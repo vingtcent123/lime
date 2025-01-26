@@ -210,17 +210,6 @@ div.div-even > *:nth-of-type(odd) {
 
 }
 
-.fixed-bottom {
-	position: fixed;
-	z-index: 900;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: white;
-	padding: 1rem 0;
-	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-}
-
 @media (max-width: 1399px) {
 
 	.stick-xl {
@@ -1046,7 +1035,7 @@ a.util-action-navigation:not(:hover):not([data-dropdown-display]) > svg:nth-of-t
 }
 
 div.util-subtitle {
-	margin-top: 0.25rem;
+	margin-top: 0.5rem;
 	font-size: 1.15rem;
 }
 
@@ -1397,7 +1386,7 @@ dl.util-presentation {
 	display: grid;
 	margin: 0;
 	padding: 0;
-	grid-column-gap: 0.75rem;
+	grid-column-gap: 1rem;
 	grid-row-gap: 0.125rem;
 	grid-auto-rows: min-content;
 	align-items: start;
@@ -1407,7 +1396,7 @@ dl.util-presentation-max-content {
 	display: grid;
 	margin: 0;
 	padding: 0;
-	grid-column-gap: 0.75rem;
+	grid-column-gap: 1rem;
 	grid-row-gap: 0.125rem;
 	grid-auto-rows: min-content;
 	align-items: start;
@@ -1636,7 +1625,7 @@ td.util-manage-vignette {
 	cursor: default;
 }
 
-.btn.btn-disabled {
+.btn.disabled {
 	pointer-events: none;
 	opacity: 0.33;
 }
@@ -2265,20 +2254,23 @@ body.dropdown-fullscreen-open[data-touch="no"] {
 .dropdown-list {
 	display: none;
 	grid-template-columns: 1fr;
+}
+
+.dropdown-list:not(.dropdown-list-unstyled) {
 	border: 1px solid #fff;
 	border-radius: var(--radius);
 }
 
-.dropdown-list:not(.dropdown-list-minimalist) {
+.dropdown-list:not(.dropdown-list-unstyled):not(.dropdown-list-minimalist) {
 	background-color: var(--primary);
 	padding: 0.5rem 0;
 }
 
-.dropdown-list:not(.dropdown-list-minimalist).dropdown-list-bottom {
+.dropdown-list:not(.dropdown-list-unstyled):not(.dropdown-list-minimalist).dropdown-list-bottom {
 	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0, transparent 100%);
 }
 
-.dropdown-list:not(.dropdown-list-minimalist).dropdown-list-top {
+.dropdown-list:not(.dropdown-list-unstyled):not(.dropdown-list-minimalist).dropdown-list-top {
 	background: linear-gradient(to top, rgba(0, 0, 0, 0.25) 0, transparent 100%);
 }
 
@@ -2300,7 +2292,7 @@ body.dropdown-fullscreen-open[data-touch="no"] {
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
-body[data-touch="no"] .dropdown-list.dropdown-list-open {
+body[data-touch="no"] .dropdown-list.dropdown-list-open:not(.dropdown-list-unstyled) {
    box-shadow: 0 0 1rem rgb(0 0 0 / 20%);
 }
 
@@ -2334,6 +2326,15 @@ body[data-touch="yes"] .dropdown-list:not(.dropdown-list-minimalist).dropdown-li
 	line-height: 1;
 	margin-right: .5em;
 	transition: background-color 0.5s;
+}
+
+@media print {
+
+	.h-menu,
+	.h-back {
+		display: none;
+	}
+
 }
 
 a.h-back {
@@ -2702,7 +2703,6 @@ div.util-buttons > .util-button div.util-button-text {
 
 div.util-buttons > .util-button h4 {
 	margin-bottom: 0.5rem;
-	color: white;
 	line-height: 1.3;
 }
 

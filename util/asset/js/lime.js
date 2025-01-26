@@ -1047,7 +1047,10 @@ Lime.Panel = class {
 			document.querySelector('body').insertAdjacentHTML('beforeend', h);
 
 			const node = document.getElementById(id);
-			node.dataset.url = options.url;
+
+			if(options.url) {
+				node.dataset.url = options.url;
+			}
 
 			Object.entries(attributes).forEach(([name, value]) => node.setAttribute(name, value));
 
@@ -1130,6 +1133,8 @@ Lime.Panel = class {
 	static show(panel) {
 
 		panel.dispatchEvent(new CustomEvent('panelBeforeShow'));
+
+		Lime.Dropdown.purge('around');
 
 		if(document.body.classList.contains('panel-open') === false) {
 			document.body.classList.add('panel-open');
@@ -1405,7 +1410,7 @@ Lime.Dropdown = class {
 
 		}
 
-		list.insertAdjacentHTML('beforebegin', '<div data-dropdown-id="'+ button.id +'-placeholder" class="dropdown-placeholder"></div>');
+		list.insertAdjacentHTML('beforebegin', '<div data-dropdown-id="'+ button.dataset.dropdownId +'-placeholder" class="dropdown-placeholder"></div>');
 		document.body.insertAdjacentElement('beforeend', list);
 
 		button.dispatchEvent(new CustomEvent('dropdownBeforeShow', {
@@ -1428,7 +1433,10 @@ Lime.Dropdown = class {
 
 	static isFullscreen(list) {
 
-		if(isTouch()) { // Mobile
+		if(
+			isTouch() || // Mobile
+			list.classList.contains('dropdown-list-minimalist')
+		) {
 			return true;
 		} else {
 
@@ -1443,10 +1451,7 @@ Lime.Dropdown = class {
 			const listBounding = list.getBoundingClientRect();
 			const listHeight = listBounding.height
 
-			return (
-				listHeight > windowHeight - 200 ||
-				list.classList.contains('dropdown-list-minimalist')
-			);
+			return (listHeight > windowHeight - 200);
 
 		}
 
@@ -1477,7 +1482,7 @@ Lime.Dropdown = class {
 			const translateY = positionY - listBounding.top;
 
 			list.style.transform = 'translate('+ translateX +'px, '+ translateY +'px)';
-			list.insertAdjacentHTML('afterend', '<div data-dropdown-id="'+ button.id +'-backdrop" class="dropdown-backdrop" style="z-index: '+ Lime.getZIndex() +'"></div>');
+			list.insertAdjacentHTML('afterend', '<div data-dropdown-id="'+ button.dataset.dropdownId +'-backdrop" class="dropdown-backdrop" style="z-index: '+ Lime.getZIndex() +'"></div>');
 			list.style.zIndex = Lime.getZIndex();
 
 		}, 5)
@@ -1494,12 +1499,8 @@ Lime.Dropdown = class {
 
 		const isTop = position.startsWith('top');
 
-		let offsetX = (button.dataset.dropdownOffsetX === undefined) ? 0 : parseInt(button.dataset.dropdownOffsetX) * rem();
-		let offsetY = (button.dataset.dropdownOffsetY === undefined) ? 0 : parseInt(button.dataset.dropdownOffsetY) * rem();
-
-		if(offsetX === 0) {
-			offsetX = 5;
-		}
+		let offsetX = (button.dataset.dropdownOffsetX === undefined) ? 5 : parseFloat(button.dataset.dropdownOffsetX) * rem();
+		let offsetY = (button.dataset.dropdownOffsetY === undefined) ? (isTop ? -5 : 5) : parseFloat(button.dataset.dropdownOffsetY) * rem();
 
 		button.stick = new Lime.Stick(
 			button,
@@ -1507,7 +1508,7 @@ Lime.Dropdown = class {
 			position,
 			{
 				x: offsetX,
-				y: (isTop ? -5 : 5) + offsetY
+				y: offsetY
 			}
 		);
 
@@ -1558,7 +1559,9 @@ Lime.Dropdown = class {
 				return;
 			}
 
-			if(window.matchMedia('(max-width: 575px)').matches) { // Mobile
+			const list = Lime.Dropdown.getListFromButton(button);
+
+			if(this.isFullscreen(list)) { // Mobile
 
 				Lime.History.getElementsOfLayers()
 					.filter(button => button.hasAttribute('data-dropdown-display'))
@@ -1586,8 +1589,15 @@ Lime.Dropdown = class {
 
 	};
 
-	static purge() {
-		qsa('[data-dropdown-display]', button => this.close(button));
+	static purge(type = null) {
+
+		qsa(
+			type === null ?
+				'[data-dropdown-display]' :
+				'[data-dropdown-display="'+ type +'"]',
+			button => this.close(button)
+		);
+
 	};
 
 	static close(button) {
@@ -1612,16 +1622,22 @@ Lime.Dropdown = class {
 			return false;
 		}
 
+		this.mutationObserver[button.id].disconnect();
+		delete this.mutationObserver[button.id];
+
+		document.removeEventListener('click', this.clickListener[button.id], {once: true})
+		delete this.clickListener[button.id];
+
 		if(document.body.contains(button) === false) {
 
-			qs('[data-dropdown-id="'+ button.id +'-list"]', list => {
+			qs('[data-dropdown-id="'+ button.dataset.dropdownId +'-list"]', list => {
 
 				list.remove();
 				document.body.classList.remove('dropdown-fullscreen-open');
 
 			})
 
-			qs('[data-dropdown-id="'+ button.id +'-backdrop"]', backdrop => backdrop.remove())
+			qs('[data-dropdown-id="'+ button.dataset.dropdownId +'-backdrop"]', backdrop => backdrop.remove());
 
 		} else {
 
@@ -1645,12 +1661,6 @@ Lime.Dropdown = class {
 
 		}
 
-		this.mutationObserver[button.id].disconnect();
-		delete this.mutationObserver[button.id];
-
-		document.removeEventListener('click', this.clickListener[button.id], {once: true})
-		delete this.clickListener[button.id];
-
 		return true;
 
 	};
@@ -1661,7 +1671,7 @@ Lime.Dropdown = class {
 		list.style.transform = '';
 
 		list.classList.add('fullscreen-closing');
-		qs('[data-dropdown-id="'+ button.id +'-backdrop"]', node => node.classList.add('fullscreen-closing'));
+		qs('[data-dropdown-id="'+ button.dataset.dropdownId +'-backdrop"]', node => node.classList.add('fullscreen-closing'));
 
 		setTimeout(() => {
 
@@ -1688,7 +1698,7 @@ Lime.Dropdown = class {
 
 	static closePlaceholder(button, list) {
 
-		qs('[data-dropdown-id="'+ button.id +'-placeholder"]', placeholder => {
+		qs('[data-dropdown-id="'+ button.dataset.dropdownId +'-placeholder"]', placeholder => {
 
 			placeholder.insertAdjacentElement('afterend', list);
 			placeholder.remove();
@@ -1697,7 +1707,7 @@ Lime.Dropdown = class {
 			list.remove();
 		});
 
-		qs('[data-dropdown-id="'+ button.id +'-backdrop"]', node => node.remove());
+		qs('[data-dropdown-id="'+ button.dataset.dropdownId +'-backdrop"]', node => node.remove());
 
 	}
 
@@ -1773,7 +1783,7 @@ Lime.Dropdown = class {
 
 					};
 
-					this.hoverPending = setTimeout(this.hoverTrigger, 500);
+					this.hoverPending = setTimeout(this.hoverTrigger, parseInt(button.dataset.dropdownLeaveTimeout || 500));
 
 				});
 
@@ -1794,7 +1804,7 @@ Lime.Dropdown = class {
 			this.hoverActive = button;
 			this.hoverActivating = null;
 
-		}, 200);
+		}, parseInt(button.dataset.dropdownEnterTimeout || 250));
 
 	};
 
@@ -1820,7 +1830,7 @@ Lime.Dropdown = class {
 
 		};
 
-		this.hoverPending = setTimeout(this.hoverTrigger, 500);
+		this.hoverPending = setTimeout(this.hoverTrigger, parseInt(button.dataset.dropdownLeaveTimeout || 500));
 
 	}
 
@@ -1917,6 +1927,8 @@ Lime.Stick = class {
 			translateY += (elementBounds.top - freeBounds.height);
 		} else if(placement.startsWith('bottom')) {
 			translateY += elementBounds.bottom;
+		} else if(placement.startsWith('center')) {
+			translateY += (window.innerHeight - freeBounds.height) / 2;
 		}
 
 		translateX += (this.offset.x ?? 0) - freeBounds.left;
@@ -2137,7 +2149,7 @@ Lime.History = class {
 
 	}
 
-	static replaceState(url) {d(url);
+	static replaceState(url) {
 		history.replaceState(history.state, '', url);
 	}
 
@@ -2159,12 +2171,12 @@ Lime.History = class {
 			id: element.id,
 			element: element,
 			onPop: onPop,
-			isPushHistory: (pushUrl !== null),
+			isPushHistory: (pushUrl !== undefined),
 			scrollY: window.scrollY,
 			backReload: backReload
 		});
 
-		if(pushUrl !== null) {
+		if(pushUrl !== undefined) {
 			this.push(pushUrl);
 		}
 
@@ -2176,13 +2188,16 @@ Lime.History = class {
 
 			if(this.layers[i].element === element) {
 
-				if(this.layers[i].isPushHistory) {
+				const layer = this.layers[i];
+				this.layers.splice(i, 1);
 
-					this.ignoreNextPopstate++; // Simulate an history change
-					return this.go(-1).then(() => this.removeLayer(i));
+				if(layer.isPushHistory) {
+
+					this.ignoreNextPopstate++; // Simulate a history change
+					return this.go(-1).then(() => this.removeLayer(layer));
 
 				} else {
-					this.removeLayer(i);
+					this.removeLayer(layer);
 				}
 
 			}
@@ -2193,15 +2208,10 @@ Lime.History = class {
 
 	};
 
-	static removeLayer(position) {
-
-		const layer = this.layers[position];
+	static removeLayer(layer) {
 
 		layer.onPop.call(this, false);
-
 		window.scrollTo(0, layer.scrollY);
-
-		this.layers.splice(position, 1);
 
 		return true;
 
@@ -2318,14 +2328,16 @@ Lime.Instruction = class {
 
 document.delegateEventListener('click', '[data-dropdown]', function(e) {
 
-	e.preventDefault();
-	e.stopImmediatePropagation();
-
 	if(
 		isTouch() ||
 		this.dataset.dropdownHover === undefined
 	) {
+
+		e.preventDefault();
+		e.stopImmediatePropagation();
+
 		Lime.Dropdown.toggle(this, this.dataset.dropdown);
+
 	}
 
 });

@@ -799,10 +799,15 @@ class XmlLib {
 					case 'b' :
 					case 'i' :
 					case 'u' :
-						return $this->cleanNodeAttributes($node);
+						$this->cleanStyleNode($node);
+						return $this->cleanNodeAttributes($node, ['style?' => NULL]);
 
 					case 'a' :
+						$this->cleanStyleNode($node);
 						return $this->cleanLinkNode($node);
+
+					case 'span' :
+						return $this->cleanSpanNode($node);
 
 					default :
 						return \util\DomLib::removeNode($node);
@@ -840,7 +845,7 @@ class XmlLib {
 
 		$this->cleanChildHeaderNodes($node);
 
-		return \util\DomLib::removeNode($node);
+		return $this->cleanTextNode($node);
 
 	}
 
@@ -853,6 +858,7 @@ class XmlLib {
 
 		$attributesLink = [
 			'href' => 'url',
+			'style?' => NULL,
 		];
 
 		if(\Privilege::can('user\admin')) {
@@ -870,6 +876,49 @@ class XmlLib {
 		$this->safeRenameNodeAttributes($node, $attributesLink);
 
 		return 0;
+
+	}
+
+	/**
+	 * Clean a span node
+	 *
+	 * @param \DOMNode $node
+	 */
+	protected function cleanSpanNode(\DOMNode $node) : int {
+		return $this->cleanStyleNode($node) ? 0 : \util\DomLib::removeNode($node);
+	}
+
+	/**
+	 * Clean a span node
+	 *
+	 * @param \DOMNode $node
+	 */
+	protected function cleanStyleNode(\DOMNode $node): bool {
+
+		if($node->hasAttribute('style') === FALSE) {
+			return FALSE;
+		}
+
+		$style = $node->getAttribute('style');
+		$matches = [];
+
+		if(preg_match('/(^|\s|\;)color\s*:\s*(rgb\([0-9]{1,3}\s*,\s*[0-9]{1,3}\s*,\s*[0-9]{1,3}\)|[a-z]+|\#[0-9a-f]{6})($|\s|\;)/si', $style, $matches) === 1) {
+
+			if($matches[2] === 'inherit') {
+				$node->removeAttribute('style');
+				return FALSE;
+			} else {
+
+				$node->setAttribute('style', 'color: '.$matches[2].';');
+				$this->cleanNodeAttributes($node, ['style' => NULL]);
+
+				return TRUE;
+
+			}
+
+		}
+
+		return FALSE;
 
 	}
 

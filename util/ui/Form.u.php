@@ -1306,8 +1306,10 @@ class FormUi {
 		$id = uniqid('field-week-selector-');
 
 		$h = '<div id="'.$id.'" class="field-week-selector">';
-			$h .= '<h4 class="field-week-selector-title">'.s("Calendrier").'</h4>';
-			
+			$h .= '<div class="field-week-selector-title">';
+				$h .= '<h4>'.s("Calendrier").'</h4>';
+			$h .= '</div>';
+
 			if($showYear) {
 
 				$params = [
@@ -1423,7 +1425,7 @@ class FormUi {
 					$h .= $this->inputGroup(
 						$this->number(value: $value, attributes: [
 							'oninput' => 'RangeField.setValue(this)',
-							'onclick' => 'this.select()'
+							'onfocus' => 'this.select()'
 						]).
 						$this->addon($attributes['data-label'])
 					);
@@ -2045,8 +2047,8 @@ class FormUi {
 			$defaultResults = '';
 			foreach($values as $value) {
 				$defaultResults .= '<div class="autocomplete-item" data-value="'.$value['value'].'">';
-					$defaultResults .= $value['itemHtml'].'&nbsp;<a onclick="AutocompleteField.removeItem(this)" class="btn btn-muted">'.\Asset::icon('trash-fill').'</a>';
 					$defaultResults .= $this->hidden($name, $value['value']);
+					$defaultResults .= $value['itemHtml'].'&nbsp;<a onclick="AutocompleteField.removeItem(this)" class="btn btn-sm btn-outline-primary">'.\Asset::icon('trash-fill').'</a>';
 				$defaultResults .= '</div>';
 			}
 		} else {

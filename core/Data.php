@@ -666,6 +666,28 @@ class Collection extends ArrayIterator {
 		return $this->find($filter, limit: 1, depth: $depth)->notEmpty();
 	}
 
+	public function findByKeys(array|Collection $keys, bool $preserveKeys = TRUE): Collection|Element {
+
+		if($keys instanceof Collection) {
+			$keys = $keys->getIds();
+		}
+
+		$c = new Collection();
+
+		foreach($keys as $key) {
+
+			if($preserveKeys) {
+				$c[$key] = $this[$key];
+			} else {
+				$c[] = $this[$key];
+			}
+
+		}
+
+		return $c;
+
+	}
+
 	/**
 	 * Find from collection with filter
 	 *
@@ -1696,7 +1718,7 @@ class Element extends ArrayObject {
 					$class = $this->getModule($this);
 					$error = explode('.', $name)[1];
 
-					$class::fail($property.'.'.$error, wrapper: $wrapper);
+					$class::fail($property.'.'.$error, [$this], wrapper: $wrapper);
 
 					$success = FALSE;
 
@@ -1878,7 +1900,7 @@ class BuildProperties extends ArrayIterator {
 		$properties = (array)$properties;
 
 		if(array_intersect($properties, $this->built) === []) {
-			throw new BuildPropertyInvalid();
+			throw new BuildPropertyError();
 		}
 
 	}
@@ -1903,7 +1925,7 @@ class BuildProperties extends ArrayIterator {
 		$properties = (array)$properties;
 
 		if(array_intersect($properties, $this->invalid) === []) {
-			throw new BuildPropertyInvalid();
+			throw new BuildPropertyError();
 		}
 
 	}
@@ -1928,7 +1950,7 @@ class BuildProperties extends ArrayIterator {
 		$properties = (array)$properties;
 
 		if(array_intersect($properties, $this->new) === []) {
-			throw new BuildPropertyInvalid();
+			throw new BuildPropertyError();
 		}
 
 	}
