@@ -211,7 +211,6 @@ class Lime {
 
 }
 
-// Required files
 require_once LIME_DIRECTORY.'/framework/core/Function.php';
 require_once LIME_DIRECTORY.'/framework/core/Package.php';
 require_once LIME_DIRECTORY.'/framework/core/Route.php';
@@ -223,7 +222,6 @@ require_once LIME_DIRECTORY.'/framework/core/View.php';
 require_once LIME_DIRECTORY.'/framework/core/Module.php';
 require_once LIME_DIRECTORY.'/framework/core/Data.php';
 
-// Get instance depending http or cli access
 if(server_exists('SERVER_NAME')) {
 	(new HttpRoute())->run();
 } else {
