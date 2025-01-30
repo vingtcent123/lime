@@ -1389,7 +1389,7 @@ dl.util-presentation {
 	grid-column-gap: 1rem;
 	grid-row-gap: 0.25rem;
 	grid-auto-rows: min-content;
-	align-items: start;
+	align-items: baseline;
 }
 
 dl.util-presentation-max-content {
@@ -1399,7 +1399,7 @@ dl.util-presentation-max-content {
 	grid-column-gap: 1rem;
 	grid-row-gap: 0.125rem;
 	grid-auto-rows: min-content;
-	align-items: start;
+	align-items: baseline;
 }
 
 @media (min-width: 576px) {
