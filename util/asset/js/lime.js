@@ -108,20 +108,12 @@ function money(value, precision = 2) {
 
 function doCopy(target) {
 
-    const fromElement = document.querySelector(target.dataset.selector);
-    if(!fromElement) return;
+	const fromElement = document.querySelector(target.dataset.selector);
 
-    const range = document.createRange();
-    const selection = window.getSelection();
-    range.selectNode(fromElement);
-    selection.removeAllRanges();
-    selection.addRange(range);
-
-	if(document.execCommand('copy')) {
+	if(navigator.clipboard.writeText(fromElement.innerHTML)) {
 		alert(target.dataset.message);
 	}
 
-    window.getSelection().removeAllRanges();
 }
 
 function parseBool(value) {
