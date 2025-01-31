@@ -1902,6 +1902,10 @@ label.btn input:checked + * {
 	color: white;
 }
 
+.btn-muted:not(.btn-readonly):hover {
+	color: white;
+}
+
 .btn-border {
 	border-color: var(--border);
 	color: var(--text);
