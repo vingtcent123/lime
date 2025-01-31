@@ -4282,7 +4282,7 @@ class EditorMutation {
 			case 'I' :
 			case 'S' :
 			case 'U' :
-				return EditorMutation._nodeAttributes(node);
+				return EditorMutation._nodeAttributes(node, [], 'style');
 
 			case 'IMG' :
 				return EditorNode.remove(node);
