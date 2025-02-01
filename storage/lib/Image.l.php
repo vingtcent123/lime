@@ -162,9 +162,10 @@ class ImageLib {
 
 			// We need to change the new dimensions so the min pixels is respected
 			$currentPixels = $widthNew * $heightNew;
+
 			if($minPixels !== NULL and $currentPixels < $minPixels) {
-				$heightNew = pow($minPixels / $currentPixels, 0.5) * $heightNew;
-				$widthNew = pow($minPixels / $currentPixels, 0.5) * $widthNew;
+				$heightNew = (int)(pow($minPixels / $currentPixels, 0.5) * $heightNew);
+				$widthNew = (int)(pow($minPixels / $currentPixels, 0.5) * $widthNew);
 			}
 
 		}
