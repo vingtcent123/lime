@@ -132,6 +132,11 @@ class DomLib {
 			$attribute = $node->attributes->item(0);
 			$value = $attribute->value;
 
+			// Nothing to rename
+			if($attributes[$attribute->name] === NULL) {
+				continue;
+			}
+
 			$node->setAttribute($attributes[$attribute->name], $value);
 			$node->removeAttribute($attribute->name);
 
