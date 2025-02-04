@@ -3857,7 +3857,7 @@ class EditorImage {
 					if(extension === 'g') { // Original file for GIF
 						url = media.urls.original;
 					} else {
-						url = media.urls.xl;
+						url = media.urls.l;
 					}
 
 					const nodeAttributes = {

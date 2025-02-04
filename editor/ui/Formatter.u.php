@@ -425,7 +425,7 @@ abstract class FormatterUi {
 		$orientation = $orientations[$position];
 		$figureCount = count($orientations);
 
-		$url = $this->getImageUrl($node, $position, $orientation, $figureCount, $figureSize, $this->for === 'editor' ? 'xl' : NULL);
+		$url = $this->getImageUrl($node, $position, $orientation, $figureCount, $figureSize, $this->for === 'editor' ? 'l' : NULL);
 
 		$previewColor = $node->getAttribute('color') ?: '#bbbbbb';
 
@@ -593,11 +593,7 @@ abstract class FormatterUi {
 
 					// Only one image, so it is big or large!
 					if($figureCount === 1) {
-						if($orientation === 'h') {
-							return 'xl';
-						} else {
-							return 'l';
-						}
+						return 'l';
 					}
 
 					return 'm';

@@ -27,11 +27,10 @@ Setting::register('storage', [
 			'xs' => 100,
 			's' => 500,
 			'm' => 750,
-			'l' => 1000,
-			'xl' => 2000
+			'l' => 1000
 		],
-		'imageCropReference' => (int)(2000 / 1.1),
-		'imageResizeReference' => ['xl', 's'],
+		'imageCropReference' => (int)(1000 / 1.1),
+		'imageResizeReference' => ['l', 's'],
 		'imageOutputType' => [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF],
 		'imageMaxLength' => 5000,
 		'imageMinPixels' => 10000000,
