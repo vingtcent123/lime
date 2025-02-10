@@ -237,7 +237,7 @@ Vous recevrez alors un e-mail contenant un lien vous permettant d'en choisir un 
 
 			$h .= '<br/><br/>';
 
-			$h .= '<div class="util-block-requirement">';
+			$h .= '<div class="util-block">';
 
 			if($isVerified) {
 				$h .= '<p class="color-success">'.\Asset::icon('check').'&nbsp;'.s("Adresse e-mail validée").'</p>';

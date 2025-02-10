@@ -1178,8 +1178,7 @@ table.util-block tbody:last-child tr:last-child td:last-child {
 }
 
 .util-block-gradient,
-.util-block-info,
-.util-block-requirement {
+.util-block-info {
 	background: var(--gradient);
 	padding: var(--container-sm-padding);
 	border-top-left-radius: var(--radius);
@@ -1187,16 +1186,11 @@ table.util-block tbody:last-child tr:last-child td:last-child {
 	margin-bottom: 1rem;
 }
 
-.util-block-requirement {
-	color: var(--secondary);
-}
-
 @media (max-width: 575px) {
 
 	.util-block-gradient,
 	.util-block-info,
-	.util-block-search,
-	.util-block-requirement {
+	.util-block-search {
 		padding: var(--container-xs-padding);
 	}
 
