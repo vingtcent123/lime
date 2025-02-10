@@ -816,7 +816,7 @@ table th,
 }
 
 .td-checkbox {
-	background-color: rgba(0, 0, 0, 0.04);
+	background-color: #0001;
 	text-align: center;
 	padding: 0;
 	width: 3rem;
