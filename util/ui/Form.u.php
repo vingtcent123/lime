@@ -1,6 +1,8 @@
 <?php
 namespace util;
 
+use Closure;
+
 /**
  * Handle forms
  */
@@ -218,7 +220,13 @@ class FormUi {
 
 			$h .= '<div class="util-quick-form">';
 				if($label !== NULL) {
-					$h .= '<h4>'.$label.'</h4>';
+					$h .= '<h4>';
+						if($label instanceof Closure) {
+							$h .= $label($e);
+						} else {
+							$h .= $label;
+						}
+					$h .= '</h4>';
 				}
 				$h .= '<div>';
 					$h .= $form->dynamicField($e, $property);
