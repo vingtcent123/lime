@@ -1,8 +1,6 @@
 <?php
 namespace util;
 
-use Closure;
-
 /**
  * Handle forms
  */
@@ -221,7 +219,7 @@ class FormUi {
 			$h .= '<div class="util-quick-form">';
 				if($label !== NULL) {
 					$h .= '<h4>';
-						if($label instanceof Closure) {
+						if($label instanceof \Closure) {
 							$h .= $label($e);
 						} else {
 							$h .= $label;
