@@ -1761,7 +1761,7 @@ class Element extends ArrayObject {
 
 	}
 
-	public function buildIndex(array $properties, array $input, $index, array $callbacks = []): array {
+	public function buildIndex(array $properties, array $input, $index, array $callbacks = [], ?string $for = NULL): array {
 
 		$callbacks['wrapper'] = function(string $property) use ($index) {
 			return $property.'['.$index.']';
@@ -1778,7 +1778,8 @@ class Element extends ArrayObject {
 		return $this->build(
 			$properties,
 			$values,
-			$callbacks
+			$callbacks,
+			$for
 		);
 
 	}

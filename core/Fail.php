@@ -288,13 +288,24 @@ class FailWatch {
 	 *
 	 * @return bool
 	 */
-	public function validate(): bool {
+	public function validate(?Closure $onOk = NULL, ?Closure $onKo = NULL): bool {
 
 		if($this->ok() === FALSE) {
+
+			if($onKo) {
+				$onKo($this);
+			}
 			throw new FailAction($this);
+
+		} else {
+
+			if($onOk) {
+				$onOk($this);
+			}
+			return TRUE;
+
 		}
 
-		return TRUE;
 
 	}
 
