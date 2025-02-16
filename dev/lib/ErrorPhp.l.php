@@ -131,7 +131,7 @@ class ErrorPhpLib {
 	/**
 	 * Handle a PHP error
 	 */
-	public static function handleError(string $type, ?int $code = NULL, string $message, ?string $file = NULL, ?string $line = NULL, ?array $trace = NULL, bool $deprecated = FALSE) {
+	public static function handleError(string $type, ?int $code, string $message, ?string $file = NULL, ?string $line = NULL, ?array $trace = NULL, bool $deprecated = FALSE) {
 
 		// Exclude errors with iconv(), getimagesize()
 		if(

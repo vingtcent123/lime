@@ -157,7 +157,7 @@ class L {
 	 * @param string $text The text to translate
 	 * @param array $args Text arguments
 	 */
-	public static function s(?int $id = NULL, string $text, $args = []): string {
+	public static function s(?int $id, string $text, $args = []): string {
 
 		if(is_scalar($args) or $args === NULL) {
 			$args = ['value' => $args];
@@ -185,7 +185,7 @@ class L {
 	 * @param string $number Number to select singular ou plural
 	 * @param array $args Texts arguments
 	 */
-	public static function p(?int $id = NULL, string $singular, string $plural, int|float $number, array $args = []): string {
+	public static function p(?int $id, string $singular, string $plural, int|float $number, array $args = []): string {
 
 		$type = self::getType(self::$currentLang, $number);
 
@@ -201,7 +201,7 @@ class L {
 
 	}
 
-	protected static function translate(?int $id = NULL, string $text, $args, ?int $type = NULL): string {
+	protected static function translate(?int $id, string $text, $args, ?int $type = NULL): string {
 
 		self::$lastId = $id;
 

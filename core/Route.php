@@ -229,7 +229,7 @@ abstract class Route {
 
 		// Start error handler
 		set_error_handler(function($code, $message, $file, $line) {
-			dev\ErrorPhpLib::handle(dev\Error::PHP, $code, $message, $file, $line);
+			\dev\ErrorPhpLib::handle(dev\Error::PHP, $code, $message, $file, $line);
 			error_clear_last();
 		});
 

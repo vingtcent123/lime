@@ -4442,7 +4442,7 @@ abstract class ModuleModel {
 	protected function buildAdd(
 		array $fields,
 		array $values,
-		bool &$ignore = NULL
+		?bool &$ignore = NULL
 	): string {
 
 		if(strpos($this->getConnection(), '@replication') !== FALSE) {
@@ -4502,7 +4502,7 @@ abstract class ModuleModel {
 	protected function buildUpdate(
 		$update,
 		$join = NULL,
-		string $condition = NULL
+		?string $condition = NULL
 	): string {
 
 		if(strpos($this->getConnection(), '@replication') !== FALSE) {
