@@ -671,6 +671,11 @@ class FormUi {
 			return $this->radios($name, $list, $default, $attributes);
 
 		} else if($type === 'color') {
+
+			if($m->hasProperty($property) and $m->isPropertyNull($property) === FALSE) {
+				$attributes += ['mandatory' => TRUE];
+			}
+
 			return $this->color($name, $default, $attributes);
 		} else {
 			throw new \Exception('Type \''.$type.'\' of property \''.$property.'\' not handled');
@@ -1809,11 +1814,20 @@ class FormUi {
 			$emptyColor = '#000000';
 		}
 
+		if(array_key_exists('mandatory', $attributes)) {
+			$mandatory = $attributes['mandatory'];
+			unset($attributes['mandatory']);
+		} else {
+			$mandatory = FALSE;
+		}
+
 		$attributes['class'] = 'form-control form-color '.($attributes['class'] ?? '');
 
 		$h = '<div class="field-color">';
 			$h .= $this->input('color', $name.'Color', $value, ['oninput' => 'ColorField.update(this)'] + $attributes);
-			$h .= '<label>'.$this->inputCheckbox($name.'Empty', TRUE, ['checked' => ($value === NULL), 'onclick' => 'ColorField.setEmpty(this, "'.$emptyColor.'")']).' '.s("Aucune").'</label>';
+			if($mandatory === FALSE) {
+				$h .= '<label>'.$this->inputCheckbox($name.'Empty', TRUE, ['checked' => ($value === NULL), 'onclick' => 'ColorField.setEmpty(this, "'.$emptyColor.'")']).' '.s("Aucune").'</label>';
+			}
 			$h .= $this->hidden($name, $value);
 		$h .= '</div>';
 

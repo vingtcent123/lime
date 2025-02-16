@@ -458,10 +458,11 @@ class ColorField {
 
 	static update(field) {
 
-		const wrapper = field.firstParent('.field-color')
+		const wrapper = field.firstParent('.field-color');
+
+		wrapper.qs('input[type="checkbox"]', checkbox => checkbox.checked = false);
 
 		const hiddenField = wrapper.qs('input[type="hidden"]');
-		wrapper.qs('input[type="checkbox"]').checked = false;
 		hiddenField.value = field.value;
 		hiddenField.dispatchEvent(new CustomEvent("input"));
 
