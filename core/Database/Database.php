@@ -114,9 +114,9 @@ class Database extends PDO {
 
 		if($this->params['type'] === 'MySQL') {
 			$options += [
-				(str_starts_with(phpversion(), '8.4') ? \Pdo\Mysql::ATTR_DIRECT_QUERY :  PDO::MYSQL_ATTR_DIRECT_QUERY) => TRUE,
-				(str_starts_with(phpversion(), '8.4') ? \Pdo\Mysql::ATTR_USE_BUFFERED_QUERY :  PDO::MYSQL_ATTR_USE_BUFFERED_QUERY) => TRUE,
-				(str_starts_with(phpversion(), '8.4') ? \Pdo\Mysql::ATTR_INIT_COMMAND :  PDO::MYSQL_ATTR_INIT_COMMAND) => "SET NAMES 'utf8mb4'",
+				\Pdo\Mysql::ATTR_DIRECT_QUERY => TRUE,
+				\Pdo\Mysql::ATTR_USE_BUFFERED_QUERY => TRUE,
+				\Pdo\Mysql::ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'",
 			];
 		}
 

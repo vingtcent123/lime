@@ -2721,7 +2721,7 @@ abstract class ModuleModel {
 				} else {
 
 					$database = self::dbInstance($this->getConnection(), [
-						PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => FALSE,
+						\Pdo\Mysql::ATTR_USE_BUFFERED_QUERY => FALSE,
 					]);
 
 				}
