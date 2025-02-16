@@ -332,7 +332,7 @@ class ConnectionLib {
 	 * This method tries available auths
 	 *
 	 */
-	public static function logIn(string $login = NULL, string $password = NULL, array $options = []): bool {
+	public static function logIn(?string $login = NULL, ?string $password = NULL, array $options = []): bool {
 
 		$fw = new \FailWatch();
 

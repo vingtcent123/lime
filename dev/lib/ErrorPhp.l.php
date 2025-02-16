@@ -131,7 +131,7 @@ class ErrorPhpLib {
 	/**
 	 * Handle a PHP error
 	 */
-	public static function handleError(string $type, int $code = NULL, string $message, string $file = NULL, string $line = NULL, array $trace = NULL, bool $deprecated = FALSE) {
+	public static function handleError(string $type, ?int $code = NULL, string $message, ?string $file = NULL, ?string $line = NULL, ?array $trace = NULL, bool $deprecated = FALSE) {
 
 		// Exclude errors with iconv(), getimagesize()
 		if(
@@ -194,7 +194,7 @@ class ErrorPhpLib {
 	/**
 	 * Get an error code from a PHP error code
 	 */
-	public static function getCode(int $phpCode = NULL): string {
+	public static function getCode(?int $phpCode = NULL): string {
 
 		switch($phpCode) {
 
@@ -210,7 +210,7 @@ class ErrorPhpLib {
 
 			case E_USER_NOTICE :
 			case E_NOTICE :
-			case E_STRICT :
+			case E_DEPRECATED :
 				return 'Notice';
 
 			default :

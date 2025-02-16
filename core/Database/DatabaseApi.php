@@ -90,7 +90,7 @@ abstract class DatabaseApi extends DatabaseObject {
 	 *
 	 * @param string $mode Date format
 	 */
-	abstract public function now(string $mode = 'datetime', string $difference = NULL);
+	abstract public function now(string $mode = 'datetime', ?string $difference = NULL);
 
 	/**
 	 * Checks if a connection has a replication
@@ -122,7 +122,7 @@ abstract class DatabaseApi extends DatabaseObject {
 	 * @param int $cacheTimeout Cache timeout to store replication delay (NULL = no cache)
 	 * @return int
 	 */
-	abstract public function getReplicationDelay(string $replicationName, int $cacheTimeout = NULL);
+	abstract public function getReplicationDelay(string $replicationName, ?int $cacheTimeout = NULL);
 
 }
 ?>

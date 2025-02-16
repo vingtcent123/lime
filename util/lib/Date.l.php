@@ -166,7 +166,7 @@ class DateLib {
 	 * @author julien delsescaux
 	 * @return int
 	 */
-	public static function getAge(string $date, string $dateRef = NULL): int {
+	public static function getAge(string $date, ?string $dateRef = NULL): int {
 
 		$month = (int)substr($date, 5, 2);
 		$day = (int)substr($date, 8, 2);
@@ -219,7 +219,7 @@ class DateLib {
 	 * @return int Offset in seconds between the two time-zone
 	 * @example getTimeZoneOffset('Europe/Paris', 'America/Guatemala') ===> return 28800
 	 */
-	public static function getTimeZoneOffset(string $fromTZ, string $toTZ = NULL): int {
+	public static function getTimeZoneOffset(string $fromTZ, ?string $toTZ = NULL): int {
 
 		if($toTZ === NULL) {
 			if(!is_string($toTZ = date_default_timezone_get())) {

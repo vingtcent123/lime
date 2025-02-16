@@ -1,6 +1,5 @@
 <?php
 namespace session;
-
 /**
  * Session package
  */
@@ -54,33 +53,11 @@ class SessionLib {
 	 * Init session
 	 *
 	 */
-	public static function init(string $domain = NULL, string $path = NULL): void {
+	public static function init(?string $domain = NULL, ?string $path = NULL): void {
 
 		if(isset($_SESSION) === FALSE) {
 
-			session_set_save_handler(
-				function(string $path, string $name): bool {
-					return TRUE;
-				},
-				function(): bool {
-					return TRUE;
-				},
-				function(string $sid) {
-					return self::read($sid);
-				},
-				function(string $sid, string $content) {
-					return self::write($sid, $content);
-				},
-				function(string $sid): bool {
-					return TRUE;
-				},
-				function(int $maxLifeTime): bool {
-					return TRUE;
-				},
-				function(): string {
-					return self::createSid();
-				}
-			);
+			session_set_save_handler(new SessionHandler());
 
 			register_shutdown_function('session_write_close');
 
@@ -450,4 +427,37 @@ class SessionLib {
 	}
 
 }
+
+class SessionHandler implements \SessionHandlerInterface, \SessionIdInterface {
+
+	public function open(string $path, string $name): bool {
+		return TRUE;
+	}
+
+	public function close(): bool {
+		return TRUE;
+	}
+
+	public function read(string $sid): string|false {
+		return SessionLib::read($sid);
+	}
+
+	public function write(string $sid, string $content): bool {
+		return SessionLib::write($sid, $content);
+	}
+
+	public function destroy(string $sid): bool {
+		return TRUE;
+	}
+
+	public function gc(int $maxLifeTime): int|false {
+		return FALSE;
+	}
+
+	public function create_sid(): string {
+		return SessionLib::createSid();
+	}
+
+}
+
 ?>

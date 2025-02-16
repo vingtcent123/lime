@@ -1217,7 +1217,7 @@ class Set {
 	 * @param bool $newValue New value (TRUE/FALSE) or NULL to get current value
 	 * @return \Set
 	 */
-	public function value(int $bit, bool $newValue = NULL): Set|bool {
+	public function value(int $bit, ?bool $newValue = NULL): Set|bool {
 
 		if($newValue === TRUE) {
 
@@ -1242,7 +1242,7 @@ class Set {
 	 * @param bool $newValue New value (TRUE/FALSE) or NULL to get current value
 	 * @return \Set
 	 */
-	public function position(int $position, bool $newValue = NULL): Set|bool {
+	public function position(int $position, ?bool $newValue = NULL): Set|bool {
 
 		$bit = pow(2, $position);
 
@@ -1542,7 +1542,7 @@ class Element extends ArrayObject {
 		return [];
 	}
 
-	public function expects(string|array $keys, callable $callback = NULL): Element {
+	public function expects(string|array $keys, ?callable $callback = NULL): Element {
 
 		$lacks = $this->checkExpected($this, (array)$keys);
 

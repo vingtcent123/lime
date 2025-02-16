@@ -267,7 +267,7 @@ class Package {
 	 * @param string $lang Translation lang
 	 * @param string $package Package name
 	 */
-	public static function getLanguage(string $file, string $lang = NULL, string $package = LIME_APP): string {
+	public static function getLanguage(string $file, ?string $lang = NULL, string $package = LIME_APP): string {
 
 		if($lang === NULL) {
 			$lang = L::getLang();

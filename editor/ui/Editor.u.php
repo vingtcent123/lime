@@ -307,7 +307,7 @@ class EditorUi {
 
 	}
 
-	public function getMediaConfigure(string $instanceId, string $url, string $xyz = NULL, string $title, string $link, int $figureSize): \Panel {
+	public function getMediaConfigure(string $instanceId, string $url, ?string $xyz = NULL, string $title, string $link, int $figureSize): \Panel {
 
 		$form = new \util\FormUi();
 

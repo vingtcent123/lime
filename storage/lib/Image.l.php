@@ -125,7 +125,7 @@ class ImageLib {
 	 * @param int $minPixels
 	 * @return bool
 	 */
-	public static function resize($format, \Imagick $resource, string $constraint = NULL, int $minPixels = NULL): bool {
+	public static function resize($format, \Imagick $resource, ?string $constraint = NULL, ?int $minPixels = NULL): bool {
 
 		$widthSource = $resource->getImageWidth();
 		$heightSource = $resource->getImageHeight();
@@ -283,7 +283,7 @@ class ImageLib {
 	 * @param string $format
 	 * @return int
 	 */
-	public static function getCompression(string $type, int $fileType, string $format = NULL) {
+	public static function getCompression(string $type, int $fileType, ?string $format = NULL) {
 
 		$settings = \Setting::get($type);
 

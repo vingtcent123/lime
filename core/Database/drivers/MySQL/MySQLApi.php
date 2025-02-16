@@ -70,7 +70,7 @@ class MySQLApi extends DatabaseApi {
 		return is_null($rows) ? NULL : (int)$rows;
 	}
 
-	public function now(string $mode = 'datetime', string $difference = NULL) {
+	public function now(string $mode = 'datetime', ?string $difference = NULL) {
 
 		if($difference !== NULL) {
 			$interval = ' + INTERVAL '.$difference;
@@ -123,7 +123,7 @@ class MySQLApi extends DatabaseApi {
 
 	}
 
-	public function getReplicationDelay(string $replicationName, int $cacheTimeout = NULL): int {
+	public function getReplicationDelay(string $replicationName, ?int $cacheTimeout = NULL): int {
 
 		// No delay while in development
 		if(LIME_ENV !== 'prod') {

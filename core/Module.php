@@ -1619,7 +1619,7 @@ abstract class ModuleModel {
 	/**
 	 * Create the connection to the database
 	 */
-	public function db(string $connection = NULL) {
+	public function db(?string $connection = NULL) {
 
 		if($connection === NULL) {
 			$connection = $this->getPackage();
@@ -2038,7 +2038,7 @@ abstract class ModuleModel {
 	 * @param string $condition Join condition
 	 * @param string $type Join type (LEFT, RIGHT, INNER)
 	 */
-	public function join(ModuleModel $mElement, string $condition = NULL, string $type = 'INNER'): ModuleModel {
+	public function join(ModuleModel $mElement, ?string $condition = NULL, string $type = 'INNER'): ModuleModel {
 
 		$type = strtoupper($type);
 
@@ -2164,7 +2164,7 @@ abstract class ModuleModel {
 	 *
 	 * @param string $mode Date mode (date, datetime, time, timestamp)
 	 */
-	public function now(string $mode = 'datetime', string $difference = NULL): string {
+	public function now(string $mode = 'datetime', ?string $difference = NULL): string {
 
 		if(empty(self::$db[$this->server])) {
 			$this->db();
@@ -2292,7 +2292,7 @@ abstract class ModuleModel {
 	 * @param \Closure $callback
 	 * @return \Module
 	 */
-	public function delegateElement(string $propertySource, \Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
+	public function delegateElement(string $propertySource, ?\Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
 
 		if($this->isSelected($propertySource) === FALSE) {
 			$this->select($propertySource);
@@ -2311,7 +2311,7 @@ abstract class ModuleModel {
 	 * @param \Closure $callback
 	 * @return \Module
 	 */
-	public function delegateArray(string $propertySource, \Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
+	public function delegateArray(string $propertySource, ?\Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
 
 		if($this->isSelected($propertySource) === FALSE) {
 			$this->select($propertySource);
@@ -2330,7 +2330,7 @@ abstract class ModuleModel {
 	 * @param string $select
 	 * @return \Module
 	 */
-	public function delegateProperty(string $propertySource, $propertySelected, \Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
+	public function delegateProperty(string $propertySource, $propertySelected, ?\Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
 
 		$select = [];
 
@@ -2366,7 +2366,7 @@ abstract class ModuleModel {
 	 * @param array $index For indexing Collection
 	 * @return \Module
 	 */
-	public function delegateCollection(string $propertySource, $index = NULL, \Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
+	public function delegateCollection(string $propertySource, $index = NULL, ?\Closure $callback = NULL, string $propertyParent = 'id'): ModuleModel {
 
 		if($this->isSelected($propertySource) === FALSE) {
 			$this->select($propertySource);
@@ -2552,7 +2552,7 @@ abstract class ModuleModel {
 	 * @param string $key Cache key
 	 * @param int $timeout Cache timeout
 	 */
-	public function cache(string $type, string $key = NULL, int $timeout = NULL): ModuleModel {
+	public function cache(string $type, ?string $key = NULL, ?int $timeout = NULL): ModuleModel {
 		if($type === 'none' or $type === 'storage') {
 			$this->options['cache'] = $type;
 		} else {
@@ -2570,7 +2570,7 @@ abstract class ModuleModel {
 	 * @param array $index For indexing Collection
 	 * @return Collection A Collection
 	 */
-	public function getCollection(int $offset = NULL, int $number = NULL, mixed $index = NULL): Collection|Generator {
+	public function getCollection(?int $offset = NULL, ?int $number = NULL, mixed $index = NULL): Collection|Generator {
 
 		$selection = $this->resetSelection();
 		$sql = $this->buildSelect($selection, $offset, $number);
@@ -2759,7 +2759,7 @@ abstract class ModuleModel {
 	 * @param int $number Number of results
 	 * @return array An array
 	 */
-	public function callback(callable $callback, int $offset = NULL, int $number = NULL) {
+	public function callback(callable $callback, ?int $offset = NULL, ?int $number = NULL) {
 
 		// We could use >recordset() if we are sure there are no sub-properties
 		$cElement = $this->getCollection($offset, $number);
@@ -2981,7 +2981,7 @@ abstract class ModuleModel {
 	 * @param array $index For indexing Collection
 	 * @return array / Collection A list of values
 	 */
-	public function getColumn($property, int $offset = NULL, int $number = NULL, ?string $index = NULL) {
+	public function getColumn($property, ?int $offset = NULL, ?int $number = NULL, ?string $index = NULL) {
 
 		if($property instanceof Sql) {
 			$select = ['_' => $property];
@@ -3224,7 +3224,7 @@ abstract class ModuleModel {
 
 	}
 
-	protected function getSeveralSelect(array $fields, string $table, array $ids, string $condition = NULL): string {
+	protected function getSeveralSelect(array $fields, string $table, array $ids, ?string $condition = NULL): string {
 
 		$sql = 'SELECT ';
 
@@ -4367,7 +4367,7 @@ abstract class ModuleModel {
 	 * @param string $sort Sorting condition
 	 * @return string A SQL query
 	 */
-	protected function buildDelete($join = NULL, string $condition = NULL, string $sort = NULL): string {
+	protected function buildDelete($join = NULL, ?string $condition = NULL, ?string $sort = NULL): string {
 
 		if(strpos($this->getConnection(), '@replication') !== FALSE) {
 			throw new Exception("Can not use write statements with replications");
@@ -4593,7 +4593,7 @@ abstract class ModuleModel {
 	 * @param int $limit
 	 * @return string
 	 */
-	protected function buildLimit(int $offset = NULL, int $limit = NULL): string {
+	protected function buildLimit(?int $offset = NULL, ?int $limit = NULL): string {
 
 		if($offset !== NULL and $limit !== NULL) {
 
@@ -5226,7 +5226,7 @@ abstract class ModulePage extends Page {
 
 	}
 
-	public function update(\Closure $action = NULL, string|array $method = 'get', ?array $propertiesUpdate = NULL, string $page = 'update', array $validate = ['canUpdate']): ModulePage {
+	public function update(?\Closure $action = NULL, string|array $method = 'get', ?array $propertiesUpdate = NULL, string $page = 'update', array $validate = ['canUpdate']): ModulePage {
 
 		$this->match((array)$method, $page, function($data) use ($action, $method, $propertiesUpdate, $validate) {
 

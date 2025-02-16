@@ -122,7 +122,7 @@ abstract class Cache {
 		return !self::$status;
 	}
 
-	public function override($object, int $timeout, string $key = NULL) {
+	public function override($object, int $timeout, ?string $key = NULL) {
 
 		if(LIME_ENV !== 'prod' and $timeout > 86400) {
 			trigger_error("Cache::override() timeout can not exceed 86400 seconds");
@@ -145,7 +145,7 @@ abstract class Cache {
 	/**
 	 * Sets a value associated with a key
 	 */
-	abstract public function set(string $key, $value, int $timeout = NULL);
+	abstract public function set(string $key, $value, ?int $timeout = NULL);
 
 	/**
 	 * Change timeout of a key
@@ -167,7 +167,7 @@ abstract class Cache {
 	 * @param int $value
 	 * @param int $timeout Timeout for the key
 	 */
-	public function counter(string $key, $value = NULL, int $timeout = NULL) {
+	public function counter(string $key, $value = NULL, ?int $timeout = NULL) {
 
 		if($value === NULL) {
 			return $this->get($key);
@@ -186,7 +186,7 @@ abstract class Cache {
 	 *
 	 * @return int/bool Current increment value
 	 */
-	public function increment(string $key, int $value = 1, int $timeout = NULL) {
+	public function increment(string $key, int $value = 1, ?int $timeout = NULL) {
 		throw new Exception("Not implemented");
 	}
 
@@ -201,7 +201,7 @@ abstract class Cache {
 	 *
 	 * @return int/bool Current increment value
 	 */
-	public function decrement(string $key, int $value = 1, int $timeout = NULL) {
+	public function decrement(string $key, int $value = 1, ?int $timeout = NULL) {
 		throw new Exception("Not implemented");
 	}
 
@@ -351,7 +351,7 @@ class EmptyCache extends Cache {
 		return FALSE;
 	}
 
-	public function set(string $key, $value, int $timeout = NULL) {
+	public function set(string $key, $value, ?int $timeout = NULL) {
 		return FALSE;
 	}
 
@@ -556,7 +556,7 @@ class MemCacheCache extends Cache {
 		}
 	}
 
-	public function set(string $key, $value, int $timeout = NULL) {
+	public function set(string $key, $value, ?int $timeout = NULL) {
 		return $this->write('set', $key, $value, $timeout);
 
 	}
@@ -565,7 +565,7 @@ class MemCacheCache extends Cache {
 		return $this->getClient()->touch($key, $newTimeout);
 	}
 
-	public function add(string $key, $value, int $timeout = NULL) {
+	public function add(string $key, $value, ?int $timeout = NULL) {
 
 		return $this->write('add', $key, $value, $timeout);
 
@@ -589,7 +589,7 @@ class MemCacheCache extends Cache {
 
 	}
 
-	private function write(string $function, string $key, $value, int $timeout = NULL): bool {
+	private function write(string $function, string $key, $value, ?int $timeout = NULL): bool {
 
 		$timeout = max(0, is_null($timeout) ? 0 : $timeout);
 
@@ -609,7 +609,7 @@ class MemCacheCache extends Cache {
 
 	}
 
-	public function increment(string $key, int $value = 1, int $timeout = NULL) {
+	public function increment(string $key, int $value = 1, ?int $timeout = NULL) {
 
 		$result = $this->getClient()->increment($key, $value);
 
@@ -626,7 +626,7 @@ class MemCacheCache extends Cache {
 		return $result;
 	}
 
-	public function decrement(string $key, int $value = 1, int $timeout = NULL) {
+	public function decrement(string $key, int $value = 1, ?int $timeout = NULL) {
 
 		$result = $this->getClient()->decrement($key, $value);
 
@@ -729,7 +729,7 @@ class RedisCache extends Cache {
 		return $values;
 	}
 
-	public function set(string $key, $value, int $timeout = NULL) {
+	public function set(string $key, $value, ?int $timeout = NULL) {
 		return $this->write('set', $key, $value, $timeout);
 	}
 
@@ -747,11 +747,11 @@ class RedisCache extends Cache {
 
 	}
 
-	public function add(string $key, $value, int $timeout = NULL): bool {
+	public function add(string $key, $value, ?int $timeout = NULL): bool {
 		return $this->write('setnx', $key, $value, $timeout);
 	}
 
-	private function write(string $function, string $key, $value, int $timeout = NULL): bool {
+	private function write(string $function, string $key, $value, ?int $timeout = NULL): bool {
 
 		if(is_bool($value)) {
 			trigger_error("Redis: can not put boolean values in cache", E_USER_NOTICE);
@@ -778,7 +778,7 @@ class RedisCache extends Cache {
 		return $result === 1;
 
 	}
-	public function counter(string $key, $value = NULL, int $timeout = NULL) {
+	public function counter(string $key, $value = NULL, ?int $timeout = NULL) {
 
 		if($value === NULL) {
 			return (int)$this->get($key);
@@ -798,7 +798,7 @@ class RedisCache extends Cache {
 
 	}
 
-	public function increment(string $key, int $value = 1, int $timeout = NULL) {
+	public function increment(string $key, int $value = 1, ?int $timeout = NULL) {
 
 		$result = $this->getClient()->incrBy($key, $value);
 		$this->debug();
@@ -810,7 +810,7 @@ class RedisCache extends Cache {
 		return $result;
 	}
 
-	public function decrement(string $key, int $value = 1, int $timeout = NULL) {
+	public function decrement(string $key, int $value = 1, ?int $timeout = NULL) {
 
 		$result = $this->getClient()->decrBy($key, $value);
 		$this->debug();
@@ -916,7 +916,7 @@ class DbCache extends Cache {
 
 	}
 
-	public function set(string $key, $value, int $timeout = NULL): bool {
+	public function set(string $key, $value, ?int $timeout = NULL): bool {
 
 		if($this->mCache === NULL) {
 			$this->mCache = \util\Cache::model();
@@ -951,7 +951,7 @@ class DbCache extends Cache {
 
 	}
 
-	public function add(string $key, $value, int $timeout = NULL): bool {
+	public function add(string $key, $value, ?int $timeout = NULL): bool {
 
 		if($this->mCache === NULL) {
 			$this->mCache = \util\Cache::model();
@@ -979,7 +979,7 @@ class DbCache extends Cache {
 
 	}
 
-	protected function getWrite(string $key, $value, int $timeout = NULL): \util\Cache {
+	protected function getWrite(string $key, $value, ?int $timeout = NULL): \util\Cache {
 
 		$timeout = (int)$timeout;
 
@@ -1125,7 +1125,7 @@ class FileCache extends Cache {
 
 	}
 
-	public function set(string $key, $value, int $timeout = NULL): bool {
+	public function set(string $key, $value, ?int $timeout = NULL): bool {
 
 		$content = serialize([$this->getWriteTimeout($timeout), $value]);
 		file_put_contents($this->path.'/'.md5($key), $content);
@@ -1134,7 +1134,7 @@ class FileCache extends Cache {
 
 	}
 
-	public function add(string $key, $value, int $timeout = NULL): bool {
+	public function add(string $key, $value, ?int $timeout = NULL): bool {
 
 		if($this->exists($key)) {
 			return FALSE;

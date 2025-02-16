@@ -272,7 +272,7 @@ Vous recevrez alors un e-mail contenant un lien vous permettant d'en choisir un 
 	/**
 	 * Change a password
 	 */
-	public function updatePassword(User $eUser, string $hash = NULL, string $email = NULL): string {
+	public function updatePassword(User $eUser, ?string $hash = NULL, ?string $email = NULL): string {
 
 		$form = new \util\FormUi();
 

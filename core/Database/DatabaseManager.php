@@ -57,7 +57,7 @@ abstract class DatabaseManager extends DatabaseObject {
 	 * @throws QueryDatabaseManagerException
 	 *
 	 */
-	abstract public function createTable(string $base, string $table, array $fields, array $indexes, string $charset = self::CHARSET_UTF8, string $storage = NULL): bool;
+	abstract public function createTable(string $base, string $table, array $fields, array $indexes, string $charset = self::CHARSET_UTF8, ?string $storage = NULL): bool;
 
 	/**
 	 * Rename a table
@@ -125,7 +125,7 @@ abstract class DatabaseManager extends DatabaseObject {
 	 * @return array
 	 * @throws QueryDatabaseManagerException
 	 */
-	abstract public function getTables(string $base, array $engines = NULL);
+	abstract public function getTables(string $base, ?array $engines = NULL);
 
 	/**
 	 * Get info on a table

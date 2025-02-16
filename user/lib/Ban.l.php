@@ -41,7 +41,7 @@ class BanLib extends BanCrud {
 	 * (True if is banned by IP or by user id)
 	 * if $ip is null IP is automatically retrieved.
 	 */
-	public static function isBanned(User $eUser, string $ip = NULL): bool {
+	public static function isBanned(User $eUser, ?string $ip = NULL): bool {
 
 		return (self::getByUser($eUser, $ip)->empty() === FALSE);
 

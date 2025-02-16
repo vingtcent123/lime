@@ -55,7 +55,7 @@ class MySQLManager extends DatabaseManager {
 	}
 
 
-	public function createTable(string $base, string $table, array $fields, array $indexes, string $charset = self::CHARSET_UTF8, string $storage = NULL, ?int $autoIncrement = NULL): bool {
+	public function createTable(string $base, string $table, array $fields, array $indexes, string $charset = self::CHARSET_UTF8, ?string $storage = NULL, ?int $autoIncrement = NULL): bool {
 
 		$column = [];
 		$other = [];
@@ -284,7 +284,7 @@ class MySQLManager extends DatabaseManager {
 
 	}
 
-	public function getTables(string $base, array $engines = NULL): array {
+	public function getTables(string $base, ?array $engines = NULL): array {
 
 		$sql = 'SHOW TABLE STATUS FROM '.$this->db->api->field($base);
 		$statement = $this->db->query($sql);

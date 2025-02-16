@@ -52,7 +52,7 @@ class FormUi {
 	 * @param string $id Id
 	 * @param string $attributes Additional attributes for <form> tag (+ groupLabelClass, groupDivClass)
 	 */
-	public function open(string $id = NULL, array $attributes = []): string {
+	public function open(?string $id = NULL, array $attributes = []): string {
 
 		if(isset($attributes['binary'])) {
 			$attributes['enctype'] = 'multipart/form-data';
@@ -309,7 +309,7 @@ class FormUi {
 	/**
 	 * Create a dynamic field
 	 */
-	public function dynamicField(\Element $e, string $property, ?\Closure $dCallback = NULL, \PropertyDescriber &$d = NULL): string {
+	public function dynamicField(\Element $e, string $property, ?\Closure $dCallback = NULL,  ?\PropertyDescriber &$d = NULL): string {
 
 		$classUi = $e->getModule().'Ui';
 		$ui = new $classUi();
@@ -797,7 +797,7 @@ class FormUi {
 	 * Display several checkboxes
 	 *
 	 */
-	public function checkboxes(?string $name, array|\ArrayIterator $values, array|\ArrayIterator $selectedValues = NULL, array $attributes = []): string {
+	public function checkboxes(?string $name, array|\ArrayIterator $values, array|\ArrayIterator|null $selectedValues = NULL, array $attributes = []): string {
 
 		// Default attributes
 		$attributes += [
@@ -1015,7 +1015,7 @@ class FormUi {
 
 	}
 
-	public function inputRadio(?string $name, int|string|float|null $value, string $label = NULL, mixed $selectedValue = NULL, array $attributes = []): string {
+	public function inputRadio(?string $name, int|string|float|null $value, ?string $label = NULL, mixed $selectedValue = NULL, array $attributes = []): string {
 
 		if(array_key_exists('id', $attributes) === FALSE) {
 			$attributes['id'] = $name;
@@ -1235,7 +1235,7 @@ class FormUi {
 	/**
 	 * Display text field for weeks
 	 */
-	public function weekNumber(string $name, int $value = NULL, array $attributes = []): string {
+	public function weekNumber(string $name, ?int $value = NULL, array $attributes = []): string {
 
 		$id = uniqid('field-week-');
 
@@ -1254,7 +1254,7 @@ class FormUi {
 		return $h;
 	}
 
-	protected function getWeekNumberField(string $name, int $value = NULL, array $attributes = []) {
+	protected function getWeekNumberField(string $name, ?int $value = NULL, array $attributes = []) {
 
 		$attributes += [
 			'placeholder' => s("n°"),
@@ -1824,7 +1824,7 @@ class FormUi {
 	/**
 	 * Display text field for emails
 	 */
-	public function email(string $name, string $value = NULL, array $attributes = []): string {
+	public function email(string $name, ?string $value = NULL, array $attributes = []): string {
 
 		$attributes['class'] = 'form-control email '.($attributes['class'] ?? '');
 

@@ -27,7 +27,7 @@ class BatchUi {
 
 	}
 
-	public static function group(string $menu, string $danger = NULL, string $title = NULL, string $hide = 'Batch.hideSelection()') {
+	public static function group(string $menu, ?string $danger = NULL, ?string $title = NULL, string $hide = 'Batch.hideSelection()') {
 
 		\Asset::css('util', 'batch.css');
 		\Asset::js('util', 'batch.js');

@@ -86,7 +86,7 @@ class GeoliteLib {
 	  * Returns Country of an IP Address
 	  *
 	  */
-	 public function getCountry(string $ipAddress = NULL): Country {
+	 public function getCountry(?string $ipAddress = NULL): Country {
 
 		 if($ipAddress === NULL) {
 			 $ipAddress = getIp();

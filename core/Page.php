@@ -87,7 +87,7 @@ class Page {
 	 * @param mixed $access Access type (http, cli, cron)
 	 * @param callable $initializer
 	 */
-	public static function init($access, Closure $initializer = NULL) {
+	public static function init($access, ?Closure $initializer = NULL) {
 
 		if(is_closure($access)) {
 			$initializer = $access;

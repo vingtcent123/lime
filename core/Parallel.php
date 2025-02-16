@@ -89,7 +89,7 @@ class Parallel {
 	 *
 	 * @return The results of each call, in an array. The order of $functions is preserved.
 	 */
-	public function pmap(array $functions, int $poolSize = NULL): array {
+	public function pmap(array $functions, ?int $poolSize = NULL): array {
 
 		pcntl_signal(SIGINT, [$this, "cleanExit"]); // NOTE: we CAN'T put this in the constructor.
 

@@ -139,7 +139,7 @@ class DateUi {
 	 * @param string $date The YYYY-MM-DD [HH:MM:SS] date
 	 * @param string $format Date format
 	 */
-	public static function numeric(string $date, int $format = self::DATE_TIME, string $timeZone = NULL): string {
+	public static function numeric(string $date, int $format = self::DATE_TIME, ?string $timeZone = NULL): string {
 
 		if(strlen($date) === 19) {
 			$timeZone = is_null($timeZone) ? self::$timeZone : $timeZone;
@@ -239,7 +239,7 @@ class DateUi {
 	 * @param string $date The YYYY-MM-DD [HH:MM:SS] date
 	 * @param string $format Date format
 	 */
-	public static function textual(string|int $date, int $format = self::DATE_TIME, string $timeZone = NULL): string {
+	public static function textual(string|int $date, int $format = self::DATE_TIME, ?string $timeZone = NULL): string {
 
 		if(is_int($date)) {
 			$date = date('Y-m-d H:i:s', $date);
@@ -978,7 +978,7 @@ class DateUi {
 	 * @param string $maxNumber Max number of period entries
 	 *
 	 */
-	public static function ago(string $date, int $format = self::AGO, string $mode = NULL, int $maxNumber = 1): string {
+	public static function ago(string $date, int $format = self::AGO, ?string $mode = NULL, int $maxNumber = 1): string {
 
 		$seconds = time() - DateLib::timestamp($date);
 
@@ -1055,7 +1055,7 @@ class DateUi {
 	 * @param string $maxNumber Max number of period entries
 	 *
 	 */
-	public static function in(string $date, int $format = self::AGO, string $mode = NULL, int $maxNumber = 1): string {
+	public static function in(string $date, int $format = self::AGO, ?string $mode = NULL, int $maxNumber = 1): string {
 
 		$seconds = DateLib::timestamp($date) - time();
 
@@ -1080,7 +1080,7 @@ class DateUi {
 	 * @param int $maxNumber Max number of period entries
 	 *
 	 */
-	public static function secondToDuration(int $duration, int $format = self::SHORT, string $mode = NULL, int $maxNumber = NULL): ?string {
+	public static function secondToDuration(int $duration, int $format = self::SHORT, ?string $mode = NULL, ?int $maxNumber = NULL): ?string {
 
 		if($mode === NULL) {
 			$mode = 'DHMS';
@@ -2808,7 +2808,7 @@ class DateUi {
 	 * @return int Offset in seconds between the two time-zone
 	 * @example getTimeZoneOffset('Europe/Paris', 'America/Guatemala') ===> return 28800
 	 */
-	public static function getTimeZoneOffset(string $fromTZ, string $toTZ = NULL): string {
+	public static function getTimeZoneOffset(string $fromTZ, ?string $toTZ = NULL): string {
 
 		if($toTZ === NULL) {
 			$toTZ = date_default_timezone_get();

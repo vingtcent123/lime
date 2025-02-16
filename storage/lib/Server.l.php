@@ -39,7 +39,7 @@ class ServerLib {
 	 * @param callable|NULL $callback
 	 * @return array
 	 */
-	public static function reput(string $type, string $basename, callable $callback = NULL): array {
+	public static function reput(string $type, string $basename, ?callable $callback = NULL): array {
 
 		$resource = \Setting::get('media\mediaDriver')->getFileResource($basename);
 		$metadata = \Setting::get('media\mediaDriver')->getMetadata($basename);
@@ -102,7 +102,7 @@ class ServerLib {
 	 * @param Imagick $resource
 	 * @param callable $callback
 	 */
-	public static function putImage(string $type, string $basename, \Imagick $resource, callable $callback = NULL): array {
+	public static function putImage(string $type, string $basename, \Imagick $resource, ?callable $callback = NULL): array {
 
 		$typeSource = self::getTypeFromResource($resource);
 		$typeDestination = \Setting::get($type)['imageOutputType'] ?? NULL;
@@ -234,7 +234,7 @@ class ServerLib {
 	 * Create formats of a file
 	 *
 	 */
-	public static function buildFormats(string $type, string $basename, array $metadata, \Imagick $resource, callable $callback = NULL): array {
+	public static function buildFormats(string $type, string $basename, array $metadata, \Imagick $resource, ?callable $callback = NULL): array {
 
 		$metadata['width'] = $resource->getImageWidth();
 		$metadata['height'] = $resource->getImageHeight();

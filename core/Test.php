@@ -44,7 +44,7 @@ abstract class Test {
 	 * @param string $message Message describing this test case
 	 * @return bool
 	 */
-	protected function assertTrue($value, string $message = NULL): bool {
+	protected function assertTrue($value, ?string $message = NULL): bool {
 		return $this->assert($value === TRUE, TRUE, TRUE, $value, $message);
 	}
 
@@ -55,7 +55,7 @@ abstract class Test {
 	 * @param string $message Message describing this test case
 	 * @return bool
 	 */
-	protected function assertFalse($value, string $message = NULL): bool {
+	protected function assertFalse($value, ?string $message = NULL): bool {
 		return $this->assert($value === FALSE, FALSE, TRUE, $value, $message);
 	}
 
@@ -75,7 +75,7 @@ abstract class Test {
 	 * @param string $message Message describing this test case
 	 * @return bool Always FALSE
 	 */
-	protected function assertFail(string $message = NULL): bool {
+	protected function assertFail(?string $message = NULL): bool {
 		return $this->assert(NULL, FALSE, TRUE, TRUE, $message);
 	}
 
@@ -87,7 +87,7 @@ abstract class Test {
 	 * @param string $message Message describing this test case
 	 * @return bool
 	 */
-	protected function assertEquals($expected, $value, string $message = NULL): bool {
+	protected function assertEquals($expected, $value, ?string $message = NULL): bool {
 		return $this->assert($value === $expected, $expected, TRUE, $value, $message);
 	}
 
@@ -99,7 +99,7 @@ abstract class Test {
 	 * @param string $message Message describing this test case
 	 * @return bool
 	 */
-	protected function assertDiffer($unexpected, $value, string $message = NULL): bool {
+	protected function assertDiffer($unexpected, $value, ?string $message = NULL): bool {
 		return $this->assert($value !== $unexpected, $unexpected, FALSE, $value, $message);
 	}
 
