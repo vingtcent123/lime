@@ -548,21 +548,28 @@ function var_filter(mixed $value, mixed $cast, mixed $default = NULL) {
 /*
  * Lowercase the first character of a string with mb functions
  */
-function mb_lcfirst(string $str): string {
-	return mb_strtolower(mb_substr($str, 0, 1)).mb_substr($str, 1);
+if(function_exists('mb_lcfirst') === FALSE) {
+
+	function mb_lcfirst(string $str): string {
+		return mb_strtolower(mb_substr($str, 0, 1)).mb_substr($str, 1);
+	}
+
 }
 
 /*
  * Uppercase the first character of a string with mb functions
  */
-function mb_ucfirst(string $str): string {
-	return mb_strtoupper(mb_substr($str, 0, 1)).mb_substr($str, 1);
+if(function_exists('mb_ucfirst') === FALSE) {
+	function mb_ucfirst(string $str): string {
+		return mb_strtoupper(mb_substr($str, 0, 1)).mb_substr($str, 1);
+	}
 }
+
 
 /*
  * Encode HTML string
  */
-function encode(string $content = NULL): string {
+function encode(?string $content = NULL): string {
 	if(is_scalar($content) or is_null($content)) {
 		return htmlspecialchars((string)$content);
 	} else {
@@ -573,7 +580,7 @@ function encode(string $content = NULL): string {
 /*
  * Decode HTML string
  */
-function decode(string $content = NULL): string {
+function decode(?string $content = NULL): string {
 	if(is_scalar($content) or is_null($content)) {
 		return htmlspecialchars_decode((string)$content);
 	} else {
