@@ -18,7 +18,7 @@ class CsvLib {
 		$stream = @fopen('php://temp', 'r+');
 
 		foreach($lines as $line) {
-			fputcsv($stream, $line, ';');
+			fputcsv($stream, $line, ';',  escape: '');
 		}
 
 		rewind($stream);
@@ -47,7 +47,7 @@ class CsvLib {
 
 		$lines = [];
 
-		while(($line = fgetcsv($stream, 0, $separator, '"')) !== FALSE) {
+		while(($line = fgetcsv($stream, 0, $separator, '"', escape: '')) !== FALSE) {
 			$lines[] = $line;
 		}
 
