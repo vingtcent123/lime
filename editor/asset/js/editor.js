@@ -1702,6 +1702,7 @@ class EditorFormat {
 	static hideSelection(instanceId) {
 
 		qs(instanceId +'-box-selection').style.display = 'none';
+		qs(instanceId +'-box-selection .editor-box-selection-color').value = '';
 
 		EditorFormat._hideLink(instanceId);
 
@@ -2335,98 +2336,6 @@ class EditorFormat {
 	};
 
 	static _removeLink(node) {
-
-		const newElements = document.createDocumentFragment();
-
-		while(node.childNodes.length > 0) {
-			newElements.appendChild(node.childNodes[0]);
-		}
-
-
-		const updateStartContainer = (node === EditorRange.startContainer);
-		const updateEndContainer = (node === EditorRange.endContainer);
-
-		node.parentElement.replaceChild(newElements, node);
-
-		if(updateStartContainer) {
-			EditorRange.newStartContainer = newElements[0];
-		}
-
-		if(updateEndContainer) {
-			EditorRange.newEndContainer = newElements[0];
-		}
-
-	};
-
-	static nodeColor = null;
-
-	static _displayColor(instanceId, node) {
-
-		EditorFormat.nodeColor = node;
-
-		qs(instanceId +'-box-selection .editor-box-selection-icons').style.display = 'none';
-		qs(instanceId +'-box-selection .editor-box-selection-color').style.display = 'block';
-		qs(instanceId +'-box-selection .editor-box-selection-color input').focus();
-
-		if(node !== null) {
-
-			qs(instanceId +'-box-selection [type="submit"]').innerHTML = Editor.labels.colorFilledSubmit;
-			qs(instanceId +'-box-selection [data-action="color-close"]').innerHTML = Editor.labels.colorFilledClose;
-
-			qs(instanceId +'-box-selection .editor-box-selection-color input').value = node.getAttribute('href');
-
-		} else {
-
-			qs(instanceId +'-box-selection [type="submit"]').innerHTML = Editor.labels.colorEmptySubmit;
-			qs(instanceId +'-box-selection [data-action="color-close"]').innerHTML = Editor.labels.colorEmptyClose;
-
-		}
-
-	};
-
-	static _closeColor(instanceId) {
-
-		if(EditorFormat.nodeColor !== null) {
-			if(confirm(Editor.labels.confirmRemoveColor)) {
-				EditorFormat._removeColor(EditorFormat.nodeColor);
-				EditorFormat._restyleIcons(instanceId);
-			}
-		}
-
-		EditorFormat._hideColor(instanceId);
-
-	};
-
-	static _hideColor(instanceId) {
-
-		qs(instanceId +'-box-selection .editor-box-selection-icons').style.display = 'flex';
-		qs(instanceId +'-box-selection .editor-box-selection-color').style.display = 'none';
-		qs(instanceId +'-box-selection .editor-box-selection-color input').value = '';
-
-		EditorFormat.nodeColor = null;
-
-	};
-
-	static _createColor(instanceId) {
-
-		let color = qs(instanceId + '-box-selection .editor-box-selection-color input').value;
-
-		if(color.match(/^http[s]?\:\/\//) === null) {
-			color = 'http://'+ color;
-		}
-
-		if(EditorFormat.nodeColor === null) {
-
-			document.execCommand('styleWithCSS', false, false);
-			document.execCommand("createColor", false, color);
-
-		} else {
-			EditorFormat.nodeColor.setAttribute('href', color);
-		}
-
-	};
-
-	static _removeColor(node) {
 
 		const newElements = document.createDocumentFragment();
 
