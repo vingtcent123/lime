@@ -732,7 +732,11 @@ abstract class FormatterUi {
 			'food' => [
 				'icon' => 'egg-fried',
 				'label' => s("Nourriture")
-			]
+			],
+			'stop' => [
+				'icon' => 'sign-stop',
+				'label' => s("Stop")
+			],
 		];
 	}
 
