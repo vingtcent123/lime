@@ -1826,7 +1826,7 @@ class FormUi {
 		$h = '<div class="field-color">';
 			$h .= $this->input('color', $name.'Color', $value, ['oninput' => 'ColorField.update(this)'] + $attributes);
 			if($mandatory === FALSE) {
-				$h .= '<label>'.$this->inputCheckbox($name.'Empty', TRUE, ['checked' => ($value === NULL), 'onclick' => 'ColorField.setEmpty(this, "'.$emptyColor.'")']).' '.s("Aucune").'</label>';
+				$h .= '<label>'.$this->inputCheckbox($name.'Empty', TRUE, ['checked' => ($value === NULL), 'onclick' => 'ColorField.setEmpty(this, "'.$emptyColor.'")']).' '.($attributes['placeholder'] ?? s("Aucune")).'</label>';
 			}
 			$h .= $this->hidden($name, $value);
 		$h .= '</div>';
