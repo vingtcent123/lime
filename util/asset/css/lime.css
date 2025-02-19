@@ -1934,19 +1934,48 @@ label.btn input:checked + * {
 }
 
 /* Panel */
-body.panel-open {
-	overflow: hidden;
-	padding-right: 15px;
-	width: 100vw;
+@media screen {
+
+	body.panel-open {
+		overflow: hidden;
+		padding-right: 15px;
+		width: 100vw;
+	}
+
+	.panel {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+}
+
+@media print {
+
+	body.panel-open {
+		width: 100vw;
+	}
+
+	body.panel-open nav,
+	body.panel-open header,
+	body.panel-open main,
+	body.panel-open footer {
+		display: none;
+	}
+
+	.panel {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+
 }
 
 .panel {
 	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
 	background-color: white;
 }
 
@@ -1969,7 +1998,14 @@ body[data-touch="yes"] .panel.closing {
 
 .panel.open {
 	display: block;
-	overflow-y: scroll;
+}
+
+@media screen {
+
+	.panel.open {
+		overflow-y: scroll;
+	}
+
 }
 
 .panel.open.closing-last {
@@ -2534,6 +2570,14 @@ div.tabs-item-wrapper {
 
 div.tabs-item {
 	grid-area: tabs;
+}
+
+@media print {
+
+	div.tabs-item {
+		display: none !important;
+	}
+
 }
 
 div.tabs-panel {
