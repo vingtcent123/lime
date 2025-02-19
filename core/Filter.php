@@ -326,17 +326,21 @@ class Filter {
 
 		if(is_string($mask)) {
 
-			$isNull = substr($mask, 0, 1) === '?';
-			$type = substr($mask, $isNull ? 1 : 0);
+			$type = $mask;
+			$isNull = FALSE;
 
 			$mask = [
-				$type,
-				'null' => $isNull
+				$type
 			];
 
 		} else {
 			$type = $mask[0];
 			$isNull = $mask['null'] ?? FALSE;
+		}
+
+		if(str_starts_with($type, '?')) {
+			$type = substr($type, 1);
+			$isNull = TRUE;
 		}
 
 		if(isset($mask['charset']) and mb_check_encoding($value, $mask['charset']) === FALSE) {
