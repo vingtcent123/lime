@@ -88,6 +88,8 @@ table {
 
 table th {
 	padding: 0.75rem 0.5rem;
+	text-align: left;
+	vertical-align: bottom;
 }
 
 table td {
@@ -95,9 +97,16 @@ table td {
 	vertical-align: middle;
 }
 
-table th {
-	text-align: left;
-	vertical-align: bottom;
+@media (min-width: 1400px) {
+
+	table td {
+		padding: 0.5rem 0.75rem;
+	}
+
+	table th {
+		padding: 0.75rem 0.75rem;
+	}
+
 }
 
 table tr {
@@ -117,39 +126,40 @@ table.tbody-even tbody:nth-of-type(odd) tr {
 }
 
 table.tr-even tbody tr:nth-of-type(even) {
-    background-color: white;
 }
 
 table.tr-even tbody tr:nth-of-type(odd) {
     background-color: var(--background-odd);
 }
 
-table.tbody-even thead,
-table.tr-even thead,
-table.thead-bordered thead {
+table.table-block {
+	box-shadow: 0.125rem 0.125rem 0.25rem #0001;
+	border-radius: var(--radius);
+	background-color: white;
+}
+
+table.table-block thead th {
+	background-color: white;
+}
+
+table.table-block thead tr:first-child th:first-child {
+	border-top-left-radius: var(--radius);
+}
+
+table.table-block thead tr:first-child th:last-child {
+	border-top-right-radius: var(--radius);
+}
+
+table.table-block tbody tr:last-child td:first-child {
+	border-bottom-left-radius: var(--radius);
+}
+
+table.table-block tbody tr:last-child td:last-child {
+	border-bottom-right-radius: var(--radius);
+}
+
+table.table-block thead tr {
 	border-bottom: 1px solid var(--border);
-}
-
-table.tbody-bordered tr:last-of-type,
-tr.tr-bordered,
-table.tr-bordered tbody tr,
-table.tr-bordered thead tr {
-	border-bottom: 1px solid var(--border);
-}
-
-table.tbody-bordered tbody tr,
-table.tr-bordered tbody tr {
-	border-left: 1px solid var(--border);
-	border-right: 1px solid var(--border);
-}
-
-table.tr-bordered tbody:only-child tr:first-child {
-	border-top: 1px solid var(--border);
-}
-
-tr.tr-bordered:hover,
-table.tr-bordered tbody tr:hover {
-	background-color: rgba(127, 127, 127, 0.05);
 }
 
 div.div-even > *:nth-of-type(even) {
@@ -805,7 +815,8 @@ table th,
 	font-size: 0.85rem;
 	text-transform: uppercase;
 	align-self: end;
-	padding-bottom: 0.375rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.5rem;
 	font-weight: normal;
 	line-height: 1.3;
 }
@@ -1079,7 +1090,7 @@ div.util-subtitle {
 .util-block,
 .util-block-help,
 .util-card {
-	box-shadow: 1px 1px 1px #8881;
+	box-shadow: 0.125rem 0.125rem 0.25rem #0001;
 }
 
 .util-block p:last-child,
