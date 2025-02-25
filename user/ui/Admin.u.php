@@ -113,7 +113,7 @@ class AdminUi {
 
 		$h = '<div class="util-overflow-xs stick-sm">';
 
-			$h .= '<table class="table-block tr-even">';
+			$h .= '<table class="tr-even">';
 				$h .= '<thead>';
 					$h .= '<tr>';
 						$h .= '<th class="text-center">'.$search->linkSort('id', '#', SORT_DESC).'</th>';

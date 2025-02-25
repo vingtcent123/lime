@@ -77,7 +77,7 @@ Attention : ce texte sera affiché à l'utilisateur.")])
 			</div>';
 		}
 
-		$h = '<table class="table-block ban-table">
+		$h = '<table class="ban-table">
 				<thead>
 					<tr>
 						<th>'.s("Qui / Quoi").'</th>

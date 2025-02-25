@@ -75,7 +75,7 @@ class ErrorMonitoringUi {
 	 */
 	public function getErrors(\Collection $cError): string {
 
-		$h = '<table class="table-block" id="errors-monitoring">';
+		$h = '<table  id="errors-monitoring">';
 
 		$selectedDate = NULL;
 
@@ -169,7 +169,7 @@ class ErrorMonitoringUi {
 			if($eError['cParameter']->count() > 0) {
 
 				$h .= '<h5>Parameters:</h5>';
-				$h .= '<table class="table-block">';
+				$h .= '<table>';
 
 				foreach($eError['cParameter'] as $eParameter) {
 

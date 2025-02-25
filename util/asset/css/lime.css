@@ -121,39 +121,19 @@ table.tbody-even tbody:nth-of-type(odd) tr {
 	background-color: var(--background-odd);
 }
 
-table.tr-even tbody tr:nth-of-type(even) {
+table.tbody-even tbody:nth-of-type(even) tr {
+	background-color: var(--background-even);
 }
 
-table.tr-even tbody tr:nth-of-type(odd) {
+table.tr-even tbody tr:nth-of-type(even) {
+	background-color: var(--background-even);
+}
+
+table.tr-even tbody tr:nth-of-type(odd):not(tr.tr-title) {
     background-color: var(--background-odd);
 }
 
-table.table-block {
-	border-radius: var(--radius);
-	background-color: white;
-}
-
-table.table-block thead th {
-}
-
-table.table-block thead tr:first-child th:first-child {
-	border-top-left-radius: var(--radius);
-}
-
-table.table-block thead tr:first-child th:last-child {
-	border-top-right-radius: var(--radius);
-}
-
-table.table-block tbody tr:last-child td:first-child {
-	border-bottom-left-radius: var(--radius);
-}
-
-table.table-block tbody tr:last-child td:last-child {
-	border-bottom-right-radius: var(--radius);
-}
-
-table.table-block thead tr {
-	border-bottom: 1px solid var(--border);
+tr.tr-title {
 }
 
 div.div-even > *:nth-of-type(even) {
@@ -222,10 +202,6 @@ div.div-even > *:nth-of-type(odd) {
 		border-radius: 0 !important;
 	}
 
-	.stick-xl .table-block {
-		border-radius: 0 !important;
-	}
-
 }
 
 @media (max-width: 1199px) {
@@ -233,10 +209,6 @@ div.div-even > *:nth-of-type(odd) {
 	.stick-lg {
 		width: calc(100% + 2 * var(--container-lg-padding));
 		transform: translate3d(calc(-1 * var(--container-lg-padding)), 0, 0);
-		border-radius: 0 !important;
-	}
-
-	.stick-lg .table-block {
 		border-radius: 0 !important;
 	}
 
@@ -248,10 +220,6 @@ div.div-even > *:nth-of-type(odd) {
 	.stick-md {
 		width: calc(100% + 2 * var(--container-md-padding));
 		transform: translate3d(calc(-1 * var(--container-md-padding)), 0, 0);
-		border-radius: 0 !important;
-	}
-
-	.stick-md .table-block {
 		border-radius: 0 !important;
 	}
 
@@ -267,10 +235,6 @@ div.div-even > *:nth-of-type(odd) {
 		border-radius: 0 !important;
 	}
 
-	.stick-sm .table-block {
-		border-radius: 0 !important;
-	}
-
 }
 
 @media (max-width: 575px) {
@@ -281,10 +245,6 @@ div.div-even > *:nth-of-type(odd) {
 	.stick-sm {
 		width: calc(100% + 2 * var(--container-xs-padding));
 		transform: translate3d(calc(-1 * var(--container-xs-padding)), 0, 0);
-		border-radius: 0 !important;
-	}
-
-	.stick-xs .table-block {
 		border-radius: 0 !important;
 	}
 
