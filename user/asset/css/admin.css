@@ -23,7 +23,6 @@ div.user-admin-stats {
 div.user-admin-stats-period {
 	font-weight: bold;
 	text-align: center;
-	background-color: var(--background);
 	display: flex;
 	align-items: center;
 	justify-content: center;
