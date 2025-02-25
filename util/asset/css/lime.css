@@ -9,6 +9,7 @@
 	--danger: #dc3545;
 	--text: #212529;
 	--success: #198754;
+	--shadow: 0.05rem 0.05rem 0.15rem #0002;
 	--radius: .5rem;
 	--gradient: linear-gradient(to top, transparent 0, #8882 100%);
 }
@@ -117,10 +118,6 @@ table.tbody-hover tbody:hover tr {
 	background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
-table.tbody-even tbody:nth-of-type(even) tr {
-	background-color: white;
-}
-
 table.tbody-even tbody:nth-of-type(odd) tr {
 	background-color: var(--background-odd);
 }
@@ -133,13 +130,12 @@ table.tr-even tbody tr:nth-of-type(odd) {
 }
 
 table.table-block {
-	box-shadow: 0.125rem 0.125rem 0.25rem #0001;
+	box-shadow: var(--shadow);
 	border-radius: var(--radius);
 	background-color: white;
 }
 
 table.table-block thead th {
-	background-color: white;
 }
 
 table.table-block thead tr:first-child th:first-child {
@@ -167,7 +163,7 @@ div.div-even > *:nth-of-type(even) {
 }
 
 div.div-even > *:nth-of-type(odd) {
-    background-color: var(--background-light);
+    background-color: var(--background-odd);
 }
 
 @media (min-width: 768px) {
@@ -1110,7 +1106,7 @@ div.util-subtitle {
 .util-block,
 .util-block-help,
 .util-card {
-	box-shadow: 0.125rem 0.125rem 0.25rem #0001;
+	box-shadow: var(--shadow);
 }
 
 .util-block p:last-child,
