@@ -108,7 +108,7 @@ class AdminUi {
 	public function displayUsers(\Collection $cUser, int $nUser, int $page, \Search $search, bool $isExternalConnected): string {
 
 		if($nUser === 0) {
-			return '<div class="util-info">'.s("Il n'y a aucun utilisateur à afficher...").'</div>';
+			return '<div class="util-empty">'.s("Il n'y a aucun utilisateur à afficher...").'</div>';
 		}
 
 		$h = '<div class="util-overflow-xs stick-sm">';

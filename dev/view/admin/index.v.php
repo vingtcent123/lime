@@ -11,7 +11,7 @@ new AdaptativeView('index', function($data, MainTemplate $t) {
 	echo (new dev\ErrorMonitoringUi())->getCloseForm();
 
 	if($data->cError->count() === 0)  {
-		echo '<div class="util-info">'.s("Génial, il n'y a pas d'erreur en ce moment !").'</div>';
+		echo '<div class="util-empty">'.s("Génial, il n'y a pas d'erreur en ce moment !").'</div>';
 	} else {
 
 		echo (new \dev\ErrorMonitoringUi())->getErrors($data->cError);

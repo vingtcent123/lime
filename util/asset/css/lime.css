@@ -9,7 +9,6 @@
 	--danger: #dc3545;
 	--text: #212529;
 	--success: #198754;
-	--shadow: 0.05rem 0.05rem 0.15rem #0002;
 	--radius: .5rem;
 	--gradient: linear-gradient(to top, transparent 0, #8882 100%);
 }
@@ -130,7 +129,6 @@ table.tr-even tbody tr:nth-of-type(odd) {
 }
 
 table.table-block {
-	box-shadow: var(--shadow);
 	border-radius: var(--radius);
 	background-color: white;
 }
@@ -1094,19 +1092,17 @@ div.util-subtitle {
 	color: white;
 }
 
-.util-block,
-.util-block-flat,
-.util-block-help,
-.util-card {
-	border-radius: var(--radius);
+.util-empty {
+	color: var(--muted);
 	margin-bottom: 1rem;
-	padding: 1rem;
 }
 
 .util-block,
 .util-block-help,
 .util-card {
-	box-shadow: var(--shadow);
+	border-radius: var(--radius);
+	margin-bottom: 1rem;
+	padding: 1rem;
 }
 
 .util-block p:last-child,
@@ -1121,13 +1117,11 @@ table.util-block tbody:last-child tr:last-child td:first-child {
 	border-bottom-left-radius: var(--radius);
 }
 
-table.util-block-flat tbody:last-child tr:last-child td:last-child,
 table.util-block tbody:last-child tr:last-child td:last-child {
 	border-bottom-right-radius: var(--radius);
 }
 
-.util-block,
-.util-block-flat {
+.util-block {
 	background: white;
 }
 
@@ -1204,8 +1198,7 @@ table.util-block tbody:last-child tr:last-child td:last-child {
 	position: relative;
 }
 
-.util-block-gradient,
-.util-block-info {
+.util-block-gradient {
 	background: var(--gradient);
 	padding: var(--container-sm-padding);
 	border-top-left-radius: var(--radius);
@@ -1216,15 +1209,10 @@ table.util-block tbody:last-child tr:last-child td:last-child {
 @media (max-width: 575px) {
 
 	.util-block-gradient,
-	.util-block-info,
 	.util-block-search {
 		padding: var(--container-xs-padding);
 	}
 
-}
-
-.util-block-info {
-	color: var(--secondary);
 }
 
 .util-block-title {
@@ -1596,9 +1584,6 @@ td.util-manage-vignette {
 }
 .bg-background-light {
 	background-color: var(--background-light) !important;
-}
-.bg-background-dark {
-	background-color: var(--background-dark) !important;
 }
 .bg-white {
 	background-color: white !important;
