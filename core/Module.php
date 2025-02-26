@@ -1809,7 +1809,7 @@ abstract class ModuleModel {
 	 *
 	 * @return Database
 	 */
-	public function beginTransaction() {
+	public function beginTransaction(): bool {
 
 		if(empty(self::$db[$this->server])) {
 			$this->db();
@@ -1819,6 +1819,8 @@ abstract class ModuleModel {
 
 		if(self::$dbTransactionStack[$this->server] === 1) {
 			return self::$db[$this->server]->beginTransaction();
+		} else {
+			return TRUE;
 		}
 
 	}
@@ -1828,21 +1830,24 @@ abstract class ModuleModel {
 	 *
 	 * @return Database
 	 */
-	public function commit() {
+	public function commit(): bool {
 
 		if(empty(self::$db[$this->server])) {
 			$this->db();
 		}
 
 		if(self::$dbTransactionStack[$this->server] === 0) {
-			return;
-		}
-
-		if(self::$dbTransactionStack[$this->server] === 1) {
-			return self::$db[$this->server]->commit();
+			return TRUE;
 		}
 
 		self::$dbTransactionStack[$this->server]--;
+
+		if(self::$dbTransactionStack[$this->server] === 0) {
+			return self::$db[$this->server]->commit();
+		} else {
+			return TRUE;
+		}
+
 
 	}
 
@@ -1851,14 +1856,14 @@ abstract class ModuleModel {
 	 *
 	 * @return Database
 	 */
-	public function rollBack() {
+	public function rollBack(): bool {
 
 		if(empty(self::$db[$this->server])) {
 			$this->db();
 		}
 		
 		if(self::$dbTransactionStack[$this->server] === 0) {
-			return;
+			return TRUE;
 		}
 
 		self::$dbTransactionStack[$this->server] = 0;
