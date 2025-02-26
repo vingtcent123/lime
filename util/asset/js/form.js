@@ -419,15 +419,15 @@ class DateField {
 
 class CheckboxField {
 
-	static all(target, selector, callback, parent = 'form') {
+	static all(target, checked, selector, callback = undefined) {
 
-		target.firstParent(parent).qsa(selector, field => {
+		target.qsa(selector, field => {
 
 			if(field.disabled === true) {
 				return;
 			}
 
-			field.checked = target.checked;
+			field.checked = checked;
 
 			if(typeof callback !== 'undefined') {
 				callback(field);
