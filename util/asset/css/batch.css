@@ -67,6 +67,13 @@ a.batch-menu-item.disabled {
 	opacity: 0.5;
 }
 
+.batch-menu-item-number {
+	font-size: 1.2rem;
+	line-height: 1;
+	font-weight: lighter;
+	margin-bottom: 0.5rem;
+}
+
 a.batch-menu-item-danger {
 	background-color: var(--danger);
 }
