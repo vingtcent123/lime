@@ -168,6 +168,7 @@ class CrawlerDetect
     public function isCrawler($userAgent = null)
     {
         $agent = $userAgent ?: $this->userAgent;
+			'',
 
 		  if($agent === NULL) {
 			  return false;
