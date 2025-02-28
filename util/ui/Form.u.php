@@ -1272,7 +1272,7 @@ class FormUi {
 
 	}
 
-	public static function weekSelector(int $year, ?string $linkWeeks = NULL, ?string $linkMonths = NULL, ?string $onclickWeeks = NULL, ?string $onclickMonths = NULL, ?string $defaultWeek = NULL, bool $showYear = TRUE): string {
+	public static function weekSelector(int $year, ?string $linkWeeks = NULL, ?string $linkMonths = NULL, ?string $onclickWeeks = NULL, ?string $onclickMonths = NULL, ?string $defaultWeek = NULL, bool $showYear = TRUE, ?int $minYear = NULL, ?int $maxYear = NULL): string {
 
 		\Asset::css('util', 'form.css');
 
@@ -1316,7 +1316,12 @@ class FormUi {
 
 		$id = uniqid('field-week-selector-');
 
-		$h = '<div id="'.$id.'" class="field-week-selector">';
+		$isValidYear = fn($test) => (
+			($minYear === NULL or $test >= $minYear) and
+			($maxYear === NULL or $test <= $maxYear)
+		);
+
+		$h = '<div id="'.$id.'" class="field-week-selector" data-year-min="'.$minYear.'" data-year-max="'.$maxYear.'">';
 			$h .= '<div class="field-week-selector-title">';
 				$h .= '<h4>'.s("Calendrier").'</h4>';
 			$h .= '</div>';
@@ -1329,13 +1334,23 @@ class FormUi {
 					'linkMonths' => $linkMonths,
 					'onclickWeeks' => $onclickWeeks,
 					'onclickMonths' => $onclickMonths,
-					'default' => $defaultWeek
+					'default' => $defaultWeek,
+					'minYear' => $minYear,
+					'maxYear' => $maxYear
 				];
 				
 				$h .= '<div class="field-week-selector-year">';
-					$h .= '<a data-ajax="util/form:weekChange" '.attrs($params, 'post-').' post-year="'.($year - 1).'" data-dropdown-keep class="field-week-selector-navigation field-week-selector-navigation-before">'.\Asset::icon('chevron-left').'</a>';
+					if($isValidYear($year - 1)) {
+						$h .= '<a data-ajax="util/form:weekChange" '.attrs($params, 'post-').' post-year="'.($year - 1).'" data-dropdown-keep class="field-week-selector-navigation field-week-selector-navigation-before">'.\Asset::icon('chevron-left').'</a>';
+					} else {
+						$h .= '<div></div>';
+					}
 					$h .= '<h4>'.$year.'</h4>';
-					$h .= '<a data-ajax="util/form:weekChange" '.attrs($params, 'post-').' post-year="'.($year + 1).'" data-dropdown-keep class="field-week-selector-navigation field-week-selector-navigation-after">'.\Asset::icon('chevron-right').'</a>';
+					if($isValidYear($year + 1)) {
+						$h .= '<a data-ajax="util/form:weekChange" '.attrs($params, 'post-').' post-year="'.($year + 1).'" data-dropdown-keep class="field-week-selector-navigation field-week-selector-navigation-after">'.\Asset::icon('chevron-right').'</a>';
+					} else {
+						$h .= '<div></div>';
+					}
 				$h .= '</div>';
 				
 			} else {
