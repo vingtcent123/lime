@@ -125,7 +125,7 @@ table.tbody-even tbody:nth-of-type(even) tr {
 	background-color: var(--background-even);
 }
 
-table.tr-hover tr:hover {
+table.tr-hover tbody tr:hover {
 	background-color: rgba(0, 0, 0, 0.03) !important;
 }
 
