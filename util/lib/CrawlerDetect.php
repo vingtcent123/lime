@@ -158,17 +158,19 @@ class CrawlerDetect
         return $userAgent;
     }
 
-    /**
-     * Check user agent string against the regex.
-     *
-     * @param string|null $userAgent
-     *
-     * @return bool
-     */
-    public function isCrawler($userAgent = null)
-    {
-        $agent = $userAgent ?: $this->userAgent;
+	/**
+	 * Check user agent string against the regex.
+	 *
+	 * @param  string|null  $userAgent
+	 * @return bool
+	 */
+	public function isCrawler($userAgent = null)
+	{
+		$agent = trim(preg_replace(
+			"/{$this->compiledExclusions}/i",
 			'',
+			$userAgent ?: $this->userAgent ?: ''
+		));
 
 		  if($agent === NULL) {
 			  return false;
