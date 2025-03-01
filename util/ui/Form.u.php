@@ -1951,14 +1951,14 @@ class FormUi {
 	public function editor(string $name, $value = '', array $values = [], array $attributes = []): string {
 
 		if($value) {
-			$convertedValue = (new \editor\EditorFormatterUi())->getFromXml($value, $values);
+			$convertedValue = new \editor\EditorFormatterUi()->getFromXml($value, $values);
 		} else {
 			$convertedValue = '';
 		}
 
 		$this->setDefaultAttributes('editor', $attributes, $name);
 
-		return (new \editor\EditorUi())->field($name, $values, $convertedValue, $attributes);
+		return new \editor\EditorUi()->field($name, $values, $convertedValue, $attributes);
 
 	}
 

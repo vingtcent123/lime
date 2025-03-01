@@ -667,7 +667,7 @@ class RedirectAction extends Action {
 					->pushInstructions()
 					->getOutput();
 
-				(new JsonAction($json))->run();
+				new JsonAction($json)->run();
 				break;
 
 		}

@@ -14,8 +14,8 @@
 		[$data->cUser, $data->nUser] = \user\AdminLib::getUsers($data->page, $data->search);
 
 		$data->cRole = \user\RoleLib::getByFqns(Setting::get('user\statsRoles'));
-		$data->cUserDaily = (new \user\UserLib())->getDailyUsersStats($data->cRole);
-		$data->cUserActive = (new \user\UserLib())->getActiveUsersStats($data->cRole);
+		$data->cUserDaily = new \user\UserLib()->getDailyUsersStats($data->cRole);
+		$data->cUserActive = new \user\UserLib()->getActiveUsersStats($data->cRole);
 
 		$data->isExternalConnected = \session\SessionLib::exists('userOld');
 
@@ -23,12 +23,12 @@
 
 	});
 
-(new \user\UserPage(
+new \user\UserPage(
 		function($data) {
 			Privilege::check('user\admin');
 		},
 		propertiesUpdate: ['email', 'birthdate', 'firstName', 'lastName']
-	))
+	)
 	->read('forgottenPassword', function($data) {
 
 		$data->expires = 7;

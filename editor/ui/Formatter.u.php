@@ -282,7 +282,7 @@ abstract class FormatterUi {
 
 				if($this->for === 'editor') {
 					$childNode->setAttribute('contenteditable', 'true');
-					$childNode->setAttribute('placeholder', (new \editor\EditorUi())->labels()['captionFigure']);
+					$childNode->setAttribute('placeholder', new \editor\EditorUi()->labels()['captionFigure']);
 					$childNode->setAttribute('style', 'display: block');
 				} else {
 
@@ -355,7 +355,7 @@ abstract class FormatterUi {
 
 			$childNode = $this->dom->createElement('figcaption');
 			$childNode->setAttribute('contenteditable', 'true');
-			$childNode->setAttribute('placeholder', (new \editor\EditorUi())->labels()['captionFigure']);
+			$childNode->setAttribute('placeholder', new \editor\EditorUi()->labels()['captionFigure']);
 
 			if($node->getAttribute('data-size') === 'left' or $node->getAttribute('data-size') === 'right') {
 				$childNode->setAttribute('style', 'display: none');
@@ -548,9 +548,9 @@ abstract class FormatterUi {
 			}
 
 			if($format === 'original') {
-				$url = (new \media\EditorUi())->getUrlByHash($xyzHash, NULL, $xyzVersion);
+				$url = new \media\EditorUi()->getUrlByHash($xyzHash, NULL, $xyzVersion);
 			} else {
-				$url = (new \media\EditorUi())->getUrlByHash($xyzHash, $format, $xyzVersion);
+				$url = new \media\EditorUi()->getUrlByHash($xyzHash, $format, $xyzVersion);
 			}
 
 		} else {
@@ -769,7 +769,7 @@ abstract class FormatterUi {
 		if($this->for === 'editor') {
 			$divImageNode->setAttribute('data-action', 'quote-image');
 			$divImageNode->setAttribute('placeholder', $icons[$about]['label']);
-			$divImageNode->setAttribute('title', (new \editor\EditorUi())->labels()['quoteIcon']);
+			$divImageNode->setAttribute('title', new \editor\EditorUi()->labels()['quoteIcon']);
 		}
 
 		$divNode->appendChild($divImageNode);

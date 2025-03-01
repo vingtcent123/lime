@@ -10,14 +10,14 @@ new AdaptativeView('index', function($data, MainTemplate $t) {
 	} else {
 
 		$t->header = '<div class="admin-navigation stick-xs">';
-			$t->header .= (new \main\AdminUi())->getNavigation('user');
-			$t->header .= (new \user\AdminUi())->getNavigation('ban');
+			$t->header .= new \main\AdminUi()->getNavigation('user');
+			$t->header .= new \user\AdminUi()->getNavigation('ban');
 		$t->header .= '</div>';
 
 	}
 
 
-	echo (new \user\BanUi())->getCollection($data->active, $data->cBan);
+	echo new \user\BanUi()->getCollection($data->active, $data->cBan);
 
 	echo \util\TextUi::pagination($data->page, $data->nPage);
 
@@ -29,13 +29,13 @@ new AdaptativeView('index', function($data, MainTemplate $t) {
 
 new AdaptativeView('form', function($data, PanelTemplate $t) {
 
-	return (new \user\BanUi())->create($data->eUserToBan, $data->userToBanIp, $data->nUserOnIp);
+	return new \user\BanUi()->create($data->eUserToBan, $data->userToBanIp, $data->nUserOnIp);
 
 });
 
 new AdaptativeView('updateEndDate', function($data, PanelTemplate $t) {
 
-	return (new \user\BanUi())->updateEndDate($data->eBan);
+	return new \user\BanUi()->updateEndDate($data->eBan);
 
 });
 

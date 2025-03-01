@@ -3,7 +3,7 @@ new AdaptativeView('set', function($data, MainTemplate $t) {
 
 	$t->title = s("Réinitialiser mon mot de passe");
 
-	echo (new user\UserUi())->updatePassword(new \user\User(), $data->hash, $data->email);
+	echo new user\UserUi()->updatePassword(new \user\User(), $data->hash, $data->email);
 
 });
 

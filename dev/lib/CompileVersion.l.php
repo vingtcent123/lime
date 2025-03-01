@@ -17,7 +17,7 @@ class CompileVersionLib {
 			return [];
 		}
 
-		$packages = (new \ReflectionApp($app))->getPackages();
+		$packages = new \ReflectionApp($app)->getPackages();
 		$versions = [];
 
 		foreach($packages as $package) {
@@ -74,7 +74,7 @@ class CompileVersionLib {
 			return [];
 		}
 
-		$packages = (new \ReflectionApp($app))->getPackages();
+		$packages = new \ReflectionApp($app)->getPackages();
 		$versions = [];
 
 		foreach($packages as $package) {

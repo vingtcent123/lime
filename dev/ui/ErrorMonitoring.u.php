@@ -187,7 +187,7 @@ class ErrorMonitoringUi {
 			}
 
 			$h .= '<h5>Link:</h5>';
-			$h .= (new \util\FormUi())->text('', \Lime::getUrl().'/dev/admin/?id='.$eError['id']);
+			$h .= new \util\FormUi()->text('', \Lime::getUrl().'/dev/admin/?id='.$eError['id']);
 
 			if($eError['referer']) {
 				$h .= '<br />Referer: '.encode($eError['referer']);

@@ -95,7 +95,7 @@ class PackageLib {
 
 		foreach($apps as $app) {
 
-			$packages = (new \ReflectionApp($app))->getPackages();
+			$packages = new \ReflectionApp($app)->getPackages();
 
 			foreach($packages as $package) {
 

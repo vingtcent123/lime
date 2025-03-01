@@ -5346,7 +5346,7 @@ abstract class ModulePage extends Page {
 			}
 
 			throw new JsonAction([
-				'field' => (new \util\FormUi())->quick($data->e, $property)
+				'field' => new \util\FormUi()->quick($data->e, $property)
 			]);
 
 		});

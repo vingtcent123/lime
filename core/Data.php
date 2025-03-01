@@ -1670,7 +1670,7 @@ class Element extends ArrayObject {
 				$callbackPrepare = $callbacksProperty[$property.'.prepare'] ?? function(&$value) use ($model, $property): bool {
 
 					if(strpos($model->getPropertyType($property), 'editor') === 0) {
-						$value = (new \editor\XmlLib())->fromHtml($value);
+						$value = new \editor\XmlLib()->fromHtml($value);
 					}
 
 					return TRUE;

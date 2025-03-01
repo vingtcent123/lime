@@ -6,7 +6,7 @@ new AdaptativeView('index', function($data, MainTemplate $t) {
 	$uiAdmin = new \user\AdminUi();
 
 	$t->header = '<div class="admin-navigation stick-xs">';
-		$t->header .= (new \main\AdminUi())->getNavigation('user');
+		$t->header .= new \main\AdminUi()->getNavigation('user');
 		$t->header .= $uiAdmin->getNavigation('user');
 		$t->header .= $uiAdmin->getUsersForm($data->search, $data->nUser);
 	$t->header .= '</div>';
@@ -21,10 +21,10 @@ new JsonView('query', function($data, AjaxTemplate $t) {
 });
 
 new AdaptativeView('forgottenPassword', function($data, PanelTemplate $t) {
-	return (new \user\AdminUi())->updateForgottenPassword($data->e, $data->eUserAuth, $data->expires);
+	return new \user\AdminUi()->updateForgottenPassword($data->e, $data->eUserAuth, $data->expires);
 });
 
 new AdaptativeView('update', function($data, PanelTemplate $t) {
-	return (new \user\AdminUi())->updateUser($data->e);
+	return new \user\AdminUi()->updateUser($data->e);
 });
 ?>

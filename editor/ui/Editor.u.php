@@ -54,7 +54,7 @@ class EditorUi {
 
 		$h = '<div '.attrs($attributes).'>';
 			if($value !== NULL) {
-				$h .= (new \editor\ReadorFormatterUi())->getFromXml($value, $options);
+				$h .= new \editor\ReadorFormatterUi()->getFromXml($value, $options);
 			}
 		$h .= '</div>';
 

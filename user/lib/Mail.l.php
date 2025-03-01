@@ -36,7 +36,7 @@ class MailLib {
 
 		$content = UserUi::getCloseMail();
 
-		(new \mail\MailLib())
+		new \mail\MailLib()
 			->addTo($eUser['email'])
 			->setContent(...$content)
 			->send('user');
@@ -55,7 +55,7 @@ class MailLib {
 
 		$content = UserUi::getSignUpMail($eUser);
 
-		(new \mail\MailLib())
+		new \mail\MailLib()
 			->addTo($eUser['email'])
 			->setContent(...$content)
 			->send('user');
@@ -76,7 +76,7 @@ class MailLib {
 
 		$content = UserUi::getVerifyMail($eUser, $hash, $change);
 
-		(new \mail\MailLib())
+		new \mail\MailLib()
 			->addTo($eUser['email'])
 			->setContent(...$content)
 			->send('user');
