@@ -262,7 +262,7 @@ class DateField {
 
 		wrapper.qs('input.field-week-value').value = week;
 
-		this.updateWeeks(qs('[data-fallback="weekNumber"]'));
+		this.updateWeeks(wrapper.qs('[data-fallback="weekNumber"]'));
 
 	};
 

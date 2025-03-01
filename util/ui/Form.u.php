@@ -1338,7 +1338,7 @@ class FormUi {
 					'minYear' => $minYear,
 					'maxYear' => $maxYear
 				];
-				
+
 				$h .= '<div class="field-week-selector-year">';
 					if($isValidYear($year - 1)) {
 						$h .= '<a data-ajax="util/form:weekChange" '.attrs($params, 'post-').' post-year="'.($year - 1).'" data-dropdown-keep class="field-week-selector-navigation field-week-selector-navigation-before">'.\Asset::icon('chevron-left').'</a>';

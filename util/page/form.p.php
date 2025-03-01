@@ -4,8 +4,8 @@
 
 		$data->id = POST('id');
 		$data->year = POST('year', 'int');
-		$data->minYear = POST('minYear', 'int');
-		$data->maxYear = POST('maxYear', 'int');
+		$data->minYear = POST('minYear', '?int');
+		$data->maxYear = POST('maxYear', '?int');
 		$data->linkWeeks = POST('linkWeeks');
 		$data->linkMonths = POST('linkMonths');
 		$data->default = POST('default');
