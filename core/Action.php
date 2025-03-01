@@ -662,7 +662,7 @@ class RedirectAction extends Action {
 				$this->setContentType('application/json; charset=utf-8');
 				$this->sendContentType();
 
-				$json = (new AjaxTemplate())
+				$json = new AjaxTemplate()
 				   ->redirect($this->url, $this->mode)
 					->pushInstructions()
 					->getOutput();

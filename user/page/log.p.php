@@ -1,5 +1,5 @@
 <?php
-(new Page())
+new Page()
 	/**
 	 * Display login form
 	 */

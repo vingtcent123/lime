@@ -1,5 +1,5 @@
 <?php
-(new Page())
+new Page()
 	->post('query', function($data) {
 
 		// Bof bof bof permet de retrouver facilement les admins

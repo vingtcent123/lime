@@ -223,8 +223,8 @@ require_once LIME_DIRECTORY.'/framework/core/Module.php';
 require_once LIME_DIRECTORY.'/framework/core/Data.php';
 
 if(server_exists('SERVER_NAME')) {
-	(new HttpRoute())->run();
+	new HttpRoute()->run();
 } else {
-	(new CliRoute())->run();
+	new CliRoute()->run();
 }
 ?>

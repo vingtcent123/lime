@@ -3,7 +3,7 @@
  * Add a new size for an image
  *
  */
-(new Page())
+new Page()
 	->cli('index', function($data) {
 
 		$type = GET('type');

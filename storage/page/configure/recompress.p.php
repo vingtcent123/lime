@@ -3,7 +3,7 @@
  * Resize original images according to imagesRequiredSize
  *
  */
-(new Page())
+new Page()
 	->cli('index', function($data) {
 
 		$type = GET('type');

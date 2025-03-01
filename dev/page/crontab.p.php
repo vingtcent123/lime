@@ -3,7 +3,7 @@
 /**
  * Generate a crontab file for the current package using Package::getList() dependencies
  */
-(new Page())
+new Page()
 	->cli('index', function($data) {
 
 		$libCron = new \dev\CronLib();

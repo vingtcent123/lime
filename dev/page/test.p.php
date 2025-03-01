@@ -4,7 +4,7 @@
  * Run test pages
  *
  */
-(new Page())
+new Page()
 	->cli('index', function($data) {
 
 		$selectedFile = GET('file', 'string', '*');

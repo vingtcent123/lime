@@ -3,7 +3,7 @@
 /**
  * Show dependencies for a package
  */
-(new Page())
+new Page()
 	->cli('index', function($data) {
 
 		$packages = (new ReflectionApp(LIME_APP))->getPackages();

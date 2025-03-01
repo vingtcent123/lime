@@ -13,8 +13,8 @@ class AlertUi {
 
 
 			'User::demo.write' => s("Vous ne pouvez pas faire de telles bêtises sur le site de démo !"),
-			'User::connectionBanned' => fn($eBan) => (new BanUi())->getConnectionBanned($eBan),
-			'User::signUpBanned' => fn($eBan) => (new BanUi())->getSignUpBanned($eBan),
+			'User::connectionBanned' => fn($eBan) => new BanUi()->getConnectionBanned($eBan),
+			'User::signUpBanned' => fn($eBan) => new BanUi()->getSignUpBanned($eBan),
 			'User::tos.accepted' => s("Veuillez accepter les conditions générales d'utilisation."),
 			'User::connectionInvalid' => s("Impossible de se connecter, car vous avez sans doute saisi un mauvais identifiant ou mot de passe."),
 			'User::phone.empty' => s("Veuillez indiquer un numéro de téléphone"),

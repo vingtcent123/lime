@@ -3,7 +3,7 @@
  * Optimize new images
  *
  */
-(new Page())
+new Page()
 	->cron('index', function($data) {
 
 		\storage\BufferLib::run();

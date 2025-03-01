@@ -258,7 +258,7 @@ abstract class Route {
 		register_shutdown_function(function() {
 
 			if(Action::ran() === 0) {
-				(new VoidAction())->run();
+				new VoidAction()->run();
 			}
 
 		});

@@ -1,5 +1,5 @@
 <?php
-(new Page())
+new Page()
 	->post('weekChange', function($data) {
 
 		$data->id = POST('id');

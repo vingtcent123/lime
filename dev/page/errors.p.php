@@ -3,7 +3,7 @@
 /**
  * Import dev errors for Android devices
  */
-(new Page())
+new Page()
 	->post('importAndroid', function($data) {
 
 		$appVersion = POST('APP_VERSION_NAME', 'string', '?');

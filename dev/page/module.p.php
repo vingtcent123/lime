@@ -1,5 +1,5 @@
 <?php
-(new Page())
+new Page()
 	/**
 	 * Build a DIA environment in the specified package
 	 *

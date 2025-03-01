@@ -3,7 +3,7 @@
  * Clean user logs
  *
  */
-(new Page())
+new Page()
 	->cron('index', function($data) {
 
 		user\LogLib::clean();

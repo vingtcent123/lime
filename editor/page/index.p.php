@@ -1,5 +1,5 @@
 <?php
-(new Page())
+new Page()
 	->post('configureVideo', fn($data) => throw new ViewAction($data))
 	->post('configureGrid', fn($data) => throw new ViewAction($data))
 	->post('configureMedia', function($data) {

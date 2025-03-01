@@ -319,7 +319,7 @@ class UserLib extends UserCrud {
 	 */
 	public static function getCountry(): Country {
 
-		$eCountry = (new GeoliteLib())->getCountry();
+		$eCountry = new GeoliteLib()->getCountry();
 
 		if($eCountry->empty()) {
 			return self::getDefaultCountry();

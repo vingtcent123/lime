@@ -5,7 +5,7 @@
  *
  * @author Émilie Guth
  */
-(new Page())
+new Page()
 	->get('/minify/{version}/{filename}', function($data) {
 
 		$isCrawler = (\util\DeviceLib::get() === 'crawler');

@@ -166,7 +166,7 @@ class Collection extends ArrayIterator {
 			}
 
 			if($this->offsetExists($key) === FALSE) {
-				$this->offsetSet($key, (new Collection())->setDepth($this->depth - 1));
+				$this->offsetSet($key, new Collection()->setDepth($this->depth - 1));
 			}
 
 			$this[$key]->push($keys, $e);
