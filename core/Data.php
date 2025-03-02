@@ -929,6 +929,14 @@ class Collection extends ArrayIterator {
 						SORT_ASC
 					];
 
+				// [fn() =>]
+				} else if(is_closure($value)) {
+
+					$order[] = [
+						$value,
+						NULL
+					];
+
 				// ['user' => ['login' => SORT_ASC|SORT_DESC]]
 				} else if(is_array($value)) {
 
@@ -987,32 +995,38 @@ class Collection extends ArrayIterator {
 
 				foreach($order as [$list, $sort]) {
 
-					$value1 = $eElement1;
-					$value2 = $eElement2;
+					if($list instanceof Closure) {
+						return $list->call($this, $eElement1, $eElement2);
+					} else {
 
-					foreach($list as $property) {
-						$value1 = $value1[$property] ?? NULL;
-						$value2 = $value2[$property] ?? NULL;
-					}
+						$value1 = $eElement1;
+						$value2 = $eElement2;
 
-					if($value1 === $value2) {
-						continue;
-					}
+						foreach($list as $property) {
+							$value1 = $value1[$property] ?? NULL;
+							$value2 = $value2[$property] ?? NULL;
+						}
 
-					$mul = ($sort === SORT_ASC) ? 1 : -1;
+						if($value1 === $value2) {
+							continue;
+						}
 
-					if($value1 === NULL) {
-						return -1 * $mul;
-					} else if($value2 === NULL) {
-						return 1 * $mul;
-					} else if(is_string($value1)) {
-						return $compare($value1, $value2) * $mul;
-					} else if(is_scalar($value1)) {
-						return ($value1 < $value2 ? -1 : 1) * $mul;
-					} else if($value1 instanceof Element) {
-						$id1 = $value1->empty() ? NULL : $value1['id'];
-						$id2 = $value2->empty() ? NULL : $value2['id'];
-						return ($id1 < $id2 ? -1 : 1) * $mul;
+						$mul = ($sort === SORT_ASC) ? 1 : -1;
+
+						if($value1 === NULL) {
+							return -1 * $mul;
+						} else if($value2 === NULL) {
+							return 1 * $mul;
+						} else if(is_string($value1)) {
+							return $compare($value1, $value2) * $mul;
+						} else if(is_scalar($value1)) {
+							return ($value1 < $value2 ? -1 : 1) * $mul;
+						} else if($value1 instanceof Element) {
+							$id1 = $value1->empty() ? NULL : $value1['id'];
+							$id2 = $value2->empty() ? NULL : $value2['id'];
+							return ($id1 < $id2 ? -1 : 1) * $mul;
+						}
+
 					}
 
 				}
