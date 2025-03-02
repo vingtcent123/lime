@@ -185,18 +185,15 @@ class User extends UserElement {
 		]);
 
 		$fw = new \FailWatch;
-
-		parent::build(['email'], $input, callbacks: [
-
-			'email.auth' => function($email) use($auth) {
+		
+		$p = new \Properties()
+			->setCallback('email.auth', function($email) use($auth) {
 				return ($auth === UserAuth::BASIC);
-			},
-
-			'email.empty' => function($email) use($auth) {
+			})
+			->setCallback('email.empty', function($email) use($auth) {
 				return ($email !== NULL);
-			},
-
-			'email.duplicate' => function($email) use($auth) {
+			})
+			->setCallback('email.duplicate', function($email) use($auth) {
 
 				// User did not change his email address
 				if(
@@ -223,9 +220,9 @@ class User extends UserElement {
 				return (User::model()
 						->whereEmail($email)
 						->exists() === FALSE);
-			}
+			});
 
-		]);
+		parent::build(['email'], $input, $p);
 
 		if($fw->ok()) {
 

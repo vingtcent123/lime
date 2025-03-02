@@ -94,26 +94,23 @@ class SignUpLib {
 			}
 
 		}
-
-		$eUser['auth']->build(['password'], $input, callbacks: [
-
-			'password.check' => function($password) {
+		
+		$p = new \Properties()
+			->setCallback('password.check', function($password) {
 				return (
 					$password !== NULL and
 					strlen($password) >= \Setting::get('passwordSizeMin')
 				);
-			},
-
-			'password.hash' => function(&$password) {
+			})
+			->setCallback('password.hash', function(&$password) {
 
 				// Valid password, we hash it
 				$password = password_hash($password, PASSWORD_DEFAULT);
 
 				return TRUE;
 
-			},
-
-			'password.match' => function($password) use($input) {
+			})
+			->setCallback('password.match', function($password) use($input) {
 
 				if(array_key_exists('passwordBis', $input)) {
 					return password_verify($input['passwordBis'], $password);
@@ -122,9 +119,9 @@ class SignUpLib {
 					return TRUE;
 				}
 
-			}
+			});
 
-		]);
+		$eUser['auth']->build(['password'], $input, $p);
 
 	}
 
