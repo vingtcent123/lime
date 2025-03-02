@@ -11,7 +11,7 @@
 
 		$fw = new \FailWatch();
 
-		$eUser->build($properties, $_POST, for: 'update');
+		$eUser->build($properties, $_POST, new \Properties('update'));
 
 		$fw->validate();
 

@@ -95,7 +95,7 @@ class SignUpLib {
 
 		}
 
-		$eUser['auth']->build(['password'], $input, [
+		$eUser['auth']->build(['password'], $input, callbacks: [
 
 			'password.check' => function($password) {
 				return (

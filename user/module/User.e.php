@@ -70,7 +70,7 @@ class User extends UserElement {
 		return ($this['visibility'] === User::PUBLIC);
 	}
 
-	public function build(array $properties, array $input, array $callbacks = [], ?string $for = NULL): array {
+	public function build(array $properties, array $input, \Properties $p = new \Properties()): void {
 
 		$emailKey = array_search('email', $properties);
 
@@ -87,9 +87,8 @@ class User extends UserElement {
 			throw new \Exception('Invalid address build');
 		}
 
-		return parent::build($properties, $input, [
-
-			'birthdate.future' => function(?string $date): bool {
+		$p
+			->setCallback('birthdate.future', function(?string $date): bool {
 
 				if($date === NULL) {
 					return TRUE;
@@ -97,9 +96,8 @@ class User extends UserElement {
 
 				return (\util\DateLib::compare($date, currentDate()) < 0);
 
-			},
-
-			'phone.empty' => function(?string $phone): bool {
+			})
+			->setCallback('phone.empty', function(?string $phone): bool {
 
 				$this->expects(['visibility']);
 
@@ -108,9 +106,8 @@ class User extends UserElement {
 					$phone !== NULL
 				);
 
-			},
-
-			'role.check' => function(Role $eRole): bool {
+			})
+			->setCallback('role.check', function(Role $eRole): bool {
 
 				return (
 					Role::model()
@@ -121,18 +118,16 @@ class User extends UserElement {
 					)
 				);
 
-			},
-
-			'country.check' => function($eCountry): bool {
+			})
+			->setCallback('country.check', function($eCountry): bool {
 
 				return (
 					$eCountry->empty() === FALSE and
 					Country::model()->exists($eCountry)
 				);
 
-			},
-
-			'firstName.empty' => function(?string $firstName): bool {
+			})
+			->setCallback('firstName.empty', function(?string $firstName): bool {
 
 				$this->expects(['visibility']);
 
@@ -141,9 +136,8 @@ class User extends UserElement {
 					$firstName !== NULL
 				);
 
-			},
-
-			'address.empty' => function(): bool {
+			})
+			->setCallback('address.empty', function(): bool {
 
 				if($this['street1'] === NULL and $this['street2'] === NULL and $this['postcode'] === NULL and $this['city'] === NULL) {
 					return TRUE;
@@ -165,9 +159,8 @@ class User extends UserElement {
 
 				return $fw->ok();
 
-			},
-
-			'addressMandatory.check' => function(): bool {
+			})
+			->setCallback('addressMandatory.check', function(): bool {
 
 				return (
 					$this['street1'] !== NULL and
@@ -175,9 +168,9 @@ class User extends UserElement {
 					$this['city'] !== NULL
 				);
 
-			}
+			});
 
-		]);
+		parent::build($properties, $input, $p);
 
 	}
 
@@ -193,7 +186,7 @@ class User extends UserElement {
 
 		$fw = new \FailWatch;
 
-		parent::build(['email'], $input, [
+		parent::build(['email'], $input, callbacks: [
 
 			'email.auth' => function($email) use($auth) {
 				return ($auth === UserAuth::BASIC);

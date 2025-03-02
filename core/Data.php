@@ -1306,6 +1306,7 @@ class Set {
 class Element extends ArrayObject {
 
 	private mixed $ghost = NULL;
+
 	private bool $quick = FALSE;
 	private static array $quickAttributes = [];
 
@@ -1627,15 +1628,14 @@ class Element extends ArrayObject {
 	 *
 	 * @param array $properties List of properties (ie: ['email', 'sex' (in $input) => 'gender' (element property)]
 	 * @param array $input List of values indexed by property name
-	 * @param array $callbacks Callback function for additional checks
-	 * @param string $for create, update
+	 * @param \Properties $p
 	 */
-	public function build(array $properties, array $input, array $callbacks = [], ?string $for = NULL): array {
+	public function build(array $properties, array $input, \Properties $p = new \Properties()): void {
 
+		$callbacks = $p->getCallbacks();
 		$model = $this->model();
 
-		$callbackWrapper = $callbacks['wrapper'] ?? fn($property) => $property;
-		$p = new BuildProperties();
+		$callbackWrapper = $p->getWrapper() ?? fn($property) => $property;
 
 		foreach($properties as $property) {
 
@@ -1727,25 +1727,25 @@ class Element extends ArrayObject {
 				try {
 
 					if($callback($value, $p, $wrapper) === FALSE) {
-						throw new BuildPropertyError();
+						throw new PropertyError();
 					}
 
-				} catch(BuildPropertySkip) {
+				} catch(PropertySkip) {
 					break;
-				} catch(BuildPropertySuccess) {
+				} catch(PropertySuccess) {
 				} catch(FailException $e) {
 					$p->addInvalid($property);
 					Fail::log($e, wrapper: $wrapper);
 					$success = FALSE;
 					break;
-				} catch(BuildPropertyError) {
+				} catch(PropertyError) {
 					$p->addInvalid($property);
 					$onError();
 					break;
 				} catch(BuildElementError) {
 					$p->addInvalid($property);
 					$onError();
-					return $p->getNew();
+					return;
 				}
 
 			}
@@ -1756,16 +1756,13 @@ class Element extends ArrayObject {
 
 		}
 
-
-		return $p->getNew();
-
 	}
 
-	public function buildIndex(array $properties, array $input, $index, array $callbacks = [], ?string $for = NULL): array {
+	public function buildIndex(array $properties, array $input, $index, \Properties $p = new \Properties()): void {
 
-		$callbacks['wrapper'] = function(string $property) use ($index) {
+		$p->setWrapper(function(string $property) use ($index) {
 			return $property.'['.$index.']';
-		};
+		});
 
 		$values = [];
 
@@ -1775,21 +1772,20 @@ class Element extends ArrayObject {
 			}
 		}
 		
-		return $this->build(
+		$this->build(
 			$properties,
 			$values,
-			$callbacks,
-			$for
+			$p
 		);
 
 	}
 
-	public function buildProperty(string $property, $value, array $callbacks = []): array {
+	public function buildProperty(string $property, $value, \Properties $p = new \Properties()): void {
 
-		return $this->build(
+		$this->build(
 			[$property],
 			[$property => $value],
-			$callbacks
+			$p
 		);
 
 	}
@@ -1875,11 +1871,38 @@ class Element extends ArrayObject {
 
 }
 
-class BuildProperties extends ArrayIterator {
+class Properties extends ArrayIterator {
+
+	private ?Closure $wrapper = NULL;
+
+	private array $callbacks = [];
 
 	private array $built = [];
 	private array $invalid = [];
 	private array $new = [];
+
+	public function __construct(
+		public readonly ?string $for = NULL
+	) {
+	}
+
+	public function setWrapper(Closure $wrapper): Properties {
+		$this->wrapper = $wrapper;
+		return $this;
+	}
+
+	public function getWrapper(): ?Closure {
+		return $this->wrapper;
+	}
+
+	public function setCallback(string $name, Closure $callback): Properties {
+		$this->callbacks[$name] = $callback;
+		return $this;
+	}
+
+	public function getCallbacks(): array {
+		return $this->callbacks;
+	}
 
 	public function addBuilt(string $property): void {
 		$this->built[] = $property;
@@ -1901,7 +1924,7 @@ class BuildProperties extends ArrayIterator {
 		$properties = (array)$properties;
 
 		if(array_intersect($properties, $this->built) === []) {
-			throw new BuildPropertyError();
+			throw new PropertyError();
 		}
 
 	}
@@ -1926,7 +1949,7 @@ class BuildProperties extends ArrayIterator {
 		$properties = (array)$properties;
 
 		if(array_intersect($properties, $this->invalid) === []) {
-			throw new BuildPropertyError();
+			throw new PropertyError();
 		}
 
 	}
@@ -1951,22 +1974,22 @@ class BuildProperties extends ArrayIterator {
 		$properties = (array)$properties;
 
 		if(array_intersect($properties, $this->new) === []) {
-			throw new BuildPropertyError();
+			throw new PropertyError();
 		}
 
 	}
 
 }
 
-class BuildPropertySkip extends Exception {
+class PropertySkip extends Exception {
 
 }
 
-class BuildPropertySuccess extends Exception {
+class PropertySuccess extends Exception {
 
 }
 
-class BuildPropertyError extends Exception {
+class PropertyError extends Exception {
 
 }
 

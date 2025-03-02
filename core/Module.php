@@ -5214,7 +5214,7 @@ abstract class ModulePage extends Page {
 			$e->validate(...$validate);
 
 			$properties = $this->getPropertiesCreate($e, $propertiesCreate);
-			$e->build($properties, $_POST, for: 'create');
+			$e->build($properties, $_POST, new \Properties('create'));
 
 			$fw->validate();
 
@@ -5297,7 +5297,7 @@ abstract class ModulePage extends Page {
 
 			$properties = $this->getPropertiesUpdate($e, $propertiesUpdate);
 
-			$e->build($properties, $_POST, for: 'update');
+			$e->build($properties, $_POST, new \Properties('update'));
 
 			$fw->validate();
 
@@ -5378,7 +5378,7 @@ abstract class ModulePage extends Page {
 
 			$fw = new \FailWatch();
 
-			$e->build([$property], $_POST, for: 'update');
+			$e->build([$property], $_POST, new \Properties('update'));
 
 			$fw->validate();
 
@@ -5421,7 +5421,7 @@ abstract class ModulePage extends Page {
 				$properties = $properties->call($this, $e);
 			}
 
-			$e->build($properties, $_POST, for: 'update');
+			$e->build($properties, $_POST, new \Properties('update'));
 
 			$fw->validate();
 
@@ -5468,7 +5468,7 @@ abstract class ModulePage extends Page {
 					$properties = $properties->call($this, $e);
 				}
 
-				$e->build($properties, $_POST, for: 'update');
+				$e->build($properties, $_POST, new \Properties('update'));
 
 			}
 
