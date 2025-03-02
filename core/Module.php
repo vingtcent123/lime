@@ -5182,7 +5182,7 @@ abstract class ModulePage extends Page {
 
 	public function create(?\Closure $action = NULL, string|array $method = 'get', ?array $propertiesCreate = NULL, string $page = 'create', array $validate = ['canCreate']): ModulePage {
 
-		$this->match((array)$method, $page, function($data) use ($action, $propertiesCreate, $validate) {
+		$this->match((array)$method, $page, function($data) use($action, $propertiesCreate, $validate) {
 
 			$data->e = $this->createElement->call($this, $data);
 
@@ -5204,7 +5204,7 @@ abstract class ModulePage extends Page {
 
 	public function doCreate(\Closure $action, ?array $propertiesCreate = NULL, string $page = 'doCreate', array $validate = ['canCreate']): ModulePage {
 
-		$this->post($page, function($data) use ($action, $propertiesCreate, $validate) {
+		$this->post($page, function($data) use($action, $propertiesCreate, $validate) {
 
 			$fw = new \FailWatch();
 
@@ -5233,7 +5233,7 @@ abstract class ModulePage extends Page {
 
 	public function update(?\Closure $action = NULL, string|array $method = 'get', ?array $propertiesUpdate = NULL, string $page = 'update', array $validate = ['canUpdate']): ModulePage {
 
-		$this->match((array)$method, $page, function($data) use ($action, $method, $propertiesUpdate, $validate) {
+		$this->match((array)$method, $page, function($data) use($action, $method, $propertiesUpdate, $validate) {
 
 			$e = $this->element->call($this, $data);
 
@@ -5274,7 +5274,7 @@ abstract class ModulePage extends Page {
 
 	public function doUpdate(\Closure $action, ?array $propertiesUpdate = NULL, string $page = 'doUpdate', array $validate = ['canUpdate']): ModulePage {
 
-		$this->post($page, function($data) use ($action, $propertiesUpdate, $validate) {
+		$this->post($page, function($data) use($action, $propertiesUpdate, $validate) {
 
 			$e = $this->element->call($this, $data);
 
@@ -5316,7 +5316,7 @@ abstract class ModulePage extends Page {
 
 	public function quick(array $propertiesAllowed, array $callbacks = [], array $validate = ['canUpdate']): ModulePage {
 
-		$this->post('/@module/'.str_replace('\\', '/', $this->module).'/quick', function($data) use ($propertiesAllowed, $callbacks) {
+		$this->post('/@module/'.str_replace('\\', '/', $this->module).'/quick', function($data) use($propertiesAllowed, $callbacks) {
 
 			$property = POST('property');
 
@@ -5351,7 +5351,7 @@ abstract class ModulePage extends Page {
 
 		});
 
-		$this->post('/@module/'.str_replace('\\', '/', $this->module).'/doQuick', function($data) use ($propertiesAllowed, $validate) {
+		$this->post('/@module/'.str_replace('\\', '/', $this->module).'/doQuick', function($data) use($propertiesAllowed, $validate) {
 
 			$property = POST('property');
 
@@ -5396,7 +5396,7 @@ abstract class ModulePage extends Page {
 
 	public function doUpdateProperties(string $page, array|Closure $properties, \Closure $action, array $validate = ['canUpdate']): ModulePage {
 
-		$this->post($page, function($data) use ($properties, $action, $validate) {
+		$this->post($page, function($data) use($properties, $action, $validate) {
 
 			$e = $this->element->call($this, $data);
 
@@ -5440,7 +5440,7 @@ abstract class ModulePage extends Page {
 
 	public function doUpdateCollectionProperties(string $page, array|Closure $properties, \Closure $action, array $validate = ['canUpdate']): ModulePage {
 
-		$this->post($page, function($data) use ($properties, $action, $validate) {
+		$this->post($page, function($data) use($properties, $action, $validate) {
 
 			$e = $this->collection->call($this, $data);
 
@@ -5494,7 +5494,7 @@ abstract class ModulePage extends Page {
 
 	public function write(string $page, \Closure $action, array $validate = ['canWrite']): ModulePage {
 
-		$this->post($page, function($data) use ($action, $validate) {
+		$this->post($page, function($data) use($action, $validate) {
 
 			$e = $this->element->call($this, $data);
 
@@ -5524,7 +5524,7 @@ abstract class ModulePage extends Page {
 
 	public function read(string|array $pageList, \Closure $action, string $method = 'get', array $validate = ['canRead'], ?Closure $onEmpty = NULL): ModulePage {
 
-		$this->match([$method], $pageList, function($data) use ($action, $validate, $onEmpty) {
+		$this->match([$method], $pageList, function($data) use($action, $validate, $onEmpty) {
 
 			$e = $this->element->call($this, $data);
 
@@ -5558,7 +5558,7 @@ abstract class ModulePage extends Page {
 
 	public function doDelete(\Closure $action, string $page = 'doDelete', ?Closure $onEmpty = NULL): ModulePage {
 
-		$this->post($page, function($data) use ($action, $onEmpty) {
+		$this->post($page, function($data) use($action, $onEmpty) {
 
 			$e = $this->element->call($this, $data);
 

@@ -304,7 +304,7 @@ abstract class Cache {
 					$h .= '</div>';
 				}
 
-				register_shutdown_function(function() use ($h) {
+				register_shutdown_function(function() use($h) {
 					echo $h;
 				});
 

@@ -234,7 +234,7 @@ class Page {
 				'name' => $name,
 				'type' => $type,
 				'request' => $request,
-				'create' => function($data) use ($create) {
+				'create' => function($data) use($create) {
 					if($this->start !== NULL) {
 						$this->start->call($this, $data);
 					}

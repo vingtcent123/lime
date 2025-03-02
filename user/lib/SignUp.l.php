@@ -113,7 +113,7 @@ class SignUpLib {
 
 			},
 
-			'password.match' => function($password) use ($input) {
+			'password.match' => function($password) use($input) {
 
 				if(array_key_exists('passwordBis', $input)) {
 					return password_verify($input['passwordBis'], $password);

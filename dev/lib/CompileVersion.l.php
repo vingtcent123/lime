@@ -24,7 +24,7 @@ class CompileVersionLib {
 
 			$checksums = [];
 
-			$package->browse('media/image', NULL, function($file) use (&$checksums) {
+			$package->browse('media/image', NULL, function($file) use(&$checksums) {
 
 				$path = $file->getPathname();
 
@@ -81,7 +81,7 @@ class CompileVersionLib {
 
 			$checksums = [];
 
-			$package->browse('media/'.$type, '.'.$type, function($file) use (&$checksums, $type) {
+			$package->browse('media/'.$type, '.'.$type, function($file) use(&$checksums, $type) {
 
 				$path = $file->getPathname();
 

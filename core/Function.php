@@ -477,7 +477,7 @@ function input_exists(string $name): bool {
 
 function var_filter(mixed $value, mixed $cast, mixed $default = NULL) {
 
-	$runDefault = function() use ($value, $default) {
+	$runDefault = function() use($value, $default) {
 		return is_closure($default) ? $default($value) : $default;
 	};
 

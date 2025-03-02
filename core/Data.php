@@ -616,7 +616,7 @@ class Collection extends ArrayIterator {
 	 */
 	public function expects(array $keys, ?callable $callback = NULL): Collection {
 
-		return $this->map(function(Element $e) use ($keys, $callback) {
+		return $this->map(function(Element $e) use($keys, $callback) {
 			$e->expects($keys, $callback);
 		});
 
@@ -983,7 +983,7 @@ class Collection extends ArrayIterator {
 				}
 			}
 
-			$callback = function($eElement1, $eElement2) use ($order, $compare) {
+			$callback = function($eElement1, $eElement2) use($order, $compare) {
 
 				foreach($order as [$list, $sort]) {
 
@@ -1040,7 +1040,7 @@ class Collection extends ArrayIterator {
 			throw new NotExistsAction('Empty collection');
 		}
 
-		$this->map(function(Element $e) use ($tests) {
+		$this->map(function(Element $e) use($tests) {
 			$e->validate(...$tests);
 		});
 
@@ -1660,14 +1660,14 @@ class Element extends ArrayObject {
 
 			if($model->hasProperty($property)) {
 
-				$callbackCast = $callbacksProperty[$property.'.cast'] ?? function(&$value) use ($model, $property): bool {
+				$callbackCast = $callbacksProperty[$property.'.cast'] ?? function(&$value) use($model, $property): bool {
 
 					$model->cast($property, $value);
 					return TRUE;
 
 				};
 
-				$callbackPrepare = $callbacksProperty[$property.'.prepare'] ?? function(&$value) use ($model, $property): bool {
+				$callbackPrepare = $callbacksProperty[$property.'.prepare'] ?? function(&$value) use($model, $property): bool {
 
 					if(strpos($model->getPropertyType($property), 'editor') === 0) {
 						$value = new \editor\XmlLib()->fromHtml($value);
@@ -1677,7 +1677,7 @@ class Element extends ArrayObject {
 
 				};
 
-				$callbackCheck = $callbacksProperty[$property.'.check'] ?? function(&$value) use ($model, $property): bool {
+				$callbackCheck = $callbacksProperty[$property.'.check'] ?? function(&$value) use($model, $property): bool {
 
 					if(
 						$model->isPropertyNull($property) and
@@ -1690,7 +1690,7 @@ class Element extends ArrayObject {
 
 				};
 
-				$callbackSet = $callbacksProperty[$property.'.set'] ?? function($value) use ($property) {
+				$callbackSet = $callbacksProperty[$property.'.set'] ?? function($value) use($property) {
 					$this[$property] = $value;
 				};
 
@@ -1713,7 +1713,7 @@ class Element extends ArrayObject {
 
 			foreach($callbacksSelected as $name => $callback) {
 
-				$onError = function() use ($name, $property, $wrapper, &$success) {
+				$onError = function() use($name, $property, $wrapper, &$success) {
 
 					$class = $this->getModule($this);
 					$error = explode('.', $name)[1];
@@ -1760,7 +1760,7 @@ class Element extends ArrayObject {
 
 	public function buildIndex(array $properties, array $input, $index, \Properties $p = new \Properties()): void {
 
-		$p->setWrapper(function(string $property) use ($index) {
+		$p->setWrapper(function(string $property) use($index) {
 			return $property.'['.$index.']';
 		});
 

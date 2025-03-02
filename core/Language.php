@@ -312,7 +312,7 @@ class L {
 	 */
 	private static function applyVariables(string $string, $variables): string {
 
-		return preg_replace_callback("/\{([a-z0-9]+?)\}|\<([a-z0-9]+)\>|\<\/([a-z0-9]+)\>/si", function($value) use ($string, $variables) {
+		return preg_replace_callback("/\{([a-z0-9]+?)\}|\<([a-z0-9]+)\>|\<\/([a-z0-9]+)\>/si", function($value) use($string, $variables) {
 
 			// {toto}
 			if($value[1]) {
