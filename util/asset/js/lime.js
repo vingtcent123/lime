@@ -98,8 +98,16 @@ function money(value, precision = 2) {
 	value = value.toString();
 
 	if(precision > 0) {
+
+		const decimal = value.substring(value.length - precision, value.length);
+
 		output += ',';
-		output += value.substring(value.length - precision, value.length);
+		output += decimal;
+
+		for(let i = decimal.length; i < precision; i++) {
+			output += '0';
+		}
+
 	}
 
 	return output +' €';
