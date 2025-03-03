@@ -445,7 +445,7 @@ div.form-group.form-group-nested > .form-control-label {
 	height: 1.8rem;
 	width: 3.6rem;
 	min-width: max-content;
-	border-radius: 1rem;
+	border-radius: var(--radius);
 	border: 1px solid white;
 	transition: all 0.5s;
 	position: relative;

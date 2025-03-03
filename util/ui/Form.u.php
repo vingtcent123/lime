@@ -201,7 +201,7 @@ class FormUi {
 			$label = NULL;
 		}
 
-		$h = $form->openAjax('/@module/'.str_replace('\\', '/', $e->getModule()).'/doQuick');
+		$h = $form->openAjax(self::getQuickUrl($e));
 
 			$h .= $form->hidden('id', $e['id']);
 			$h .= $form->hidden('property', $property);
@@ -235,6 +235,10 @@ class FormUi {
 
 		return $h;
 
+	}
+
+	public static function getQuickUrl(\Element $e): string {
+		return '/@module/'.str_replace('\\', '/', $e->getModule()).'/doQuick';
 	}
 
 	/**
