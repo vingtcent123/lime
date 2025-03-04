@@ -1602,8 +1602,27 @@ td.util-manage-vignette {
 	transition: color 0.25s, background-color 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 
+.btn-group {
+	display: inline-block;
+}
+
+.btn-group .btn:not(:last-child) {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.btn-group .btn:not(:first-child) {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.btn-group .btn:not(:first-child) {
+	margin-left: -1px;
+}
+
 @media print {
 
+	.btn-group,
 	.btn {
 		display: none;
 	}
