@@ -59,6 +59,7 @@ Attention : ce texte sera affiché à l'utilisateur.")])
 		$h .= $form->submit(\Asset::icon('slash-circle-fill').' '.s("Bannir"), ['class' => 'btn btn-danger']);
 
 		return new \Panel(
+			id: 'panel-user-ban',
 			title: s("Bannir {email}", ['email' => encode($eUser['email'])]),
 			body: $h
 		);
@@ -165,6 +166,7 @@ Attention : ce texte sera affiché à l'utilisateur.")])
 		$h .= $form->close();
 
 		return new \Panel(
+			id: 'panel-user-ban-duration',
 			title: s("Changer la fin du bannissement"),
 			body: $h
 		);

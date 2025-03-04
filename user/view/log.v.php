@@ -2,6 +2,7 @@
 new AdaptativeView('form', function($data, PanelTemplate $t) {
 
 	return new Panel(
+		id: 'panel-user-login',
 		title: s("Connectez-vous !"),
 		body: new \user\UserUi()->logInBasic($data->email)
 	);

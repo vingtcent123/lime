@@ -2,7 +2,7 @@
 new AdaptativeView('updateUser', function($data, PanelTemplate $t) {
 
 	return new Panel(
-		id: 'user-update',
+		id: 'panel-user-update',
 		title: s("Modifier mes informations personnelles"),
 		body: new user\UserUi()->update($data->eUserOnline)
 	);
@@ -12,7 +12,7 @@ new AdaptativeView('updateUser', function($data, PanelTemplate $t) {
 new AdaptativeView('updateEmail', function($data, PanelTemplate $t) {
 
 	return new Panel(
-		id: 'user-update-email',
+		id: 'panel-user-update-email',
 		title: s("Changer mon adresse e-mail"),
 		body: new user\UserUi()->updateEmail($data->eUserOnline)
 	);
@@ -28,7 +28,7 @@ new AdaptativeView('updatePassword', function($data, PanelTemplate $t) {
 	}
 
 	return new Panel(
-		id: 'user-update-password',
+		id: 'panel-user-update-password',
 		title: $title,
 		body: new user\UserUi()->updatePassword($data->eUserOnline)
 	);
@@ -38,6 +38,7 @@ new AdaptativeView('updatePassword', function($data, PanelTemplate $t) {
 new AdaptativeView('dropAccount', function($data, PanelTemplate $t) {
 
 	return new Panel(
+		id: 'panel-user-drop',
 		title: s("Fermer mon compte"),
 		body: new user\DropUi()->close($data->eUserOnline, $data->canCloseDelay)
 	);

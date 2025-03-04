@@ -228,6 +228,7 @@ class AdminUi {
 		$h .= $form->close();
 
 		return new \Panel(
+			id: 'panel-user-update',
 			title: $eUser->getName(),
 			body: $h,
 			close: 'reload'
@@ -249,6 +250,7 @@ class AdminUi {
 		};
 
 		return new \Panel(
+			id: 'panel-user-password',
 			title: s("Lien de réinitialisation de mot de passe"),
 			body: $h
 		);

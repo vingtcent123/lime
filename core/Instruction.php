@@ -9,7 +9,7 @@ interface Instruction {
 class Panel implements Instruction {
 
 	public function __construct(
-		public ?string $id = NULL,
+		public string $id,
 		public ?string $back = NULL,
 		public ?string $title = NULL,
 		public ?string $documentTitle = NULL,
@@ -38,7 +38,7 @@ class Panel implements Instruction {
 	protected function asArray(): array {
 
 		$output = [
-			'id' => $this->id ?? uniqid('panel-')
+			'id' => $this->id
 		];
 
 		if($this->back !== NULL) {
