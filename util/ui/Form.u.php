@@ -274,9 +274,7 @@ class FormUi {
 		$d = NULL;
 		$h = $this->dynamicField($e, $property, $dCallback, $d);
 
-		$field = $attributes['field'] ?? $d->field;
-
-		switch($field) {
+		switch($d->field) {
 
 			case NULL :
 				return '';
