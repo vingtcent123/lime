@@ -316,13 +316,15 @@ Element.prototype.parseScripts = function() {
 
 Element.prototype.parseRender = function() {
 
-	if(this.hasAttribute('onrender')) {
-		evalScope(this, this.getAttribute('onrender'));
-	}
+	setTimeout(() => {
+		if(this.hasAttribute('onrender')) {
+			evalScope(this, this.getAttribute('onrender'));
+		}
 
-	this.qsa('[onrender]', function(node) {
-		evalScope(node, node.getAttribute('onrender'));
-	});
+		this.qsa('[onrender]', function(node) {
+			evalScope(node, node.getAttribute('onrender'));
+		});
+	}, 1);
 
 };
 
