@@ -1110,11 +1110,7 @@ abstract class ModuleModel {
 			unset($data['if']);
 
 			if(!$if) {
-				return array_key_exists('else', $data) ? '('.$data['else'].')' : NULL;
-			}
-
-			if(array_key_exists('else', $data)) {
-				unset($data['else']);
+				return NULL;
 			}
 
 		}
@@ -1142,6 +1138,17 @@ abstract class ModuleModel {
 	}
 
 	public function or(...$wheres): ModuleModel {
+
+		if(array_key_exists('if', $wheres)) {
+
+			$if = $wheres['if'];
+			unset($wheres['if']);
+
+			if(!$if) {
+				return $this;
+			}
+
+		}
 
 		$this->condition ??= '';
 		$this->condition .= '(';
