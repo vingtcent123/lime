@@ -86,7 +86,7 @@ class UserUi {
 			$submit = '<div class="login-submit">';
 				$submit .= $form->submit(s("Se connecter"));
 				$submit .= '<div class="login-forgotten-password">
-					<a href="/user/log:forgottenPassword">'.s("Mot de passe oublié ?").'</a>
+					<a href="/user/log:forgottenPassword" target="_blank">'.s("Mot de passe oublié ?").'</a>
 				</div>';
 			$submit .= '</div>';
 

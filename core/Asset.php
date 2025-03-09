@@ -420,7 +420,7 @@ class Asset {
 	 *
 	 * @return string
 	 */
-	protected static function directory(string $package): string {
+	public static function directory(string $package): string {
 
 		$path = '/asset/'.\Package::getApp($package).'/'.$package;
 
