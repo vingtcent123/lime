@@ -316,7 +316,7 @@ Element.prototype.parseScripts = function() {
 
 Element.prototype.parseRender = function() {
 
-	setTimeout(() => {
+	const render = () => {
 		if(this.hasAttribute('onrender')) {
 			evalScope(this, this.getAttribute('onrender'));
 		}
@@ -324,7 +324,13 @@ Element.prototype.parseRender = function() {
 		this.qsa('[onrender]', function(node) {
 			evalScope(node, node.getAttribute('onrender'));
 		});
-	}, 1);
+	};
+
+	if(this.hasAttribute('data-render-timeout')) {
+		setTimeout(render, parseInt(this.dataset.renderTimeout));
+	} else {
+		render();
+	}
 
 };
 
