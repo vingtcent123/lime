@@ -316,21 +316,21 @@ Element.prototype.parseScripts = function() {
 
 Element.prototype.parseRender = function() {
 
-	const render = () => {
-		if(this.hasAttribute('onrender')) {
-			evalScope(this, this.getAttribute('onrender'));
-		}
-
-		this.qsa('[onrender]', function(node) {
+	const render = (node) => {
+		if(node.hasAttribute('data-render-timeout')) {
+			setTimeout(() => evalScope(node, node.getAttribute('onrender')), parseInt(node.dataset.renderTimeout));
+		} else {
 			evalScope(node, node.getAttribute('onrender'));
-		});
+		}
 	};
 
-	if(this.hasAttribute('data-render-timeout')) {
-		setTimeout(render, parseInt(this.dataset.renderTimeout));
-	} else {
-		render();
+	if(this.hasAttribute('onrender')) {
+		render(this);
 	}
+
+	this.qsa('[onrender]', function(node) {
+		render(node);
+	});
 
 };
 
