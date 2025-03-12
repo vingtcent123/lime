@@ -854,6 +854,14 @@ Ajax.Instruction = class {
 				Lime.History.replaceState(data[0]);
 				return;
 
+			case 'location' :
+				window.location = data[0];
+				return;
+
+			case 'parentLocation' :
+				window.parent.location = data[0];
+				return;
+
 			case 'eval' :
 				evalScope(document.body, data[0]);
 				return;

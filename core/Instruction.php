@@ -166,6 +166,22 @@ class JavascriptInstruction implements Instruction {
 	}
 
 	/**
+	 * window.location
+	 */
+	public function location(string $url): self {
+		$this->instructions[] = ['location', [$url]];
+		return $this;
+	}
+
+	/**
+	 * window.parent.location
+	 */
+	public function parentLocation(string $url): self {
+		$this->instructions[] = ['parentLocation', [$url]];
+		return $this;
+	}
+
+	/**
 	 * Push a new state in the history
 	 */
 	public function pushHistory(string $url): self {
