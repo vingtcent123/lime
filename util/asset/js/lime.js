@@ -1242,6 +1242,7 @@ Lime.Panel = class {
 		}
 
 		panel.classList.add('closing');
+		panel.dispatchEvent(new CustomEvent('panelClose'));
 
 		// No more panel open
 		if(qsa('.panel.open:not(.closing)').length === 0) {
