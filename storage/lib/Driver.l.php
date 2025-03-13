@@ -7,7 +7,7 @@ namespace storage;
  *
  * @author Émilie Guth
  */
-class XyzLib {
+class DriverLib {
 
 	public static function getFileResource(string $path): \Imagick {
 

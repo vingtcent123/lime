@@ -12,7 +12,7 @@ class ImageLib {
 	 */
 	public static function getBasePath(): string {
 
-		return \Setting::get('storage\basePath');
+		return DriverLib::directory();
 
 	}
 
