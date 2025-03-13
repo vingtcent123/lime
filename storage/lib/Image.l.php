@@ -7,16 +7,6 @@ namespace storage;
 class ImageLib {
 
 	/**
-	 * Returns the base path to store the medias
-	 *
-	 */
-	public static function getBasePath(): string {
-
-		return DriverLib::directory();
-
-	}
-
-	/**
 	 * Checks the given type depending on supported types
 	 *
 	 * @param int $type

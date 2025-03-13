@@ -35,7 +35,7 @@ new Page()
 			$typeSource = exif_imagetype($fileSource);
 
 			$pathDestination = \storage\ServerLib::getPath($type, $sizeInt, $file->getFileName());
-			$dirDestination = \storage\ImageLib::getBasePath().'/'.dirname($pathDestination);
+			$dirDestination = \storage\DriverLib::directory().'/'.dirname($pathDestination);
 
 			if(is_dir($dirDestination) === FALSE) {
 				mkdir($dirDestination, 0777, TRUE);

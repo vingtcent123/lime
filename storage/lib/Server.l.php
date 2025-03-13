@@ -424,7 +424,7 @@ class ServerLib {
 	}
 
 	public static function getAbsolutePath(string $type, $format, string $basename): string {
-		return ImageLib::getBasePath().'/'.self::getPath($type, $format, $basename);
+		return DriverLib::directory().'/'.self::getPath($type, $format, $basename);
 	}
 
 	/**
@@ -434,7 +434,7 @@ class ServerLib {
 	 * @return string
 	 */
 	public static function getDirectory(string $type): string {
-		return  ImageLib::getBasePath().'/'.$type;
+		return  DriverLib::directory().'/'.$type;
 	}
 
 	public static function parseBasename(string $basename): array {
