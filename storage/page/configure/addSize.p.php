@@ -41,7 +41,7 @@ new Page()
 				mkdir($dirDestination, 0777, TRUE);
 			}
 
-			$pathSource = substr($fileSource, strlen(\util\XyzLib::directory()) + 1);
+			$pathSource = substr($fileSource, strlen(\storage\XyzLib::directory()) + 1);
 
 			$bounds = \Setting::get('media\mediaDriver')->getMetadata($pathSource)['crop'] ?? NULL;
 

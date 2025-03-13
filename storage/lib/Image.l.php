@@ -12,11 +12,7 @@ class ImageLib {
 	 */
 	public static function getBasePath(): string {
 
-		if(LIME_ENV === 'dev') {
-			return '/var/www/storage';
-		}
-
-		return '/var/www/storage';
+		return \Setting::get('storage\basePath');
 
 	}
 

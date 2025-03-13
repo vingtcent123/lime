@@ -1,5 +1,5 @@
 <?php
-namespace util;
+namespace storage;
 
 /**
  * To use directly the XYZ file system
@@ -78,14 +78,13 @@ class XyzLib {
 	}
 
 	public static function getFileName(string $file): string {
-		return self::directory().'/'.$file;
+		return self::directory().'Xyz.l.php/'.$file;
 	}
 
 	public static function directory() {
-		if(LIME_ENV === 'dev') {
-			return '/var/www/storage';
-		}
-		return '/var/www/storage';
+
+		return \Setting::get('storage\basePath');
+
 	}
 
 }

@@ -48,5 +48,7 @@ Setting::register('storage', [
 
 	'imagesInputType' => [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF, IMAGETYPE_BMP],
 
+	'basePath' => '/var/www/storage',
+
 ]);
 ?>
