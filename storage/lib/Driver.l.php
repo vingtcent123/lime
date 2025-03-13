@@ -78,7 +78,7 @@ class DriverLib {
 	}
 
 	public static function getFileName(string $file): string {
-		return self::directory().'Xyz.l.php/'.$file;
+		return self::directory().'/'.$file;
 	}
 
 	public static function directory() {
