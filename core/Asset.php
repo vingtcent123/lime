@@ -62,7 +62,7 @@ class Asset {
 
 			[$packageName, $file] = $arguments;
 
-			$path = self::directory($packageName).'/js/'.$file;
+			$path = self::getJsPath($packageName, $file);
 
 			if(isset(self::$js[$path]) === FALSE) {
 				self::$js[$path] = new AssetElement($path, 'js');
@@ -73,6 +73,10 @@ class Asset {
 
 		return self::$js[$path];
 
+	}
+
+	public static function getJsPath(string $packageName, string $file): string {
+		return self::getPath($packageName, $file, 'js');
 	}
 
 	/**
@@ -97,7 +101,7 @@ class Asset {
 	 */
 	public static function css(string $packageName, string $file): AssetElement {
 
-		$path = self::directory($packageName).'/css/'.$file;
+		$path = self::getCssPath($packageName, $file);
 
 		if(isset(self::$css[$path]) === FALSE) {
 			self::$css[$path] = new AssetElement($path, 'css');
@@ -105,6 +109,10 @@ class Asset {
 
 		return self::$css[$path];
 
+	}
+
+	public static function getCssPath(string $packageName, string $file): string {
+		return self::getPath($packageName, $file, 'css');
 	}
 
 	private static $hasGoogleFont = FALSE;
@@ -134,7 +142,7 @@ class Asset {
 	 */
 	public static function lib(string $packageName, string $file): ?AssetElement {
 
-		$path = self::directory($packageName).'/lib/'.$file;
+		$path = self::getLibPath($packageName, $file);
 
 		if(substr($file, -3) === '.js') {
 
@@ -156,6 +164,10 @@ class Asset {
 
 		return NULL;
 
+	}
+
+	public static function getLibPath(string $packageName, string $file): string {
+		return self::getPath($packageName, $file, 'lib');
 	}
 
 	/**
@@ -360,7 +372,7 @@ class Asset {
 			$source = $package;
 			$version = '';
 		} else {
-			$source = self::path($package, $file, 'image');
+			$source = self::getPath($package, $file, 'image');
 			$version = self::getVersion();
 		}
 
@@ -377,9 +389,11 @@ class Asset {
 	 *
 	 * @return string
 	 */
-	public static function path(string $package, string $file, ?string $type = NULL): string {
+	public static function getPath(string $package, string $file, ?string $type = NULL): string {
 
-		$path = self::directory($package).($type !== NULL ? '/'.$type : '').'/'.$file."?".self::getVersion();
+		$version = self::getVersion();
+
+		$path = self::directory($package).($type !== NULL ? '/'.$type : '').'/'.$file.($version !== NULL ? '?'.$version : '');
 
 		return $path;
 
