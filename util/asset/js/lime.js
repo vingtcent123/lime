@@ -10,6 +10,10 @@ function d(...arguments) {
 	console.log(...arguments);
 }
 
+function dd(...arguments) {
+	throw console.log(...arguments);
+}
+
 if('scrollRestoration' in history) { // what an amazing feature!
 	history.scrollRestoration = 'manual';
 }
@@ -62,7 +66,7 @@ let browser = {
 browser.isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
 // Firefox 1.0+
-browser.isFirefox = typeof InstallTrigger !== 'undefined';
+browser.isFirefox = navigator.userAgent.indexOf("Firefox") !== -1;
 
 // Safari 3.0+ "[object HTMLElementConstructor]"
 browser.isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
@@ -720,7 +724,7 @@ String.prototype.removeArgument = function(name) {
 
 	let location = this;
 
-	const regex = new RegExp('([\&\?])'+ name.replace('[', '\\[').replace(']', '\\]') +'(=[a-z0-9/\.\%\:\\-\\\\+]*)*[&]?', 'gi');
+	const regex = new RegExp('([\&\?])'+ name.replace('[', '\\[').replace(']', '\\]') +'(=[a-z0-9/,\.\%\:\\-\\\\+\{\}]*)*[&]?', 'gi');
 	location = location.replace(regex, '$1');
 	location = location.replace('?&', '?');
 	location = location.replace('&&', '&');

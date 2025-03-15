@@ -183,8 +183,8 @@ Vous recevrez alors un e-mail contenant un lien vous permettant d'en choisir un 
 			self::p('email')->label,
 			$form->inputGroup(
 				$form->addon(\Asset::icon('envelope-fill')).
-				$form->fake($eUser['email']).
-				'<a href="/user/settings:updateEmail"" class="btn btn-primary">'.\Asset::icon('pencil-fill').'</a>'
+				'<div class="form-control form-control-fake">'.encode($eUser['email']).'</div>'.
+				'<a href="/user/settings:updateEmail" class="btn btn-primary">'.\Asset::icon('pencil-fill').'</a>'
 			)
 		);
 		$h .= $form->dynamicGroups($eUser, ['firstName', 'lastName', 'phone']);
