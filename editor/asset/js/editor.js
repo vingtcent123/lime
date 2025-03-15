@@ -2242,16 +2242,6 @@ class EditorFormat {
 				nodeP.removeAttribute('class');
 			} else {
 
-				if(nodeP.qsa('b, i, u, a').length > 0) {
-
-					if(confirm(Editor.labels.confirmHeader) === false) {
-						return false;
-					} else {
-						nodeP.qsa('b, i, u, a', nodeStyle => EditorNode.remove(nodeStyle));
-					}
-
-				}
-
 				nodeP.setAttribute('data-header', newHeaderSize);
 				nodeP.removeAttribute('class');
 

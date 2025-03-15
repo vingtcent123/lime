@@ -214,7 +214,6 @@ class EditorUi {
 			'header' => s("Transformer en titre"),
 			'link' => s("Créer ou supprimer un lien"),
 			'button' => s("Transformer en bouton"),
-			'confirmHeader' => s("Les styles en gras, italique, souligné ainsi que les liens seront perdus. Voulez-vous toujours transformer ce paragraphe en titre ?"),
 			'confirmRemoveLinks' => s("Si vous continuez, les liens que vous avez sélectionnés seront supprimés. Voulez-vous continuer ?"),
 			'confirmRemoveLink' => s("Souhaitez-vous supprimer ce lien ?"),
 			'media' => s("Ajouter une photo, une vidéo, une astuce ou un séparateur"),
