@@ -76,7 +76,7 @@ class Asset {
 	}
 
 	public static function getJsPath(string $packageName, string $file): string {
-		return self::getPath($packageName, $file, 'js');
+		return self::getPath($packageName, $file, 'js', withVersion: FALSE);
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Asset {
 	}
 
 	public static function getCssPath(string $packageName, string $file): string {
-		return self::getPath($packageName, $file, 'css');
+		return self::getPath($packageName, $file, 'css', withVersion: FALSE);
 	}
 
 	private static $hasGoogleFont = FALSE;
@@ -389,11 +389,11 @@ class Asset {
 	 *
 	 * @return string
 	 */
-	public static function getPath(string $package, string $file, ?string $type = NULL): string {
+	public static function getPath(string $package, string $file, ?string $type = NULL, bool $withVersion = TRUE): string {
 
 		$version = self::getVersion();
 
-		$path = self::directory($package).($type !== NULL ? '/'.$type : '').'/'.$file.($version !== NULL ? '?'.$version : '');
+		$path = self::directory($package).($type !== NULL ? '/'.$type : '').'/'.$file.(($withVersion and $version !== NULL) ? '?'.$version : '');
 
 		return $path;
 
