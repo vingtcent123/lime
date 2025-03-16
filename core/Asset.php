@@ -456,7 +456,7 @@ class Asset {
 	 *
 	 * @return int
 	 */
-	public static function getVersion(): string {
+	public static function getVersion(): ?string {
 		if(self::$version === NULL) {
 			return SERVER('HTTP_X_ASSET_VERSION', 'string', str_replace('.', '', LIME_TIME));
 		} else {
