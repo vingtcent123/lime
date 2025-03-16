@@ -996,7 +996,15 @@ class Collection extends ArrayIterator {
 				foreach($order as [$list, $sort]) {
 
 					if($list instanceof Closure) {
-						return $list->call($this, $eElement1, $eElement2);
+
+						$result = $list->call($this, $eElement1, $eElement2);
+
+						if($result === 0) {
+							continue;
+						} else {
+							return $result;
+						}
+
 					} else {
 
 						$value1 = $eElement1;
