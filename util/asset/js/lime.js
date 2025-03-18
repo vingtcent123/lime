@@ -2017,9 +2017,14 @@ Lime.Quick = class {
 							(node) => node.focus(),
 							() => list.qs(
 								'.util-quick-form input',
-								(node) => node.select()
+								(node) => node.select(),
+								() => list.qs('.util-quick-form textarea', (node) => {
+									node.focus();
+									node.setSelectionRange(node.value.length, node.value.length);
+								})
 							)
 						);
+
 
 					});
 
