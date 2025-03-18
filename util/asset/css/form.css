@@ -48,6 +48,62 @@ input[type="checkbox"] {
 	height: 1.1rem;
 }
 
+.form-warning [type="submit"] {
+	box-shadow: 0 0 15px var(--warning);
+}
+
+[data-wrapper].form-warning-wrapper > label.form-control-label {
+	color: var(--warning) !important;
+	font-weight: bold;
+}
+
+[data-wrapper].form-warning-wrapper input {
+	color: var(--warning);
+}
+
+[data-wrapper].form-warning-wrapper [data-wrapper].form-warning-wrapper input {
+	color: var(--warning);
+}
+
+.form-columns [data-wrapper].form-warning-wrapper > label.form-control-label {
+	padding-right: 0.25rem;
+	border-right: 2px solid var(--warning);
+}
+
+.form-warning-message {
+	font-size: 0.875rem;
+	color: var(--warning) !important;
+	font-weight: normal !important;
+	border-radius: var(--radius);
+	margin: 0.25rem 0.25rem 0 0;
+	line-height: 1.3;
+}
+
+.form-warning-field div.input-group label.btn,
+.form-warning-field div.btn,
+.form-warning-field .input-group label,
+.form-warning-field input,
+.form-warning-field textarea,
+.form-warning-field .form-warning-field-component,
+.form-warning-field,
+.form-warning-field select {
+	border-color: var(--warning) !important;
+}
+.form-warning-field input[type="radio"] {
+	outline: 1px solid var(--warning) !important;
+}
+.form-warning-field input[type="text"],
+.form-warning-field input[type="time"],
+.form-warning-field input[type="date"],
+.form-warning-field input[type="email"],
+.form-warning-field input[type="url"] {
+	background: linear-gradient(to right, rgba(194, 120, 10, 0.2) 0, transparent 3rem);
+	background-color: white;
+}
+
+.form-error-field .input-group-addon {
+	color: var(--warning);
+}
 
 .form-error [type="submit"] {
 	box-shadow: 0 0 15px var(--danger);
@@ -62,6 +118,7 @@ input[type="checkbox"] {
 	color: var(--danger);
 }
 
+[data-wrapper].form-warning-wrapper [data-wrapper]  input,
 [data-wrapper].form-error-wrapper [data-wrapper]  input {
 	color: inherit;
 }
@@ -92,10 +149,10 @@ input[type="checkbox"] {
 .form-error-field .form-error-field-component,
 .form-error-field,
 .form-error-field select {
-	border-color: #d9534f !important;
+	border-color: var(--danger) !important;
 }
 .form-error-field input[type="radio"] {
-	outline: 1px solid #d9534f !important;
+	outline: 1px solid var(--danger) !important;
 }
 .form-error-field input[type="text"],
 .form-error-field input[type="time"],
