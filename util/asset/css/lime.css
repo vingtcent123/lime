@@ -2790,6 +2790,10 @@ div.util-buttons > .util-button h4 {
 		display: block !important;
 	}
 
+	.util-print-break-after {
+		page-break-after: always;
+	}
+
 	.util-print-break-inside-avoid {
 		page-break-inside: avoid;
 	}
