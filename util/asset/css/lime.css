@@ -853,7 +853,6 @@ tbody .td-checkbox > label {
 }
 
 .util-info,
-.util-help,
 .util-success,
 .util-warning,
 .util-danger {
@@ -865,7 +864,6 @@ tbody .td-checkbox > label {
 @media print {
 
 	.util-info,
-	.util-help,
 	.util-success,
 	.util-warning,
 	.util-danger {
@@ -875,34 +873,21 @@ tbody .td-checkbox > label {
 }
 
 .util-info p:last-child,
-.util-help p:last-child,
 .util-success p:last-child,
 .util-warning p:last-child,
 .util-danger p:last-child {
 	margin-bottom: 0;
 }
 
-.util-help,
 .util-info {
 	border: 1px solid var(--secondary);
 	border-radius: var(--radius);
 	color: var(--secondary);
 }
 
-.util-help a:not(.btn),
 .util-info a:not(.btn) {
 	color: #777;
 	text-decoration: underline;
-}
-
-.util-help {
-	display: flex;
-	align-items: start;
-	column-gap: 1rem;
-}
-
-.util-help > svg {
-	font-size: 3.2rem;
 }
 
 .util-warning {

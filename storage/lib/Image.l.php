@@ -172,7 +172,7 @@ class ImageLib {
 				$resource->setImagePage(0, 0, 0, 0);
 
 				$cut = (1 - $ratio / $ratioSource) * $widthSource;
-				$resource->cropImage($widthSource - $cut, $heightSource, (int)($cut / 2), 0);
+				$resource->cropImage((int)($widthSource - $cut), $heightSource, (int)($cut / 2), 0);
 
 				$result = TRUE;
 
@@ -183,7 +183,7 @@ class ImageLib {
 				$resource->setImagePage(0, 0, 0, 0);
 
 				$cut = (1 - $ratioSource / $ratio) * $heightSource;
-				$resource->cropImage($widthSource, $heightSource - $cut, 0, (int)($cut / 2));
+				$resource->cropImage($widthSource, (int)($heightSource - $cut), 0, (int)($cut / 2));
 
 				$result = TRUE;
 
