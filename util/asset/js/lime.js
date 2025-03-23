@@ -120,7 +120,7 @@ function money(value, precision = 2) {
 
 function doCopy(target) {
 
-	const fromElement = document.querySelector(target.dataset.selector);
+	const fromElement = qs(target.dataset.selector);
 
 	if(navigator.clipboard.writeText(fromElement.innerHTML)) {
 		alert(target.dataset.message);
