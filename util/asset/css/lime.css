@@ -432,11 +432,7 @@ input[type=checkbox], input[type=radio] {
 .form-control.disabled:not(select),
 .form-control[disabled]:not(select),
 .form-control:disabled:not(select) {
-	color: var(--muted);
-}
-
-.form-control-fake {
-	color: var(--muted);
+	color: #000B;
 }
 
 select.form-control {
@@ -1152,7 +1148,6 @@ table.util-block tbody:last-child tr:last-child td:last-child {
 
 .util-block-dark {
 	color: white;
-	background-color: var(--primary);
 }
 
 .util-block-search {

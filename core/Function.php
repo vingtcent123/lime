@@ -399,7 +399,7 @@ function allPut() {
 
 }
 
-function PUT(string $name, $cast = 'string', $default = NULL) {
+function PUT(string $name, $cast = 'string', mixed $default = NULL) {
 	$_PUT = allPut();
 	$value = $_PUT[$name] ?? NULL;
 	return var_filter($value, $cast, $default);
@@ -413,7 +413,7 @@ function put_exists(string $name): bool {
 /*
  * Retrieve a variable by GET method
  */
-function GET(string $name, $cast = 'string', $default = NULL) {
+function GET(string $name, $cast = 'string', mixed $default = NULL) {
 
 	$value = $_GET[$name] ?? NULL;
 	return var_filter($value, $cast, $default);
@@ -427,7 +427,7 @@ function get_exists(string $name): bool {
 /*
  * Retrieve a variable by COOKIE method
  */
-function COOKIE(string $name, $cast = 'string', $default = NULL) {
+function COOKIE(string $name, $cast = 'string', mixed $default = NULL) {
 
 	$value = $_COOKIE[$name] ?? NULL;
 	return var_filter($value, $cast, $default);
@@ -455,7 +455,7 @@ function request_exists(string $name): bool {
 /*
  * Retrieve a variable from GET or POST depending of the request method
  */
-function INPUT(string $name, $cast = 'string', $default = NULL) {
+function INPUT(string $name, $cast = 'string', mixed $default = NULL) {
 
 	return match(Route::getRequestMethod()) {
 		'GET' => GET($name, $cast, $default),

@@ -5209,9 +5209,9 @@ abstract class ModulePage extends Page {
 
 	}
 
-	public function doCreate(\Closure $action, ?array $propertiesCreate = NULL, string $page = 'doCreate', array $validate = ['canCreate']): ModulePage {
+	public function doCreate(\Closure $action, ?array $propertiesCreate = NULL, string $page = 'doCreate', array $validate = ['canCreate'], ?Closure $onKo = NULL): ModulePage {
 
-		$this->post($page, function($data) use($action, $propertiesCreate, $validate) {
+		$this->post($page, function($data) use($action, $propertiesCreate, $validate, $onKo) {
 
 			$fw = new \FailWatch();
 
@@ -5223,11 +5223,11 @@ abstract class ModulePage extends Page {
 			$properties = $this->getPropertiesCreate($e, $propertiesCreate);
 			$e->build($properties, $_POST, new \Properties('create'));
 
-			$fw->validate();
+			$fw->validate(onKo: $onKo);
 
 			($this->module.'Lib')::create($e);
 
-			$fw->validate();
+			$fw->validate(onKo: $onKo);
 
 			$data->e = $e;
 			$action->call($this, $data);
@@ -5279,9 +5279,9 @@ abstract class ModulePage extends Page {
 
 	}
 
-	public function doUpdate(\Closure $action, ?array $propertiesUpdate = NULL, string $page = 'doUpdate', array $validate = ['canUpdate']): ModulePage {
+	public function doUpdate(\Closure $action, ?array $propertiesUpdate = NULL, string $page = 'doUpdate', array $validate = ['canUpdate'], ?Closure $onKo = NULL): ModulePage {
 
-		$this->post($page, function($data) use($action, $propertiesUpdate, $validate) {
+		$this->post($page, function($data) use($action, $propertiesUpdate, $validate, $onKo) {
 
 			$e = $this->element->call($this, $data);
 
@@ -5306,11 +5306,11 @@ abstract class ModulePage extends Page {
 
 			$e->build($properties, $_POST, new \Properties('update'));
 
-			$fw->validate();
+			$fw->validate(onKo: $onKo);
 
 			($this->module.'Lib')::update($e, $properties);
 
-			$fw->validate();
+			$fw->validate(onKo: $onKo);
 
 			$data->e = $e;
 			$action->call($this, $data);

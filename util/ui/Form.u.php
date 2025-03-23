@@ -1785,17 +1785,20 @@ class FormUi {
 
 	}
 
-	public static function info(string $text, string $icon = 'arrow-return-right', string $class = ''): string {
-		return '<div class="form-info '.$class.'">'.\Asset::icon($icon).$text.'</div>';
+	public static function info(string $text, string $class = ''): string {
+		return '<div class="form-info '.$class.'">'.$text.'</div>';
 	}
 
 	/**
 	 * Display text field
 	 */
-	public function fake(string $value, bool $encode = TRUE): string {
+	public function fake(string $value, ?string $icon = NULL, bool $encode = TRUE): string {
+
+		$icon ??= \Asset::icon('lock-fill');
+
 		return $this->inputGroup(
-			$this->addon(\Asset::icon('lock-fill')).
-			'<div class="form-control form-control-fake">'.($encode ? encode($value) : $value).'</div>'
+			$this->addon($icon).
+			'<div class="form-control form-control-fake disabled">'.($encode ? encode($value) : $value).'</div>'
 		);
 	}
 
