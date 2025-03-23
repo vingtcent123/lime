@@ -584,7 +584,6 @@ Node.prototype.delegateEventListener = function(type, selector, listener, option
 			if(target.matches(selector)) {
 				e.delegateTarget = target;
 				listener.call(target, e);
-				break;
 			}
 
 		}
