@@ -454,7 +454,7 @@ class ModuleLib {
 					}
 
 				} else {
-					trigger_error("Can not split class '".$element['name']."' on property '".$property."'", E_USER_ERROR);
+					throw new \Exception("Can not split class '".$element['name']."' on property '".$property."'");
 				}
 
 			}

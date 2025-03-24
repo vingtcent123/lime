@@ -924,8 +924,7 @@ class ViewAction extends Action {
 
 		if($this->viewFile === NULL) {
 
-			trigger_error("View '".$this->path."' does not exist", E_USER_ERROR);
-			exit;
+			throw new Exception("View '".$this->path."' does not exist");
 
 		} else {
 

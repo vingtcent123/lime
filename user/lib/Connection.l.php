@@ -494,7 +494,7 @@ class ConnectionLib {
 	private static function checkImap(string $login, string $password, array $params): bool {
 
 		if(function_exists('imap_open') === FALSE) {
-			throw new \Exception('Function imap_open() does not exist', E_USER_ERROR);
+			throw new \Exception('Function imap_open() does not exist');
 		}
 
 		\dev\ErrorPhpLib::$doNothingFromError = TRUE;

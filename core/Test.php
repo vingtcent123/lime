@@ -301,12 +301,12 @@ abstract class Test {
 	 * @param string $message
 	 * @param string $file
 	 * @param string $line
-	 * @throws Exception If the error is of type E_USER_ERROR or E_ERROR, the exception is thrown.
+	 * @throws Exception If the error is of type E_ERROR or E_ERROR, the exception is thrown.
 	 */
 	public function handleError(int $code, string $message, string $file, string $line) {
 
 		switch($code) {
-			case E_USER_ERROR :
+			case E_ERROR :
 			case E_ERROR :
 				throw new \Exception($message, $code, 0, $file, $line);
 			default :

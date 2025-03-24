@@ -69,8 +69,7 @@ class Lime {
 	public static function init(string $app): void {
 
 		if(ctype_alpha($app) === FALSE) {
-			trigger_error("App name must only contain alphabetic characters", E_USER_ERROR);
-			exit;
+			throw new Exception("App name must only contain alphabetic characters");
 		} else {
 			define('LIME_APP', $app);
 		}
@@ -131,8 +130,7 @@ class Lime {
 	public static function setUrls(array $urls): void {
 
 		if(isset($urls[LIME_ENV]) === FALSE) {
-			trigger_error("No URL for mode '".LIME_ENV."'", E_USER_ERROR);
-			exit;
+			throw new Exception("No URL for mode '".LIME_ENV."'");
 		}
 
 		self::$url = $urls[LIME_ENV];

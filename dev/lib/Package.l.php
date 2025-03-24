@@ -106,15 +106,13 @@ class PackageLib {
 					$pathPage = \Lime::getPath().'/main/page/'.$packageName;
 
 					if(is_dir($pathPage)) {
-						trigger_error('Conflit between package '.$packageName.' and page directory '.$pathPage.'', E_USER_ERROR);
-						exit;
+						throw new \Exception('Conflit between package '.$packageName.' and page directory '.$pathPage);
 					}
 
 					$pathView = \Lime::getPath().'/main/view/'.$packageName;
 
 					if(is_dir($pathView)) {
-						trigger_error('Conflit between package '.$packageName.' and view directory '.$pathView.'', E_USER_ERROR);
-						exit;
+						throw new \Exception('Conflit between package '.$packageName.' and view directory '.$pathView);
 					}
 
 					$list[$packageName] = $app;

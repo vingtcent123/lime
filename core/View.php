@@ -52,8 +52,7 @@ abstract class View {
 	public static function get(string $name, ViewAction $action): View {
 
 		if(isset(self::$views[$name]) === FALSE) {
-			trigger_error('View '.$name.' does not exist in '.$action->getViewFile().'', E_USER_ERROR);
-			exit;
+			throw new Exception('View '.$name.' does not exist in '.$action->getViewFile());
 		}
 
 		return self::$views[$name];

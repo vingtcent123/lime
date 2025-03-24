@@ -532,8 +532,7 @@ class Page {
 
 		}
 
-		trigger_error('Can not load \''.$uri[0].'\' page', E_USER_ERROR);
-		exit;
+		throw new Exception('Can not load \''.$uri[0].'\' page');
 
 	}
 
