@@ -112,7 +112,13 @@ class TextUi {
 
 		\Asset::css('util', 'form.css');
 
-		$h = '<a '.attrs($attributes).' class="field-switch '.($on ? 'field-switch-on' : 'field-switch-off').'">';
+		$class = 'field-switch';
+		if(array_key_exists('class', $attributes)) {
+			$class .= ' '.$attributes['class'];
+			unset($attributes['class']);
+		}
+
+		$h = '<a '.attrs($attributes).' class="'.$class.' '.($on ? 'field-switch-on' : 'field-switch-off').'">';
 			$h .= '<div class="field-switch-circle"></div>';
 			$h .= '<div class="field-switch-text">';
 				$h .= '<div>'.$textOn.'</div>';

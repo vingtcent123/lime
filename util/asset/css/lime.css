@@ -1085,6 +1085,11 @@ table.util-block tbody:last-child tr:last-child td:last-child {
 	background: white;
 }
 
+.util-block-separator {
+	margin: 0.5rem -1rem;
+	border-bottom: 1px solid var(--border);
+}
+
 .util-block-optional {
 	padding: 1rem;
 	border: 3px dashed var(--border);

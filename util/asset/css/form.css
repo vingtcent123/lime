@@ -507,6 +507,10 @@ div.form-group.form-group-nested > .form-control-label {
 	overflow: hidden;
 }
 
+.field-switch.disabled {
+	pointer-events: none;
+}
+
 .field-switch:hover {
 	box-shadow: 0 0 0.5rem var(--border);
 	text-decoration: none !important;
