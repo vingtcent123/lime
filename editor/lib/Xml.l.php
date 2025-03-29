@@ -1115,7 +1115,7 @@ class XmlLib {
 			$main->appendChild($nodeFix);
 		}
 
-		if($fixed) {
+		if($fixed and LIME_ENV === 'dev') {
 			trigger_error('Repair invalid XML ('.$fixed.') to ('.$this->dom->saveXml($main).')', E_USER_NOTICE);
 		}
 
