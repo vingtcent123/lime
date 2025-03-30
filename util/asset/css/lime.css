@@ -2499,6 +2499,7 @@ body[data-touch="yes"] .dropdown-item {
 	white-space: nowrap;
 	line-height: 1.2;
 	letter-spacing: 0.5px;
+	text-transform: uppercase;
 }
 
 .dropdown-title + .dropdown-subtitle,

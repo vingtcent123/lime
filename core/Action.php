@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Action once the page has been created
  *

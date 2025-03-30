@@ -2993,7 +2993,7 @@ abstract class ModuleModel {
 	 * @param array $index For indexing Collection
 	 * @return array / Collection A list of values
 	 */
-	public function getColumn($property, ?int $offset = NULL, ?int $number = NULL, ?string $index = NULL) {
+	public function getColumn($property, ?int $offset = NULL, ?int $number = NULL, ?string $index = NULL): array|Collection {
 
 		if($property instanceof Sql) {
 			$select = ['_' => $property];
