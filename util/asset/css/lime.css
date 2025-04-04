@@ -171,6 +171,13 @@ div.div-even > *:nth-of-type(odd) {
 		padding-right: 1.5rem;
 	}
 
+	td.highlight-stick-both,
+	th.highlight-stick-both {
+		background: rgba(127, 127, 127, 0.05);
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+
 }
 
 @media (max-width: 767px) {
@@ -194,6 +201,13 @@ div.div-even > *:nth-of-type(odd) {
 		background: linear-gradient(to right, rgba(127, 127, 127, 0.05) 0, rgba(127, 127, 127, 0.05) calc(100% - 0.5rem), transparent calc(100% - 0.5rem), transparent 100%);
 		padding-left: 0.5rem;
 		padding-right: 1rem;
+	}
+
+	td.highlight-stick-both,
+	th.highlight-stick-both {
+		background: rgba(127, 127, 127, 0.05);
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
 	}
 
 }

@@ -108,7 +108,7 @@ class TextUi {
 	/**
 	 * Switch item
 	 */
-	public static function switch(array $attributes, bool $on = FALSE, ?string $textOn = NULL, ?string $textOff = NULL): string {
+	public static function switch(array $attributes, bool $on = FALSE, ?string $textOn = NULL, ?string $textOff = NULL, ?string $labelOn = NULL, ?string $labelOff = NULL): string {
 
 		\Asset::css('util', 'form.css');
 
@@ -121,8 +121,8 @@ class TextUi {
 		$h = '<a '.attrs($attributes).' class="'.$class.' '.($on ? 'field-switch-on' : 'field-switch-off').'">';
 			$h .= '<div class="field-switch-circle"></div>';
 			$h .= '<div class="field-switch-text">';
-				$h .= '<div>'.$textOn.'</div>';
-				$h .= '<div>'.$textOff.'</div>';
+				$h .= '<div '.($labelOn !== NULL ? 'title="'.encode($labelOn).'"' : '').'>'.$textOn.'</div>';
+				$h .= '<div '.($labelOff !== NULL ? 'title="'.encode($labelOff).'"' : '').'>'.$textOff.'</div>';
 			$h .= '</div>';
 		$h .= '</a>';
 
