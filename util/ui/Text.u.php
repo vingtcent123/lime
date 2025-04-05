@@ -117,6 +117,12 @@ class TextUi {
 			$class .= ' '.$attributes['class'];
 			unset($attributes['class']);
 		}
+		if(array_key_exists('disabled', $attributes)) {
+			if($attributes['disabled']) {
+				$class .= ' disabled';
+			}
+			unset($attributes['disabled']);
+		}
 
 		$h = '<a '.attrs($attributes).' class="'.$class.' '.($on ? 'field-switch-on' : 'field-switch-off').'">';
 			$h .= '<div class="field-switch-circle"></div>';
