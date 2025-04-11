@@ -509,6 +509,7 @@ div.form-group.form-group-nested > .form-control-label {
 
 .field-switch.disabled {
 	pointer-events: none;
+	border-color: transparent;
 }
 
 .field-switch:hover {
@@ -520,34 +521,49 @@ div.form-group.form-group-nested > .form-control-label {
 	display: none;
 }
 
-.field-switch-on {
+.field-switch-on:not(.disabled) {
 	background-color: var(--success);
 }
 
-.field-switch-off {
+.field-switch-off:not(.disabled) {
 	background-color: var(--muted);
 }
 
-.field-switch-text {
+.field-switch:not(.disabled) .field-switch-text {
 	padding: 0 0.5rem;
+	font-size: 0.9rem;
 }
 
-.field-switch-on .field-switch-text {
+.field-switch-on:not(.disabled) .field-switch-text {
 	margin-left: 1.3rem;
+}
+
+.field-switch-off:not(.disabled) .field-switch-text {
+	margin-right: 1.3rem;
+}
+
+.field-switch.disabled .field-switch-text {
+	margin-left: 1.5rem;
 }
 
 .field-switch-off .field-switch-text {
 	transform: translate(0, calc(-1.8rem + 2px));
-	margin-right: 1.3rem;
 }
 
 .field-switch-text > div {
 	height: calc(1.8rem - 2px);
 	display: flex;
 	align-items: center;
-	font-size: 0.8rem;
 	line-height: 1;
 	color: white;
+}
+
+.field-switch-on.disabled .field-switch-text > div {
+	color: var(--success);
+}
+
+.field-switch-off.disabled .field-switch-text > div {
+	color: var(--muted);
 }
 
 .field-switch-text > div:last-child {
@@ -564,11 +580,19 @@ div.form-group.form-group-nested > .form-control-label {
 	margin: 0.3rem 0;
 }
 
-.field-switch-circle {
+.field-switch-on.disabled .field-switch-circle {
+	background-color: var(--success);
+}
+
+.field-switch-off.disabled .field-switch-circle {
+	background-color: var(--muted);
+}
+
+.field-switch:not(.disabled) .field-switch-circle {
 	left: 0.3rem;
 }
 
-.field-switch-off .field-switch-circle {
+.field-switch-off:not(.disabled) .field-switch-circle {
 	left: calc(100% - 1.4rem + 2px - 0.3rem);
 }
 
