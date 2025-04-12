@@ -230,7 +230,7 @@ class DataAction extends Action {
 	 * @param string $data
 	 * @param string $contentType
 	 */
-	public function __construct(string $data = '', string $contentType = Action::HTML) {
+	public function __construct(string $data = '', string $contentType = Action::HTML, ?string $filename = NULL) {
 
 		if($data !== NULL) {
 			$this->set($data);
@@ -238,6 +238,10 @@ class DataAction extends Action {
 
 		if($contentType !== NULL) {
 			$this->setContentType($contentType);
+		}
+
+		if($filename !== NULL) {
+			$this->contentDisposition = 'attachment; filename="'.$filename.'"';
 		}
 
 		parent::__construct();
@@ -268,6 +272,9 @@ class DataAction extends Action {
 	public function run(): void {
 
 		$this->sendContentType();
+		if($this->contentDisposition !== NULL) {
+			$this->sendContentDisposition();
+		}
 
 		echo $this->data;
 
