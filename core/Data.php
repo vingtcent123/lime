@@ -353,45 +353,59 @@ class Collection extends ArrayIterator {
 	 */
 	public function reindex(mixed $index): Collection {
 
-		$index = (array)$index;
-
 		if($this->depth > 1) {
 			throw new Exception('Can not reindex collection with depth > 1');
 		}
 
-		$lastProperty = last($index);
+		if($index instanceof Closure) {
+			$callback = $index;
+		} else {
+
+			$index = (array)$index;
+			$lastProperty = last($index);
+
+			$callback = function(Element $e) use($index, $lastProperty): mixed {
+
+				$currentElement = $e;
+
+				foreach($index as $property) {
+
+					if($currentElement->offsetExists($property) === FALSE) {
+						throw new Exception('Invalid property');
+					}
+
+					if($currentElement[$property] instanceof Element) {
+						$key = $currentElement[$property]['id'] ?? NULL;
+					} else {
+						$key = $currentElement[$property];
+					}
+
+					if($key === NULL) {
+						$key = '';
+					}
+
+					$currentElement = $currentElement[$property];
+
+					if($property === $lastProperty) {
+						return $key;
+					}
+
+				}
+
+			};
+
+		}
+
 
 		$c = new Collection();
 		$c->setDepth(2);
 
 		foreach($this as $e) {
 
-			$currentElement = $e;
+			$key = $callback($e);
 
-			foreach($index as $property) {
-
-				if($currentElement->offsetExists($property) === FALSE) {
-					throw new Exception('Invalid property');
-				}
-
-				if($currentElement[$property] instanceof Element) {
-					$key = $currentElement[$property]['id'] ?? NULL;
-				} else {
-					$key = $currentElement[$property];
-				}
-
-				if($key === NULL) {
-					$key = '';
-				}
-
-				$currentElement = $currentElement[$property];
-
-				if($property === $lastProperty) {
-					$c[$key] ??= new Collection();
-					$c[$key][] = $e;
-				}
-
-			}
+			$c[$key] ??= new Collection();
+			$c[$key][] = $e;
 
 		}
 
