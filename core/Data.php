@@ -402,7 +402,7 @@ class Collection extends ArrayIterator {
 
 		foreach($this as $e) {
 
-			$key = $callback($e);
+			$key = $callback($e) ?? '';
 
 			$c[$key] ??= new Collection();
 			$c[$key][] = $e;
