@@ -143,6 +143,9 @@ table.tr-even tbody tr:nth-of-type(odd):not(tr.tr-title) {
 }
 
 tr.tr-title {
+	background-color: transparent !important;
+	text-transform: uppercase;
+	font-weight: bold;
 }
 
 div.div-even > *:nth-of-type(even) {
