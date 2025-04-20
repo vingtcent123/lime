@@ -142,6 +142,10 @@ table.tr-even tbody tr:nth-of-type(odd):not(tr.tr-title) {
     background-color: var(--background-odd);
 }
 
+table.tr-bordered tr {
+	border-bottom: 1px solid #0002;
+}
+
 tr.tr-title {
 	background-color: transparent !important;
 	text-transform: uppercase;
