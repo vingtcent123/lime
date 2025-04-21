@@ -1673,6 +1673,8 @@ class Element extends ArrayObject {
 
 		$callbackWrapper = $p->getWrapper() ?? fn($property) => $property;
 
+		$p->setProperties($properties);
+
 		foreach($properties as $property) {
 
 			$callbacksProperty = [];
@@ -1913,6 +1915,7 @@ class Properties extends ArrayIterator {
 
 	private array $callbacks = [];
 
+	private array $properties = [];
 	private array $built = [];
 	private array $invalid = [];
 	private array $new = [];
@@ -1920,6 +1923,14 @@ class Properties extends ArrayIterator {
 	public function __construct(
 		public readonly ?string $for = NULL
 	) {
+	}
+
+	public function setProperties(array $properties): void {
+		$this->properties = $properties;
+	}
+
+	public function hasProperty(string $property): bool {
+		return in_array($property, $this->properties);
 	}
 
 	public function setWrapper(Closure $wrapper): Properties {
