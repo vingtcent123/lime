@@ -1074,6 +1074,10 @@ class AutocompleteField {
 
 		const dropdown = this.getDropdown(input);
 
+		if(dropdown === null) {
+			return;
+		}
+
 		input.classList.remove('autocomplete-open');
 
 		if(this.isFullscreen()) {
