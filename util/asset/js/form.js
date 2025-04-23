@@ -213,6 +213,72 @@ class SwitchField {
 }
 
 /**
+ * Manipulates calculations
+ */
+document.delegateEventListener('input', '[data-calculation]', function(e) {
+	CalculationField.calculateValue(this);
+});
+
+class CalculationField {
+
+	/**
+	 * Calculates the final value according to the input content
+	 */
+	static calculateValue(target) {
+		const currentOperation = target.value;
+		const resultElement = target.nextElementSibling;
+		const hiddenElement = resultElement.nextElementSibling;
+
+		if(!currentOperation) {
+			resultElement.hide();
+		}
+
+		try {
+			const result = eval(currentOperation);
+			if(result) {
+				if(result.toString() === currentOperation.toString()) {
+					resultElement.hide();
+				} else {
+					resultElement.removeHide();
+				}
+				resultElement.innerHTML = '= ' + result;
+				hiddenElement.setAttribute('value', result);
+			}
+		} catch(e) {}
+	}
+
+	/**
+	 * Updates the field to the given value
+	 */
+	static updateValue(hiddenTarget, value) {
+
+		hiddenTarget.setAttribute('value', value);
+
+		const resultElement = hiddenTarget.previousSibling;
+
+		if(resultElement) {
+
+			resultElement.hide(); // hides because values are the same (calculated + input)
+			resultElement.innerHTML = '= ' + value;
+
+			// Updates the input field
+			const operationElement = resultElement.previousSibling;
+
+			if(operationElement) {
+				operationElement.setAttribute('value', value);
+			}
+		}
+
+	}
+
+	static getValue(hiddenTarget) {
+
+		return parseFloat(hiddenTarget.getAttribute('value'));
+
+	}
+}
+
+/**
  * Manipulates dates
  */
 

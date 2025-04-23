@@ -230,7 +230,7 @@ class FormUi {
 					$h .= $form->dynamicField($e, $property);
 				$h .= '</div>';
 				$h .= $form->submit(s("Enregistrer"), ['class' => 'btn btn-outline-transparent']);
-			$h . '</div>';
+			$h .= '</div>';
 		$h .= $form->close();
 
 		return $h;
@@ -446,99 +446,108 @@ class FormUi {
 
 		$name = $d->name ?? $property;
 
-		switch($field) {
+		if($field !== 'default') {
 
-			case 'select' :
-				return $this->select($name, $values, $default, $attributes);
+			switch($field) {
 
-			case 'range' :
-				return $this->range($name, $d->from, $d->to, $d->step ?? 1, $default, $attributes);
+				case 'select' :
+					return $this->select($name, $values, $default, $attributes);
 
-			case 'rangeSelect' :
-				return $this->rangeSelect($name, $d->from, $d->to, $d->step ?? 1, $default, $attributes);
+				case 'range' :
+					return $this->range($name, $d->from, $d->to, $d->step ?? 1, $default, $attributes);
 
-			case 'radio' :
-				return $this->radios($name, $values ?? $attributes['values'], $default, $attributes);
+				case 'rangeSelect' :
+					return $this->rangeSelect($name, $d->from, $d->to, $d->step ?? 1, $default, $attributes);
 
-			case 'textarea' :
-			case 'yesNo' :
-			case 'switch' :
-			case 'weekNumber' :
-			case 'week' :
-			case 'month' :
-			case 'time' :
-			case 'date' :
-			case 'email' :
-			case 'hidden' :
-				return $this->{$field}($name, $default, $attributes);
+				case 'radio' :
+					return $this->radios($name, $values ?? $attributes['values'], $default, $attributes);
 
-			case 'autocomplete' :
+				case 'calculation':
+					return $this->calculation($name, $default, $attributes);
 
-				$url = $d->autocompleteUrl ?? throw new \Exception('Missing $d->autocompleteUrl for autocomplete field');
+				case 'textarea' :
+				case 'yesNo' :
+				case 'switch' :
+				case 'weekNumber' :
+				case 'week' :
+				case 'month' :
+				case 'time' :
+				case 'date' :
+				case 'email' :
+				case 'hidden' :
+					return $this->{$field}($name, $default, $attributes);
 
-				if(is_closure($d->autocompleteBody)) {
-					$autocompleteBody = $d->autocompleteBody->call($this, $this, $e);
-				} else {
-					$autocompleteBody = $d->autocompleteBody ?? [];
-				}
+				case 'autocomplete' :
 
-				if(is_closure($d->autocompleteDefault)) {
-					$autocompleteDefault = $d->autocompleteDefault->call($this, $e);
-				} else {
-					$autocompleteDefault = $d->autocompleteDefault;
-				}
+					$url = $d->autocompleteUrl ?? throw new \Exception('Missing $d->autocompleteUrl for autocomplete field');
 
-				$default = [];
-
-				if($d->multiple ?? FALSE) {
-
-					$name .= '[]';
-
-					if($autocompleteDefault instanceof \Collection) {
-						$default = $autocompleteDefault->makeArray(fn($e) => ($d->autocompleteResults)($e));
+					if(is_closure($d->autocompleteBody)) {
+						$autocompleteBody = $d->autocompleteBody->call($this, $this, $e);
+					} else {
+						$autocompleteBody = $d->autocompleteBody ?? [];
 					}
 
-				} else {
+					if(is_closure($d->autocompleteDefault)) {
+						$autocompleteDefault = $d->autocompleteDefault->call($this, $e);
+					} else {
+						$autocompleteDefault = $d->autocompleteDefault;
+					}
 
-					if($autocompleteDefault !== NULL) {
+					$default = [];
 
-						if(
-							$autocompleteDefault instanceof \Element === FALSE or
-							$autocompleteDefault->notEmpty()
-						) {
-							$default[] = ($d->autocompleteResults)($autocompleteDefault);
+					if($d->multiple ?? FALSE) {
+
+						$name .= '[]';
+
+						if($autocompleteDefault instanceof \Collection) {
+							$default = $autocompleteDefault->makeArray(fn($e) => ($d->autocompleteResults)($e));
 						}
 
 					} else {
 
-						if(
-							$e->offsetExists($property) and (
-								($e[$property] instanceof \Element and $e[$property]->notEmpty()) or
-								($e[$property] instanceof \Element === FALSE and $e[$property] !== NULL)
-							)
-						) {
-							$default[] = ($d->autocompleteResults)($e[$property]);
+						if($autocompleteDefault !== NULL) {
+
+							if(
+								$autocompleteDefault instanceof \Element === FALSE or
+								$autocompleteDefault->notEmpty()
+							) {
+								$default[] = ($d->autocompleteResults)($autocompleteDefault);
+							}
+
+						} else {
+
+							if(
+								$e->offsetExists($property) and (
+									($e[$property] instanceof \Element and $e[$property]->notEmpty()) or
+									($e[$property] instanceof \Element === FALSE and $e[$property] !== NULL)
+								)
+							) {
+								$default[] = ($d->autocompleteResults)($e[$property]);
+							}
+
 						}
 
 					}
 
-				}
+					if(is_closure($d->autocompleteDispatch)) {
+						$dispatch = $d->autocompleteDispatch->call($this, $this, $e);
+					} else {
+						$dispatch = $d->autocompleteDispatch ?? NULL;
+					}
 
-				if(is_closure($d->autocompleteDispatch)) {
-					$dispatch = $d->autocompleteDispatch->call($this, $this, $e);
-				} else {
-					$dispatch = $d->autocompleteDispatch ?? NULL;
-				}
+					[
+						'query' => $query,
+						'results' => $results
+					] = $this->autocomplete($name, $url, $autocompleteBody, $dispatch, $default, $attributes);
 
-				[
-					'query' => $query,
-					'results' => $results
-				] = $this->autocomplete($name, $url, $autocompleteBody, $dispatch, $default, $attributes);
+					$d->last = $results;
 
-				$d->last = $results;
+					return $query;
 
-				return $query;
+				default :
+					throw new \Exception('Unknown field \''.$field.'\'');
 
+			}
 
 		}
 
@@ -1820,6 +1829,27 @@ class FormUi {
 		$attributes['class'] = 'form-control form-number '.($attributes['class'] ?? '');
 
 		return $this->input('number', $name, $value, $attributes);
+	}
+
+	/**
+	 * Display text field for numbers
+	 */
+	public function calculation(string $name, ?string $value = NULL, array $attributes = []): string {
+
+		$attributes['class'] = 'form-control form-number '.($attributes['class'] ?? '');
+		$attributes['data-calculation'] = 1;
+
+		$result = '<div class="form-calculation hide" data-calculated>';
+			if($value !== NULL) {
+				$result .= '= '.$value;
+			}
+		$result .= '</div>';
+
+		$result .= $this->hidden($name, $value, ['data-calculated-value' => TRUE]);
+
+		$attributes['name'] = $name.'-calculation';
+
+		return $this->input('text', $name, $value, $attributes).$result;
 	}
 
 	/**
