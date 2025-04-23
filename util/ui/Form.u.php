@@ -1832,7 +1832,7 @@ class FormUi {
 	}
 
 	/**
-	 * Display text field for numbers
+	 * Display text field for calculated input
 	 */
 	public function calculation(string $name, ?string $value = NULL, array $attributes = []): string {
 
