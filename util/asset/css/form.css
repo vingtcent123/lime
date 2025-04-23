@@ -495,21 +495,22 @@ div.form-group.form-group-nested > .form-control-label {
 
 /* Switch */
 .field-switch {
+	border-radius: var(--radius);
+	transition: all 0.5s;
+	display: inline-block;
+}
+
+.field-switch:not(.disabled) {
 	height: 1.8rem;
 	width: 3.6rem;
 	min-width: max-content;
-	border-radius: var(--radius);
 	border: 1px solid white;
-	transition: all 0.5s;
 	position: relative;
 	cursor: pointer;
-	display: inline-block;
 	overflow: hidden;
 }
-
 .field-switch.disabled {
 	pointer-events: none;
-	border-color: transparent;
 }
 
 .field-switch:hover {
@@ -546,11 +547,11 @@ div.form-group.form-group-nested > .form-control-label {
 	margin-left: 1.5rem;
 }
 
-.field-switch-off .field-switch-text {
+.field-switch-off:not(.disabled) .field-switch-text {
 	transform: translate(0, calc(-1.8rem + 2px));
 }
 
-.field-switch-text > div {
+.field-switch:not(.disabled) .field-switch-text > div {
 	height: calc(1.8rem - 2px);
 	display: flex;
 	align-items: center;

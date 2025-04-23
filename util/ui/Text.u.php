@@ -117,18 +117,29 @@ class TextUi {
 			$class .= ' '.$attributes['class'];
 			unset($attributes['class']);
 		}
+
+
 		if(array_key_exists('disabled', $attributes)) {
-			if($attributes['disabled']) {
+			$isDisabled = $attributes['disabled'];
+			if($isDisabled) {
 				$class .= ' disabled';
 			}
 			unset($attributes['disabled']);
+		} else {
+			$isDisabled = FALSE;
 		}
+
+		$showOn = '<div '.($labelOn !== NULL ? 'title="'.encode($labelOn).'"' : '').'>'.$textOn.'</div>';
+		$showOff = '<div '.($labelOff !== NULL ? 'title="'.encode($labelOff).'"' : '').'>'.$textOff.'</div>';
 
 		$h = '<a '.attrs($attributes).' class="'.$class.' '.($on ? 'field-switch-on' : 'field-switch-off').'">';
 			$h .= '<div class="field-switch-circle"></div>';
 			$h .= '<div class="field-switch-text">';
-				$h .= '<div '.($labelOn !== NULL ? 'title="'.encode($labelOn).'"' : '').'>'.$textOn.'</div>';
-				$h .= '<div '.($labelOff !== NULL ? 'title="'.encode($labelOff).'"' : '').'>'.$textOff.'</div>';
+				if($isDisabled) {
+					$h .= $on ? $showOn : $showOff;
+				} else {
+					$h .= $showOn.$showOff;
+				}
 			$h .= '</div>';
 		$h .= '</a>';
 
