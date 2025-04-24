@@ -248,9 +248,9 @@ class CalculationField {
 	}
 
 	/**
-	 * Updates the field to the given value
+	 * Sets the field to the given value
 	 */
-	static updateValue(hiddenTarget, value) {
+	static setValue(hiddenTarget, value) {
 
 		hiddenTarget.setAttribute('value', value);
 
@@ -265,7 +265,7 @@ class CalculationField {
 			const operationElement = resultElement.previousSibling;
 
 			if(operationElement) {
-				operationElement.setAttribute('value', value);
+				operationElement.value = value;
 			}
 		}
 
