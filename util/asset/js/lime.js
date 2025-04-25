@@ -92,12 +92,13 @@ function rem() {
 
 function money(value, precision = 2) {
 
+	const isNegative = value < 0;
 	const multiplier = Math.pow(10, precision);
 
 	value *= multiplier;
 	value = Math.round(value);
 
-	let output = Math.floor(value / multiplier);
+	let output = isNegative ? Math.ceil(value / multiplier) : Math.floor(value / multiplier);
 
 	value = value.toString();
 
