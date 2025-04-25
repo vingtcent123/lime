@@ -332,9 +332,11 @@ Element.prototype.parseRender = function() {
 		render(this);
 	}
 
-	this.qsa('[onrender]', function(node) {
-		render(node);
-	});
+	setTimeout(() => {
+		this.qsa('[onrender]', function(node) {
+			render(node);
+		});
+	}, 0);
 
 };
 
