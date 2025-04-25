@@ -338,6 +338,23 @@ class Collection extends ArrayIterator {
 	}
 
 	/*
+	 * Get collection keys
+	 *
+	 * @return array
+	 */
+	public function getKeys(): array {
+
+		$keys = [];
+
+		foreach($this as $key => $value) {
+			$keys[] = $key;
+		}
+
+		return $keys;
+
+	}
+
+	/*
 	 * Get IDs in the element group
 	 *
 	 * @return array

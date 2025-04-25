@@ -1535,6 +1535,13 @@ td.util-manage-vignette {
 	width: 3rem;
 }
 
+/* Flex */
+.flex-align-center {
+	display: flex;
+	align-items: center;
+	grid-column-gap: 1rem;
+}
+
 /* Text */
 .text-start {
 	text-align: left;
