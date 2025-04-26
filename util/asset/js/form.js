@@ -225,7 +225,7 @@ class CalculationField {
 	 * Calculates the final value according to the input content
 	 */
 	static calculateValue(target) {
-		const currentOperation = target.value;
+		const currentOperation = target.value.replace(/,/g, '.');
 		const resultElement = target.nextElementSibling;
 		const hiddenElement = resultElement.nextElementSibling;
 
@@ -234,7 +234,8 @@ class CalculationField {
 		}
 
 		try {
-			const result = eval(currentOperation);
+			const result = Math.round(eval(currentOperation) * 100) / 100;
+
 			if(result) {
 				if(result.toString() === currentOperation.toString()) {
 					resultElement.hide();
