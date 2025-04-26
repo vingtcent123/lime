@@ -1106,6 +1106,8 @@ Lime.Panel = class {
 
 	static paint(panel, data) {
 
+		panel.dispatchEvent(new CustomEvent('panelBeforePaint'));
+
 		const title = data.title || '';
 		const back = data.back || null;
 		const subTitle = data.subTitle || '';
@@ -1116,6 +1118,8 @@ Lime.Panel = class {
 		Lime.Panel.header(panel, back, title, subTitle, header);
 		Lime.Panel.body(panel, body);
 		Lime.Panel.footer(panel, footer);
+
+		panel.dispatchEvent(new CustomEvent('panelAfterPaint'));
 
 	};
 
