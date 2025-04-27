@@ -104,7 +104,7 @@ function money(value, precision = 2) {
 
 	if(precision > 0) {
 
-		const decimal = value.substring(value.length - precision, value.length);
+		const decimal = value.substring(value.length - precision, value.length).padStart(precision, '0');
 
 		output += ',';
 		output += decimal;
