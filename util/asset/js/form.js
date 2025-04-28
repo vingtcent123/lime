@@ -236,7 +236,7 @@ class CalculationField {
 		try {
 			const result = Math.round(eval(currentOperation) * 100) / 100;
 
-			if(result) {
+			if(isNaN(result) === false) {
 				if(result.toString() === currentOperation.toString()) {
 					resultElement.hide();
 				} else {
