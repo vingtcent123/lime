@@ -234,7 +234,7 @@ class CalculationField {
 		}
 
 		try {
-			const result = Math.round(eval(currentOperation) * 100) / 100;
+			const result = round(eval(currentOperation));
 
 			if(isNaN(result) === false) {
 				if(result.toString() === currentOperation.toString()) {

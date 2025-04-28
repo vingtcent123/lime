@@ -119,6 +119,14 @@ function money(value, precision = 2) {
 
 }
 
+function round(value, precision = 2) {
+
+	const multiplier = Math.pow(10, precision);
+
+	return Math.round(value * multiplier) / multiplier;
+
+}
+
 function doCopy(target) {
 
 	const fromElement = qs(target.dataset.selector);
