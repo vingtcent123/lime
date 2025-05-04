@@ -1371,6 +1371,8 @@ Lime.Tab = class {
 			() => this.select(wrapper.qs('.tab-item:first-child'))
 		);
 
+		history.removeArgument('tab');
+
 	}
 
 }
