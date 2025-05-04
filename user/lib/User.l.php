@@ -206,6 +206,21 @@ class UserLib extends UserCrud {
 
 	}
 
+
+	public static function updateRole(User $eUser, string $fqn): void {
+
+		$eRole = RoleLib::getByFqn($fqn);
+
+		if($eRole->notEmpty()) {
+
+			User::model()->update($eUser, [
+				'role' => $eRole
+			]);
+
+		}
+
+	}
+
 	/**
 	 * Sets the hash, the expiration date of the hash and sends the email
 	 */
