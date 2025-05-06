@@ -394,7 +394,7 @@ class FormUi {
 
 	}
 
-	protected function createDynamicField(\PropertyDescriber $d, \Element $e, string $property): string {
+	public function createDynamicField(\PropertyDescriber $d, \Element $e, string $property): string {
 
 		$field = $d->field;
 		$attributes = $d->attributes;
