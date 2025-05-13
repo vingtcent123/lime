@@ -1441,6 +1441,14 @@ dl.util-presentation-max-content {
 	align-items: baseline;
 }
 
+@media (max-width: 575px) {
+
+	dl.util-presentation {
+		grid-template-columns: auto 1fr;
+	}
+
+}
+
 @media (min-width: 576px) {
 
 	dl.util-presentation-1 {
@@ -1472,14 +1480,6 @@ dl.util-presentation-max-content {
 
 	dl.util-presentation-3 dd.util-presentation-fill {
 		grid-column: span 5;
-	}
-
-}
-
-@media (max-width: 575px) {
-
-	dl.util-presentation {
-		grid-template-columns: auto 1fr;
 	}
 
 }
