@@ -1014,7 +1014,10 @@ class FormUi {
 			$onclick = 'SwitchField.change(this)';
 		}
 
-		$h .= '<div class="field-switch '.($selectedValue ? 'field-switch-on' : 'field-switch-off').'" '.attr('onclick', $onclick).'>';
+		$valueOn = $attributes['valueOn'] ?? TRUE;
+		$valueOff = $attributes['valueOff'] ?? FALSE;
+
+		$h .= '<div class="field-switch '.($selectedValue === $valueOn ? 'field-switch-on' : 'field-switch-off').'" '.attr('onclick', $onclick).' data-value-on="'.encode($valueOn).'" data-value-off="'.encode($valueOff).'">';
 			$h .= '<div class="field-switch-circle"></div>';
 			if(isset($attributes['labelOn']) or isset($attributes['labelOff'])) {
 				$h .= '<div class="field-switch-text">';
@@ -1022,9 +1025,7 @@ class FormUi {
 					$h .= '<div>'.($attributes['labelOff'] ?? '').'</div>';
 				$h .= '</div>';
 			}
-			$h .= $this->inputCheckbox($name, TRUE, [
-				'checked' => (bool)$selectedValue,
-			]);
+			$h .= $this->hidden($name, $selectedValue);
 		$h .= '</div>';
 
 		return $h;

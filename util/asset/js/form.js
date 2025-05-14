@@ -195,7 +195,7 @@ class SwitchField {
 
 		const input = target.qs('input');
 
-		input.checked = active;
+		input.value = active ? target.dataset.valueOn : target.dataset.valueOff;
 
 		if(onchange) {
 			onchange(input);
