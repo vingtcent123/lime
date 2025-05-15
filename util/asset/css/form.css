@@ -536,11 +536,11 @@ div.form-group.form-group-nested > .form-control-label {
 }
 
 .field-switch-on:not(.disabled) .field-switch-text {
-	margin-left: 1.3rem;
+	margin-right: 1.3rem;
 }
 
 .field-switch-off:not(.disabled) .field-switch-text {
-	margin-right: 1.3rem;
+	margin-left: 1.3rem;
 }
 
 .field-switch.disabled .field-switch-text {
@@ -590,11 +590,11 @@ div.form-group.form-group-nested > .form-control-label {
 }
 
 .field-switch:not(.disabled) .field-switch-circle {
-	left: 0.3rem;
+	left: calc(100% - 1.4rem + 2px - 0.3rem);
 }
 
 .field-switch-off:not(.disabled) .field-switch-circle {
-	left: calc(100% - 1.4rem + 2px - 0.3rem);
+	left: 0.3rem;
 }
 
 /* Weeks */
