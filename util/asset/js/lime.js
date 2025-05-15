@@ -347,6 +347,14 @@ Element.prototype.parseRender = function() {
 
 };
 
+Element.prototype.display = function(displayed) {
+	if(displayed) {
+		this.removeHide();
+	} else {
+		this.hide();
+	}
+}
+
 Element.prototype.hide = function() {
 	this.classList.add('hide');
 }
