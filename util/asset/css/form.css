@@ -498,6 +498,11 @@ div.form-group.form-group-nested > .form-control-label {
 	border-radius: var(--radius);
 	transition: all 0.5s;
 	display: inline-block;
+	font-size: 0.9rem;
+}
+
+.field-switch.field-switch-sm {
+	font-size: 0.8rem;
 }
 
 .field-switch:not(.disabled) {
@@ -509,6 +514,12 @@ div.form-group.form-group-nested > .form-control-label {
 	cursor: pointer;
 	overflow: hidden;
 }
+
+.field-switch.field-switch-sm:not(.disabled) {
+	height: 1.5rem;
+	width: 2.4rem;
+}
+
 .field-switch.disabled {
 	pointer-events: none;
 }
@@ -532,23 +543,34 @@ div.form-group.form-group-nested > .form-control-label {
 
 .field-switch:not(.disabled) .field-switch-text {
 	padding: 0 0.5rem;
-	font-size: 0.9rem;
 }
 
 .field-switch-on:not(.disabled) .field-switch-text {
 	margin-right: 1.3rem;
 }
 
+.field-switch-on.field-switch-sm:not(.disabled) .field-switch-text {
+	margin-right: 0.9rem;
+}
+
 .field-switch-off:not(.disabled) .field-switch-text {
 	margin-left: 1.3rem;
 }
 
+.field-switch-off.field-switch-sm:not(.disabled) .field-switch-text {
+	margin-left: 0.9rem;
+}
+
 .field-switch.disabled .field-switch-text {
-	margin-left: 1.5rem;
+	margin-left: 0.8rem;
 }
 
 .field-switch-off:not(.disabled) .field-switch-text {
 	transform: translate(0, calc(-1.8rem + 2px));
+}
+
+.field-switch-off.field-switch-sm:not(.disabled) .field-switch-text {
+	transform: translate(0, calc(-1.5rem + 2px));
 }
 
 .field-switch:not(.disabled) .field-switch-text > div {
@@ -557,6 +579,10 @@ div.form-group.form-group-nested > .form-control-label {
 	align-items: center;
 	line-height: 1;
 	color: white;
+}
+
+.field-switch.field-switch-sm:not(.disabled) .field-switch-text > div {
+	height: calc(1.5rem - 2px);
 }
 
 .field-switch-on.disabled .field-switch-text > div {
@@ -581,6 +607,11 @@ div.form-group.form-group-nested > .form-control-label {
 	margin: 0.3rem 0;
 }
 
+.field-switch-sm .field-switch-circle {
+	height: calc(0.9rem - 2px);
+	width: calc(0.9rem - 2px);
+}
+
 .field-switch-on.disabled .field-switch-circle {
 	background-color: var(--success);
 }
@@ -589,12 +620,16 @@ div.form-group.form-group-nested > .form-control-label {
 	background-color: var(--muted);
 }
 
-.field-switch:not(.disabled) .field-switch-circle {
-	left: calc(100% - 1.4rem + 2px - 0.3rem);
+.field-switch-on:not(.disabled) .field-switch-circle {
+	left: calc(100% - 1.3rem + 2px - 0.3rem);
+}
+
+.field-switch-on.field-switch-sm:not(.disabled) .field-switch-circle {
+	left: calc(100% - 0.8rem + 2px - 0.3rem);
 }
 
 .field-switch-off:not(.disabled) .field-switch-circle {
-	left: 0.3rem;
+	left: 0.4rem;
 }
 
 /* Weeks */
