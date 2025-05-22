@@ -402,6 +402,19 @@ Element.prototype.slideUp = function(options = {}) {
 
 };
 
+Element.prototype.slideDown = function(options = {}) {
+
+	const duration = options.duration || 0.5;
+	const done = options.done || function() {};
+
+	this.style.transition = 'all '+ duration +'s';
+	this.style.removeProperty('overflow-y');
+
+	setTimeout(() => this.style.maxHeight = 'inherit', 10);
+	setTimeout(() => done.call(this), 10 + duration * 1000);
+
+};
+
 Element.prototype.fadeOut = function(options = {}) {
 
 	const duration = options.duration || 0.5;
@@ -1990,7 +2003,7 @@ Lime.Asset = class {
 	static icon(name) {
 
 		return '<svg class="asset-icon asset-icon-'+ name +'" fill="currentColor">'+
-			'<use xlink:href="/asset/framework/util/lib/bootstrap-icons-1.11.3.svg#'+ name +'"/>'+
+			'<use xlink:href="/asset/framework/util/lib/bootstrap-icons-1.13.1.svg#'+ name +'"/>'+
 			'</svg>';
 
 	}

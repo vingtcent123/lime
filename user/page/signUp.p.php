@@ -1,7 +1,7 @@
 <?php
-(new Page(function($data) {
+new Page(function($data) {
 		Feature::check('user\signUp');
-	}))
+	})
 	/**
 	 * Display sign up form
 	 */
