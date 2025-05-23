@@ -789,7 +789,7 @@ class CsvAction extends Action {
 		$fp = fopen('php://memory', 'r+');
 
 		foreach($this->lines as $line) {
-			fputcsv($fp, $line, escape: '');
+			fputcsv($fp, $line, separator: ';', escape: '');
 		}
 
 		rewind($fp);
