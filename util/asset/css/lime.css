@@ -5,7 +5,7 @@
 
 :root {
 	--info: #c9e8fd;
-	--warning: #c2780a;
+	--warning: #cb6503;
 	--danger: #dc3545;
 	--text: #212529;
 	--success: #198754;
@@ -950,13 +950,13 @@ tbody .td-checkbox > label {
 }
 
 .util-warning {
-	border: 1px solid var(--warning);
 	border-radius: var(--radius);
-	color: var(--warning);
+	background-color: var(--warning);
+	color: white;
 }
 
 .util-warning a:not(.btn) {
-	color: var(--warning);
+	color: white;
 	text-decoration: underline;
 }
 
@@ -972,13 +972,13 @@ tbody .td-checkbox > label {
 }
 
 .util-danger {
-	border: 1px solid var(--danger);
 	border-radius: var(--radius);
-	color: var(--danger);
+	background-color: var(--danger);
+	color: white;
 }
 
 .util-danger a:not(.btn) {
-	color: var(--danger);
+	color: white;
 	text-decoration: underline;
 }
 
