@@ -562,7 +562,7 @@ div.form-group.form-group-nested > .form-control-label {
 }
 
 .field-switch.disabled .field-switch-text {
-	margin-left: 1rem;
+	margin-left: 1.3rem;
 }
 
 .field-switch-off:not(.disabled) .field-switch-text {
