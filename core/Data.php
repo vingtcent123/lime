@@ -2259,7 +2259,7 @@ class Search {
 
 		$h = '<span style="white-space: nowrap">';
 
-			$h .= '<a href="'.$request.'">';
+			$h .= '<a href="'.$request.'" style="white-space: initial">';
 				$h .= $label;
 			$h .= '</a>';
 
