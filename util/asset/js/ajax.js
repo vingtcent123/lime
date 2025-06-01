@@ -621,6 +621,11 @@ Ajax.Instruction = class {
 
 					}
 
+					if(purgeLayers) {
+						Lime.Dropdown.purge();
+						Lime.Panel.purge();
+					}
+
 					const promise = purgeLayers ?
 						Lime.History.purgeLayers() :
 						Promise.resolve();
