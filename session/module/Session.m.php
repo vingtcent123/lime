@@ -33,7 +33,6 @@ class SessionModel extends \ModuleModel {
 
 	protected ?int $split = NULL;
 	protected ?string $splitOn = NULL;
-	protected string $storage = 'memory';
 
 	public function __construct() {
 

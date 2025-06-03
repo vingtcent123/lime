@@ -4,7 +4,6 @@ Session:
   updatedAt: datetime = SPECIAL(now)
   user: ?user\User
   SPLIT: ["sid", "SETTING(split)"]
-  STORAGE: memory
   UNIQUE: [
     ["sid"]
   ]
