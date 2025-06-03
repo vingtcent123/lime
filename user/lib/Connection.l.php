@@ -124,13 +124,14 @@ class ConnectionLib {
 
 	protected static function getFromSession(): User {
 
-		$eUser = \session\SessionLib::get('user');
+		$email = \session\SessionLib::get('userEmail');
 
-		User::model()
+		$eUser = User::model()
 			->select(User::getSelection() + [
 				'role' => ['can', 'fqn']
 			])
-			->get($eUser);
+			->whereEmail($email)
+			->get();
 
 		return $eUser;
 
@@ -580,7 +581,8 @@ class ConnectionLib {
 			// Log out connected user first
 			try {
 
-				$eUserOnline = \session\SessionLib::get('user');
+				$email = \session\SessionLib::get('userEmail');
+				$eUserOnline = UserLib::getByEmail($email);
 
 				self::logOut($eUserOnline);
 
@@ -595,9 +597,7 @@ class ConnectionLib {
 		\session\SessionLib::set('userLoggedAt', $loggedAt);
 		\session\SessionLib::set('userDeletedAt', $eUser['deletedAt']);
 
-		\session\SessionLib::set('user', new User([
-			'id'=> $eUser['id']
-		]));
+		\session\SessionLib::set('userEmail', $eUser['email']);
 
 		if($isRegularLogin) {
 
@@ -623,11 +623,13 @@ class ConnectionLib {
 	 */
 	public static function logInExternal(User $eUser, User $eUserAction): bool {
 
-		$eUserOld = \session\SessionLib::get('user');
+		$email = \session\SessionLib::get('userEmail');
 
-		if(\session\SessionLib::exists('userOld')) {
+		if(\session\SessionLib::exists('userEmailOld')) {
 			return FALSE;
 		}
+
+		$eUserOld = UserLib::getByEmail($email);
 
 		// First : logOut $eUserAction
 		self::logOut($eUserAction);
@@ -635,7 +637,7 @@ class ConnectionLib {
 		// Second : logIn $eUserAction as if it was $eUser
 		self::doLogIn($eUser, Log::LOGIN_EXTERNAL);
 
-		\session\SessionLib::set('userOld', $eUserOld);
+		\session\SessionLib::set('userEmailOld', $eUserOld['email']);
 
 		return TRUE;
 
@@ -649,7 +651,8 @@ class ConnectionLib {
 	public static function logOutExternal(): bool {
 
 		try {
-			$eUserOld = \session\SessionLib::get('userOld');
+			$email = \session\SessionLib::get('userEmailOld');
+			$eUserOld = UserLib::getByEmail($email);
 		} catch(\Exception $e) {
 			return FALSE;
 		}
@@ -714,11 +717,12 @@ class ConnectionLib {
 	 */
 	public static function checkLoginExternal(): ?array {
 
-		if(\session\SessionLib::exists('userOld') === FALSE) {
+		if(\session\SessionLib::exists('userEmailOld') === FALSE) {
 			return NULL;
 		}
 
-		$eUserAction = \session\SessionLib::get('userOld');
+		$email = \session\SessionLib::get('userEmailOld');
+		$eUserAction = UserLib::getByEmail($email);
 		$eUser = self::getOnline();
 
 		return [$eUser, $eUserAction];
