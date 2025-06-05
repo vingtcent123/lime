@@ -295,7 +295,7 @@ class Package {
 		}
 
 		if(isset(self::$list[$package]) === FALSE) {
-			throw new Exception("Package '".$package."' does not exist");
+			return NULL;
 		}
 
 		$app = self::$list[$package];
