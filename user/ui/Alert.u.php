@@ -51,8 +51,8 @@ class AlertUi {
 		return match($fqn) {
 
 			'User::welcomeCreate'=> s("Bienvenue sur {siteName}, votre compte a bien été créé !"),
-			'User::welcome' => s("Vous êtes maintenant connecté sur {siteName} !"),
-			'User::bye' => s("Vous êtes maintenant déconnecté de {siteName}."),
+			'User::welcome' => s("Vous êtes maintenant connecté·e sur {siteName} !"),
+			'User::bye' => s("Vous êtes maintenant déconnecté·e de {siteName}."),
 			'User::adminUpdated' => s("L'utilisateur a bien bien été mis à jour."),
 			'User::updated' => s("Vos informations personnelles ont bien été mises à jour."),
 			'User::emailUpdated' => s("Votre adresse e-mail a bien été mise à jour."),
