@@ -7,8 +7,6 @@ namespace user;
  */
 class MailLib {
 
-	const SALT = '4?5)§79_3df;3g(-444}';
-
 	/**
 	 * Return true if the user has verified his last specified mail address and false otherwise.
 	 */
@@ -37,7 +35,7 @@ class MailLib {
 		$content = UserUi::getCloseMail();
 
 		new \mail\MailLib()
-			->addTo($eUser['email'])
+			->setTo($eUser['email'])
 			->setContent(...$content)
 			->send('user');
 	}
@@ -56,7 +54,7 @@ class MailLib {
 		$content = UserUi::getSignUpMail($eUser);
 
 		new \mail\MailLib()
-			->addTo($eUser['email'])
+			->setTo($eUser['email'])
 			->setContent(...$content)
 			->send('user');
 
@@ -77,7 +75,7 @@ class MailLib {
 		$content = UserUi::getVerifyMail($eUser, $hash, $change);
 
 		new \mail\MailLib()
-			->addTo($eUser['email'])
+			->setTo($eUser['email'])
 			->setContent(...$content)
 			->send('user');
 
