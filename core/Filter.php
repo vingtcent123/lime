@@ -343,7 +343,11 @@ class Filter {
 			$isNull = TRUE;
 		}
 
-		if(isset($mask['charset']) and mb_check_encoding($value, $mask['charset']) === FALSE) {
+		if(
+			$value !== NULL and
+			isset($mask['charset']) and
+			mb_check_encoding($value, $mask['charset']) === FALSE
+		) {
 			return FALSE;
 		}
 
