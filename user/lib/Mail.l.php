@@ -37,7 +37,7 @@ class MailLib {
 		new \mail\MailLib()
 			->setTo($eUser['email'])
 			->setContent(...$content)
-			->send('user');
+			->send();
 	}
 
 	/**
@@ -56,7 +56,7 @@ class MailLib {
 		new \mail\MailLib()
 			->setTo($eUser['email'])
 			->setContent(...$content)
-			->send('user');
+			->send();
 
 	}
 
@@ -77,7 +77,7 @@ class MailLib {
 		new \mail\MailLib()
 			->setTo($eUser['email'])
 			->setContent(...$content)
-			->send('user');
+			->send();
 
 	}
 

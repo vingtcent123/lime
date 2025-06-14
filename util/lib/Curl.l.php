@@ -57,6 +57,7 @@ class CurlLib {
 		$curl = curl_init();
 
 		if($mode === 'POST') {
+
 			if(is_array($params)) {
 				foreach($params as $value) {
 					if(is_array($value) or (is_string($value) and substr($value, 0, 1) === '@')) {
@@ -70,6 +71,7 @@ class CurlLib {
 				CURLOPT_POST => TRUE,
 				CURLOPT_POSTFIELDS => $params
 			]);
+
 		} else {
 			$url .= (strpos($url, '?') === FALSE ? '?' : '&').(is_array($params) ? http_build_query($params) : $params);
 		}
